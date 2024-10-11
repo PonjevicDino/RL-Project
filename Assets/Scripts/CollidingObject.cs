@@ -3,7 +3,7 @@
 public class CollidingObject : MonoBehaviour {
 
     [SerializeField]
-    private int price;
+    public int price;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Vehicle")) {

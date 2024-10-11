@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
     [SerializeField] private int numOfPoints = 10;
     [SerializeField] private int distanceBetweenPoints = 3;
+
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private GameObject fuelTankPrefab;
 
     public Vector3 endPoint;
 
@@ -34,14 +38,14 @@ public class SpriteTerrainGenerator : MonoBehaviour
         shape.spline.SetPosition(3, shape.spline.GetPosition(3) + Vector3.right * (scale - 2));
 
         //The new endpoint.y needs to be precalculated, since otherwise it would always lay on the same height as the start
-        endPoint = new Vector3(shape.spline.GetPosition(3).x, hillHeight * Mathf.PerlinNoise((numOfPoints-1) * Random.Range(5.0f, 15.0f), 0.0f) - terrainYOffset, 0.0f);
+        endPoint = new Vector3(shape.spline.GetPosition(3).x, (hillHeight + chunkNumber * 5) * Mathf.PerlinNoise((numOfPoints-1) * Random.Range(5.0f, 15.0f), 0.0f) - terrainYOffset, 0.0f);
         shape.spline.SetPosition(2, endPoint);
 
         for (int i = 0; i < (numOfPoints-1); i++)
         {
             //The xPos is set based on the current i and the yPos by the perlin noise
             float xPos = shape.spline.GetPosition(i + 1).x + distanceBetweenPoints;
-            float yPos = hillHeight * Mathf.PerlinNoise(i * Random.Range(5.0f, 15.0f), 0.0f) - terrainYOffset;
+            float yPos = (hillHeight + chunkNumber * 5) * Mathf.PerlinNoise(i * Random.Range(5.0f, 15.0f), 0.0f) - terrainYOffset;
                
             //Afterwards insert the point into the spline
             shape.spline.InsertPointAt(i + 2, new Vector3(xPos, yPos));
@@ -57,5 +61,31 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
         //Lastly set the collision, so the vehicle can drive on the surface
         transform.gameObject.AddComponent<EdgeCollider2D>();
+
+        int spawnOffset = chunkNumber * scale - 2;
+
+        PlaceCoins(spawnOffset);
+        PlaceFuelTanks(spawnOffset);
+    }
+
+    private void PlaceCoins(int spawnOffset)
+    {
+        for (int splinePoint = 5; splinePoint < shape.spline.GetPointCount() - 4; splinePoint += 3)
+        {
+            int spawnSplinePoint = splinePoint + Random.Range(-1, 1);
+            Vector3 spawnPosition = shape.spline.GetPosition(spawnSplinePoint);
+            GameObject coinPrefabInstance = Instantiate(coinPrefab,
+                                                        spawnPosition + Vector3.up * 25 + Vector3.right * spawnOffset,
+                                                        Quaternion.identity, this.transform);
+            coinPrefabInstance.GetComponent<CoinGenerator>().SpawnCoins(0.5f, spawnPosition);
+        }
+    }
+
+    private void PlaceFuelTanks(int spawnOffset)
+    {
+        Instantiate(fuelTankPrefab, new Vector3(25.0f, 0.0f) + Vector3.up * 25 + Vector3.right * spawnOffset,
+                                                Quaternion.identity, this.transform);
+        Instantiate(fuelTankPrefab, new Vector3(75.0f, 0.0f) + Vector3.up * 25 + Vector3.right * spawnOffset,
+                                                Quaternion.identity, this.transform);
     }
 }

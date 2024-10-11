@@ -12,6 +12,9 @@ public class GameManager : Singleton<GameManager> {
     private Sprite spriteImg;
 
     [SerializeField]
+    private ChunkSpawner chunkSpawner;
+
+    [SerializeField]
     private GameObject fuelWarning, fadeIn, pauseUI, gameOverUI;
 
     [SerializeField]
@@ -26,6 +29,9 @@ public class GameManager : Singleton<GameManager> {
     public CameraController cameraController;
     private CarController carController;
 
+    [SerializeField] private float maxLevelDistance = 2000.0f;
+    public float levelProgress;
+
     public bool GasBtnPressed { get; set; }
     public bool BrakeBtnPressed { get; set; }
     public bool isDie { get; set; }
@@ -39,14 +45,22 @@ public class GameManager : Singleton<GameManager> {
         Initialize();
     }
 
+    private void FixedUpdate()
+    {
+        if (!gameOverUI.activeSelf)
+        {
+            levelProgress = (carController.transform.position.x - carController.StartPos.x) / maxLevelDistance;
+        }
+    }
+
     private void Update() {
         //뒤로가기 누르면 게임 일시정지
         if(Input.GetKeyDown(KeyCode.Escape))  
             GamePause();
 
         //움직인 거리 계산하여 계속해서 text 갱신
-        if(!gameOverUI.activeSelf)
-            distanceText.text = (int)(carController.transform.position.x - carController.StartPos.x) + "m / <color=yellow>1427m</color>";
+        if (!gameOverUI.activeSelf)
+            distanceText.text = (int)(carController.transform.position.x - carController.StartPos.x) + "m"; /*+ "m / <color=yellow>1427m</color>";*/
 
         //게임오버/성공 후 한번 더 터치하면 게임 재시작
         if(isDie && Input.GetMouseButtonDown(0) && gameOverUI.activeSelf) 
@@ -64,16 +78,16 @@ public class GameManager : Singleton<GameManager> {
 
         //선택한 맵 불러오기
         if(stageIndex.Equals(0)) {
-            objName = "Country";
+            objName = "Ground";
             Camera.main.backgroundColor = new Color(0.5803922f, 0.8470589f, 0.937255f, 0);
         }
         else if(stageIndex.Equals(1)) {
-            objName = "Mars";
-            Camera.main.backgroundColor = new Color(0.8627452f, 0.6666667f, 0.6666667f, 0);
+            objName = "Moon";
+            Camera.main.backgroundColor = new Color(0.0111764f, 0.050980f, 0.223529f, 0);
         }
         else if(stageIndex.Equals(2))
             objName = "Cave";
-        objectManager.GetObject(objName);
+        chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(objName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
         if(vehicleIndex.Equals(0)) objName = "HillClimber";

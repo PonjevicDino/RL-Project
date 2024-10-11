@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChunkSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject chunkPrefab;
+    private GameObject chunkPrefab;
     [SerializeField] private Vector3 spawnPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
     private GameObject chunk;
@@ -13,6 +13,12 @@ public class ChunkSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        //SpawnNewChunk();
+    }
+
+    public void InitializeChunkSpawning(GameObject chunkPrefab)
+    {
+        this.chunkPrefab = chunkPrefab;
         SpawnNewChunk();
     }
 

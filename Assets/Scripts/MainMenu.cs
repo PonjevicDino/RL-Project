@@ -25,12 +25,13 @@ public class MainMenu : MonoBehaviour {
 
     private void Start() {
         //저장된 데이터가 없을 경우 초기화
+        PlayerPrefs.DeleteAll();
         if(!PlayerPrefs.HasKey("Stage")) {
             PlayerPrefs.SetInt("Stage", 0);
             PlayerPrefs.SetInt("Vehicle", 0);
-            PlayerPrefs.SetInt("Stage_Mars", 0);
+            PlayerPrefs.SetInt("Stage_Moon", 1);
             PlayerPrefs.SetInt("Stage_Cave", 0);
-            PlayerPrefs.SetInt("Vehicle_Motorcycle", 0);
+            PlayerPrefs.SetInt("Vehicle_Motorcycle", 1);
             PlayerPrefs.SetInt("Money", 5000);
         }
         LoadData();
@@ -40,8 +41,8 @@ public class MainMenu : MonoBehaviour {
 
     //선택되었던 스테이지/차량 데이터와 돈 데이터 불러오기
     private void LoadData() {
-        Stages[1].transform.GetChild(1).gameObject.SetActive(PlayerPrefs.GetInt("Stage_Mars").Equals(0));
-        Stages[1].GetComponent<Button>().enabled = PlayerPrefs.GetInt("Stage_Mars").Equals(0);
+        Stages[1].transform.GetChild(1).gameObject.SetActive(PlayerPrefs.GetInt("Stage_Moon").Equals(0));
+        Stages[1].GetComponent<Button>().enabled = PlayerPrefs.GetInt("Stage_Moon").Equals(0);
         Stages[2].transform.GetChild(1).gameObject.SetActive(true);
         Stages[3].transform.GetChild(1).gameObject.SetActive(true);
         Vehicles[1].transform.GetChild(1).gameObject.SetActive(PlayerPrefs.GetInt("Vehicle_Motorcycle").Equals(0));
