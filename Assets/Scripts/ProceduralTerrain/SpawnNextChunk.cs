@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class SpawnNextChunk : MonoBehaviour
 {
-    [SerializeField] private GameObject chunkPrefab;
-
     private bool isNextChunkSpawned = false;
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //If the next chunk wasn´t spawned yet, sapwn it using the ChunkSpawner
         if (!isNextChunkSpawned)
-        {       
-            Instantiate(chunkPrefab, transform.parent.gameObject.GetComponent<SpriteTerrainGenerator>().endPoint,
-                        Quaternion.identity, 
-                        transform.parent.parent.transform);
-
+        {
+            Object.FindAnyObjectByType<ChunkSpawner>().SpawnNewChunk();
             isNextChunkSpawned = true;
         }
     }
