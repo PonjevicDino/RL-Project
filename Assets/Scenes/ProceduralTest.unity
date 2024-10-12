@@ -1696,6 +1696,8 @@ MonoBehaviour:
   - {fileID: 943550339}
   objectManager: {fileID: 948473166}
   cameraController: {fileID: 519420030}
+  maxLevelDistance: 2000
+  levelProgress: 0
 --- !u!4 &840990932
 Transform:
   m_ObjectHideFlags: 0
@@ -1991,6 +1993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967429751}
   - component: {fileID: 967429752}
+  - component: {fileID: 967429753}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2026,6 +2029,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {x: 0, y: 0, z: 0}
+  terrainPrefab: {fileID: 2267716341390590846, guid: 7ce80cf25ce2b37448dd65cd169630bc,
+    type: 3}
+--- !u!114 &967429753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 967429749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933711fe1b3b2ea4daafb433f7a28297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialFrequency: 1
+  initialAmplitude: 1.5
+  amplitudeIncrease: 0.05
+  pointCount: 1000
+  initialPointSpacing: 15
+  spacingIncreaseFactor: 0.03
+  randomnessFactor: 5
 --- !u!1 &989111647
 GameObject:
   m_ObjectHideFlags: 0

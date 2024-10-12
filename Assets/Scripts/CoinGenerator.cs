@@ -7,13 +7,11 @@ public class CoinGenerator : MonoBehaviour
     [SerializeField] private List<Sprite> coinTextures;
     [SerializeField] private float levelProgress;
 
-    void Start()
+    public void SpawnCoins(Vector3 spawnPosition)
     {
-        //SpawnCoins(levelProgress);    
-    }
+        GameManager gameManager = Object.FindAnyObjectByType<GameManager>();
+        levelProgress = gameManager.levelProgress;
 
-    public void SpawnCoins(float levelProgress, Vector3 spawnPosition)
-    {
         // Define the coin values
         int[] coinTypes = { 500, 100, 25, 5 };
         // Calculate the number of coins to spawn based on level progress

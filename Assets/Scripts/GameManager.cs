@@ -87,6 +87,8 @@ public class GameManager : Singleton<GameManager> {
         }
         else if(stageIndex.Equals(2))
             objName = "Cave";
+
+        Debug.Log(objName);
         chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(objName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
