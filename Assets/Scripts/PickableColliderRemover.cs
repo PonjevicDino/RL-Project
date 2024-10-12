@@ -8,10 +8,6 @@ public class PickableColliderRemover : MonoBehaviour
     {
         if (transform.gameObject.activeSelf)
         {
-            if (!collision.gameObject.name.Contains("Chunk") && !collision.gameObject.name.Contains("Vehicle") && !collision.gameObject.name.Contains("Bumper") && !collision.gameObject.name.Contains("Tire")) { 
-                Debug.LogWarning(collision.gameObject.name); 
-            }
-
             StartCoroutine(SetTriggerAfterDelay(2.0f));
         }
     }
@@ -20,11 +16,6 @@ public class PickableColliderRemover : MonoBehaviour
     {
         if (transform.gameObject.activeSelf && !collision.gameObject.name.Contains("Collider"))
         {
-            if (!collision.gameObject.name.Contains("Chunk") && !collision.gameObject.name.Contains("Vehicle") && !collision.gameObject.name.Contains("Bumper") && !collision.gameObject.name.Contains("Tire"))
-            {
-                Debug.LogWarning(collision.gameObject.name);
-            }
-
             StartCoroutine(SetTriggerAfterDelay(2.0f));
         }
     }

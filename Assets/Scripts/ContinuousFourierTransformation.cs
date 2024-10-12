@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
+using static SpriteTerrainGenerator;
 
 public class ContinuousFourierTransform : MonoBehaviour
 {
@@ -26,24 +27,24 @@ public class ContinuousFourierTransform : MonoBehaviour
         //UpdateRenderer();
     }
 
-    public Vector3[] ComputeFourierTransform()
+    public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation)
     {
-        float amplitude = initialAmplitude;
-        points = new Vector3[pointCount];
+        float amplitude = fourierTransformation.initialAmplitude;
+        points = new Vector3[fourierTransformation.pointCount];
 
-        for (int i = 0; i < pointCount; i++)
+        for (int i = 0; i < fourierTransformation.pointCount; i++)
         {
-            float randomnessFactorOffset = (1 + (i / (float)pointCount));
+            float randomnessFactorOffset = (1 + (i / (float)fourierTransformation.pointCount));
 
             // Calculate the x position, increasing spacing further into the function
-            float x = i * (initialPointSpacing + (i * (spacingIncreaseFactor / randomnessFactorOffset)));
+            float x = i * (fourierTransformation.initialPointSpacing + (i * (fourierTransformation.spacingIncreaseFactor / randomnessFactorOffset)));
 
             // Increase the randomness factor over time
-            float currentRandomnessFactor = randomnessFactor * randomnessFactorOffset;
+            float currentRandomnessFactor = fourierTransformation.randomnessFactor * randomnessFactorOffset;
 
             // Add randomness to the amplitude based on the increasing randomness factor
             float randomAmplitude = Random.Range(-currentRandomnessFactor, currentRandomnessFactor);
-            float y = Mathf.Sin(x * initialFrequency) * (amplitude + randomAmplitude);
+            float y = Mathf.Sin(x * fourierTransformation.initialFrequency) * (amplitude + randomAmplitude);
 
             // Make sure the first point leads into a valley
             if (i == 0)
@@ -52,7 +53,7 @@ public class ContinuousFourierTransform : MonoBehaviour
             }
 
             // Update amplitude for the next point
-            amplitude += amplitudeIncrease; // Increase amplitude for the next point
+            amplitude += fourierTransformation.amplitudeIncrease; // Increase amplitude for the next point
 
             // Assign the calculated point position
             points[i] = new Vector3(x, y, 0);

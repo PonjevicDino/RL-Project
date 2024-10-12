@@ -9,7 +9,7 @@ public class DespawnChunk : MonoBehaviour
     {
         if (!collider.gameObject.name.Contains("Coin") && !collider.gameObject.name.Contains("Fuel"))
         {
-            transform.parent.parent.GetComponent<ChunkSpawner>().EnableNextChunk();
+            //transform.parent.parent.GetComponent<ChunkSpawner>().EnableNextChunk();
             Destroy(transform.parent.gameObject);
         }
     }
