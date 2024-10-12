@@ -9,7 +9,7 @@ public class SpawnNextChunk : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //If the next chunk wasn´t spawned yet, sapwn it using the ChunkSpawner
-        if (!isNextChunkSpawned && !other.gameObject.name.Contains("Coin"))
+        if (!isNextChunkSpawned && !other.gameObject.name.Contains("Coin") && !other.gameObject.name.Contains("FuelTank"))
         {
             Object.FindAnyObjectByType<ChunkSpawner>().SpawnNewChunkBasedOnFourier();
             isNextChunkSpawned = true;

@@ -12,12 +12,13 @@ public class ChunkSpawner : MonoBehaviour
     private SpriteShapeController shape;
     private ContinuousFourierTransform terrain;
 
-    private GameObject chunk;
+    public GameObject chunk;
     private int chunkNumber = 0;
 
     private GameObject lastChunk;
 
     private Vector3[] points;
+    private Vector3 previousEndPoint;
 
     private void Start()
     {
@@ -89,15 +90,24 @@ public class ChunkSpawner : MonoBehaviour
 
         if (chunk)
         {
-            previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
-            //previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().dummySpawnPoint; //For overlapping spawn
+            //previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
+            previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().dummySpawnPoint; //For overlapping spawn
         }
 
         //Use the spawnOffset of the prefab to determine where to spawn the next chunk and position it based on its chunkNumber
-        Vector3 spawnOffset = previousEndPoint + spawnPosition + (new Vector3(1.0f, 0.0f) * chunkNumber);
+        Vector3 spawnOffset = previousEndPoint + spawnPosition; //(new Vector3(1.0f, 0.0f) * chunkNumber);
         chunk = Instantiate(chunkPrefab, new Vector3(spawnOffset.x, spawnPosition.y), Quaternion.identity, this.transform);
-        chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint);
+        chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint); 
         chunkNumber++;
+    }
+
+    public void EnableNextChunk()
+    {
+        SpriteTerrainGenerator currentChunk = chunk.GetComponent<SpriteTerrainGenerator>();
+        currentChunk.GetComponent<SpriteShapeRenderer>().enabled = true;
+        currentChunk.collider.isTrigger = false;
+        currentChunk.GetComponent<SpriteShapeController>().BakeCollider();
+        
     }
 
     private void SpawnTerrain()
@@ -105,9 +115,4 @@ public class ChunkSpawner : MonoBehaviour
         chunk = Instantiate(terrainPrefab, spawnPosition, Quaternion.identity, this.transform);
         chunk.GetComponent<SpriteTerrainGenerator>().SpawnTerrain(terrain);
     }
-
-    /*private void RemovePointsFromSpline()
-    {
-
-    }*/
 }
