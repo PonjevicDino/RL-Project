@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField]
     private AudioSource[] audio;
 
-    private int totalMoney, moneyEarned = 0;
+    [HideInInspector] public int totalMoney, moneyEarned = 0;
 
     public ObjectManager objectManager;
     public CameraController cameraController;

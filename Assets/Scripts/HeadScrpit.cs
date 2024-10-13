@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 
+// TODO: Fix typo "HeadScrpit" --> "HeadScript"
 public class HeadScrpit : MonoBehaviour {
 
+    [HideInInspector] public bool headHit = false;
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        //머리가 땅에 닿아서 게임오버
+        //머리가 땅에 닿아서 게임오버 
         if(collision.gameObject.CompareTag("Platform") && !GameManager.Instance.isDie) {
+            headHit = true;
             GameManager.Instance.PlaySound("crack");
             GameManager.Instance.StartGameOver();
         }
