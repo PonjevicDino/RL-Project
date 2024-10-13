@@ -23,14 +23,21 @@ public class HillClimberAgent : Agent
     {
         agentGasText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentGas").ToList()[0].GetComponent<Text>();
         agentBrakeText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentBrake").ToList()[0].GetComponent<Text>();
-        OnEpisodeBegin(); 
+        //OnEpisodeBegin(); 
     }
 
     public override void OnEpisodeBegin(bool reloadScene = false)
     {
+        GameManager.Instance.isControlledByAI = true;
         if (reloadScene)
         {
-            SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
+            Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Terrain").ToList()[0].GetComponent<ChunkSpawner>().ReloadAllChunks();
+            transform.parent.SetPositionAndRotation(new Vector3(-5.8757452f, 0.527813f, 0.0f), Quaternion.identity);
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            GameManager.Instance.isDie = false;
+            GameManager.Instance.FuelCharge();
+            transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScrpit>().headHit = false;
+            //SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
         }
     }
 
@@ -95,8 +102,11 @@ public class HillClimberAgent : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         // Agent inputs
-        agentGasText.enabled = GameManager.Instance.GasBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[0]));
-        agentBrakeText.enabled = GameManager.Instance.BrakeBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[1]));
+        if (agentGasText != null && agentBrakeText != null)
+        {
+            agentGasText.enabled = GameManager.Instance.GasBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[0]));
+            agentBrakeText.enabled = GameManager.Instance.BrakeBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[1]));
+        }
 
         // Rewards
         // - Level Progress

@@ -37,7 +37,9 @@ public class GameManager : Singleton<GameManager> {
     public bool isDie { get; set; }
     public bool ReachGoal { get; set; }
 
-    private void Start() {
+    public bool isControlledByAI { get; set; }
+
+    public void Start() {
         Time.timeScale = 1f;
         isDie = false;
         ReachGoal = false;
@@ -114,7 +116,7 @@ public class GameManager : Singleton<GameManager> {
             
             if(fuelGauge.fillAmount <= 0.3f) {  //연료 부족 경고 애니메이션
                 if(!isDie) fuelWarning.SetActive(true);
-                if(fuelGauge.fillAmount == 0f)  //연료가 다 떨어져서 게임 오버
+                else if(!isControlledByAI && fuelGauge.fillAmount == 0f)  //연료가 다 떨어져서 게임 오버
                     StartGameOver();
             }
         }
@@ -181,7 +183,7 @@ public class GameManager : Singleton<GameManager> {
 
     //게임오버 함수
     public void StartGameOver() {
-        if(!isDie) {
+        if(!isDie && !isControlledByAI) {
             StartCoroutine(GameOver());
             isDie = true;
         }

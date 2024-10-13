@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.U2D;
 
@@ -41,5 +43,15 @@ public class ChunkSpawner : MonoBehaviour
         chunk = Instantiate(chunkPrefab, new Vector3(spawnOffset.x, spawnPosition.y), Quaternion.identity, this.transform);
         chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint); 
         chunkNumber++;
+    }
+
+    public void ReloadAllChunks()
+    {
+        while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
+        chunkNumber = 0;
+        InitializeChunkSpawning(chunkPrefab);
     }
 }
