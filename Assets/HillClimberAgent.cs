@@ -124,5 +124,16 @@ public class HillClimberAgent : Agent
         {
             EndEpisode(reloadScene: true);
         }
+        // - Car out of Map
+        if (transform.parent.position.y <= -100.0f)
+        {
+            EndEpisode(reloadScene: true);
+        }
+        // - Car reached Goal
+        if (transform.parent.position.x >= 9900.0f)
+        {
+            SetReward(1000.0f);
+            EndEpisode(reloadScene: true);
+        }
     }
 }
