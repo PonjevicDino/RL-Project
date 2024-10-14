@@ -94,7 +94,7 @@ public class HillClimberAgent : Agent
         foreach (var coin in coins)
         {
             float currentCoinDistance = Vector3.Distance(coin.gameObject.transform.position, transform.parent.position);
-            coinDistance = currentCoinDistance > coinDistance ? currentCoinDistance : coinDistance;
+            coinDistance = currentCoinDistance < coinDistance ? currentCoinDistance : coinDistance;
         }
         sensor.AddObservation(coinDistance);
     }
