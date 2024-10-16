@@ -94,7 +94,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
             Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint, spawnSplinePoint) + new Vector3(0.0f, 2.0f);
             Vector3 spawnPosition = GetMeanBetweenSplinePoints(splinePoint, spawnSplinePoint);
             GameObject coinPrefabInstance = Instantiate(coinPrefab,
-                                                        new Vector3(spawnPosition.x, heightOffset.y + 1)  + Vector3.right * spawnOffset,
+                                                        new Vector3(spawnPosition.x, heightOffset.y + 3.0f) + Vector3.right * spawnOffset + Vector3.right,
                                                         Quaternion.identity, transform);
             coinPrefabInstance.GetComponent<CoinGenerator>().SpawnCoins(spawnPosition);
         }

@@ -39,6 +39,7 @@ public class HillClimberAgent : Agent
             transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScrpit>().headHit = false;
             //SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
         }
+        lastLevelProgress = 0.0f;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -116,7 +117,7 @@ public class HillClimberAgent : Agent
             lastLevelProgress = GameManager.Instance.levelProgress;
         }
         // - Fuel State
-        SetReward(transform.parent.gameObject.GetComponent<CarController>().Fuel / 100.0f);
+        SetReward((1.0f - transform.parent.gameObject.GetComponent<CarController>().Fuel) / 100.0f);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
         SetReward(moneyDifference / 10.0f);

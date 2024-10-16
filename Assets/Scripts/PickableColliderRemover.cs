@@ -29,4 +29,12 @@ public class PickableColliderRemover : MonoBehaviour
             transform.gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         }
     }
+
+    void FixedUpdate()
+    {
+        if (transform.position.y < -20.0f)
+        {
+            transform.SetPositionAndRotation(transform.position + Vector3.up * 120.0f, Quaternion.identity);
+        }
+    }
 }
