@@ -2234,12 +2234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFrequency: 1
-  initialAmplitude: 2
-  amplitudeIncrease: 0.02
+  initialAmplitude: 0.125
+  amplitudeIncrease: 0.25
   pointCount: 1000
   initialPointSpacing: 10
   spacingIncreaseFactor: 0
-  randomnessFactor: 3
+  randomnessFactor: 0.5
 --- !u!1 &989111647
 GameObject:
   m_ObjectHideFlags: 0

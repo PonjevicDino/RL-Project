@@ -15,6 +15,10 @@ public class HillClimberAgent : Agent
 {
     private float lastLevelProgress = 0.0f;
     private int lastTotalMoney;
+    private float lastFuel;
+    private List<Vector3> velocityHistory;
+    private DateTime lastSectionTime;
+    private int acceleratorHeldSteps = 0;
 
     private Text agentGasText;
     private Text agentBrakeText;
@@ -23,7 +27,6 @@ public class HillClimberAgent : Agent
     {
         agentGasText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentGas").ToList()[0].GetComponent<Text>();
         agentBrakeText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentBrake").ToList()[0].GetComponent<Text>();
-        //OnEpisodeBegin(); 
     }
 
     public override void OnEpisodeBegin(bool reloadScene = false)
@@ -40,6 +43,14 @@ public class HillClimberAgent : Agent
             //SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
         }
         lastLevelProgress = 0.0f;
+
+        //Prefill the Velocity-Histroy
+        velocityHistory = new List<Vector3>();
+        for (int item = 0; item < 5; item++)
+        {
+            velocityHistory.Add(Vector3.zero);
+        }
+        lastFuel = 1.0f;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -55,14 +66,25 @@ public class HillClimberAgent : Agent
         Rigidbody2D carRidgidBody = carTransform.gameObject.GetComponent<Rigidbody2D>();
 
         // Fuel state
-        sensor.AddObservation(carTransform.gameObject.GetComponent<CarController>().Fuel);
+        float currentFuel = carTransform.gameObject.GetComponent<CarController>().Fuel;
+        sensor.AddObservation(currentFuel);
+        // Fuel consumption
+        float fuelConsumption = currentFuel != lastFuel ? lastFuel - currentFuel : 0.0f;
+        sensor.AddObservation(fuelConsumption);
+        lastFuel = currentFuel;
 
         // Velocity of the player car
-        sensor.AddObservation(carRidgidBody.velocityX);
-        sensor.AddObservation(carRidgidBody.velocityY);
+        sensor.AddObservation(carRidgidBody.velocity.normalized);
+        // History: Velocity of the player car
+        velocityHistory.RemoveAt(0);
+        velocityHistory.Add(carRidgidBody.velocity);
+        for (int historyIndex = 0; historyIndex < velocityHistory.Count(); historyIndex++)
+        {
+            sensor.AddObservation(velocityHistory[0].normalized);
+        }
 
         // Pitch angle of the player car
-        sensor.AddObservation(carRidgidBody.rotation);
+        sensor.AddObservation(carRidgidBody.rotation / 180.0f);
 
         // Distance between player car and terrain to hit
         // Normal rotation vector on terrain hit
@@ -92,12 +114,19 @@ public class HillClimberAgent : Agent
         // Distance to next coin
         float coinDistance = 999.9f;
         var coins = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name.Contains("Coin "));
+        GameObject nearestCoin = this.gameObject;
         foreach (var coin in coins)
         {
             float currentCoinDistance = Vector3.Distance(coin.gameObject.transform.position, transform.parent.position);
-            coinDistance = currentCoinDistance < coinDistance ? currentCoinDistance : coinDistance;
+            if (currentCoinDistance < coinDistance)
+            {
+                coinDistance = currentCoinDistance;
+                nearestCoin = coin.gameObject;
+            }
         }
         sensor.AddObservation(coinDistance);
+        // Angle to next coin
+        Vector3.Angle(transform.parent.position, nearestCoin.transform.position);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -105,24 +134,42 @@ public class HillClimberAgent : Agent
         // Agent inputs
         if (agentGasText != null && agentBrakeText != null)
         {
-            agentGasText.enabled = GameManager.Instance.GasBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[0]));
-            agentBrakeText.enabled = GameManager.Instance.BrakeBtnPressed = Convert.ToBoolean(Mathf.Abs(actions.DiscreteActions[1]));
+            agentGasText.enabled = GameManager.Instance.GasBtnPressed = actions.DiscreteActions[0] > 0.0f ? true : false;
+            agentBrakeText.enabled = GameManager.Instance.BrakeBtnPressed = actions.DiscreteActions[1] > 0.0f ? true : false;
         }
 
         // Rewards
         // - Level Progress
-        if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
+        if (GameManager.Instance.levelProgress - lastLevelProgress >= 10.0f)
         {
-            SetReward(GameManager.Instance.levelProgress - lastLevelProgress);
+            SetReward((GameManager.Instance.levelProgress - lastLevelProgress) + Mathf.Max(0, 10.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds));
             lastLevelProgress = GameManager.Instance.levelProgress;
+            lastSectionTime = DateTime.Now;
+        }
+        else if (GameManager.Instance.levelProgress - lastLevelProgress < 0.0f)
+        {
+            SetReward(-0.05f); // Punishment for going backwards
         }
         // - Fuel State
-        SetReward((1.0f - transform.parent.gameObject.GetComponent<CarController>().Fuel) / 100.0f);
+        SetReward((1.0f - transform.parent.gameObject.GetComponent<CarController>().Fuel) / 10000.0f);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
-        SetReward(moneyDifference / 10.0f);
+        SetReward(moneyDifference / 100.0f);
         lastTotalMoney += moneyDifference;
-        
+        // - Holding the Gas-Pedal
+        if (GameManager.Instance.GasBtnPressed)
+        {
+            acceleratorHeldSteps++;
+            if (acceleratorHeldSteps > 3)
+            {
+                AddReward(0.1f);  // Small reward for holding accelerator
+            }
+        }
+        else
+        {
+            acceleratorHeldSteps = 0;
+        }
+
 
         // End Episode conditions
         // - No Fuel

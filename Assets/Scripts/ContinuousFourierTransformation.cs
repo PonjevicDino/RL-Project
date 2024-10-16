@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 using static SpriteTerrainGenerator;
 
 public class ContinuousFourierTransform : MonoBehaviour
 {
     [SerializeField] private float initialFrequency = 1f; // Standard frequency
-    [SerializeField] private float initialAmplitude = 2f; // Initial amplitude to start higher
-    [SerializeField] private float amplitudeIncrease = 0.5f; // Increase in amplitude
+    [SerializeField] private float initialAmplitude = 0.125f; // Initial amplitude to start higher
+    [SerializeField] private float amplitudeIncrease = 0.125f; // Increase in amplitude
     [SerializeField] private int pointCount = 100; // Number of points to render
     [SerializeField] private float initialPointSpacing = 0.1f; // Initial spacing between points
     [SerializeField] private float spacingIncreaseFactor = 0.01f; // Factor by which to increase spacing
