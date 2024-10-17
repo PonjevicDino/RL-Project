@@ -1,0 +1,29 @@
+{
+    "HillClimber": {
+        "checkpoints": [
+            {
+                "steps": 280326,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-280326.onnx",
+                "reward": 43.512505888938904,
+                "creation_time": 1729180899.8850505,
+                "auxillary_file_paths": [
+                    "results\\HillClimber2\\HillClimber\\HillClimber-280326.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 280326,
+            "file_path": "results\\HillClimber2\\HillClimber.onnx",
+            "reward": 43.512505888938904,
+            "creation_time": 1729180899.8850505,
+            "auxillary_file_paths": [
+                "results\\HillClimber2\\HillClimber\\HillClimber-280326.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

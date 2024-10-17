@@ -1,0 +1,1864 @@
+Mono path[0] = 'D:/OneDrive - FH OOe/3. Semester/Reinforcement-Learning/HillClimbRacer/HillClimbRacing_Data/Managed'
+Mono config path = 'D:/OneDrive - FH OOe/3. Semester/Reinforcement-Learning/HillClimbRacer/MonoBleedingEdge/etc'
+[Physics::Module] Initialized MultithreadedJobDispatcher with 27 workers.
+Initialize engine version: 2023.2.20f1 (0e25a174756c)
+[Subsystems] Discovering subsystems at path D:/OneDrive - FH OOe/3. Semester/Reinforcement-Learning/HillClimbRacer/HillClimbRacing_Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4080 SUPER (ID=0x2702)
+    Vendor:   NVIDIA
+    VRAM:     16047 MB
+    Driver:   32.0.15.6109
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.131 seconds
+- Finished resetting the current domain, in  0.001 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.441700 ms
+Ground
+Registered Communicator in Agent.
+Trajectory | upwards...
+Trajectory | Hit distance: 04.497
+Trajectory | Hit distance: 04.409
+Trajectory | Hit distance: 04.266
+Trajectory | Hit distance: 05.359
+Trajectory | Hit distance: 05.106
+Trajectory | Hit distance: 04.799
+Trajectory | Hit distance: 04.436
+Trajectory | Hit distance: 04.019
+Trajectory | Hit distance: 03.546
+Trajectory | Hit distance: 03.019
+Trajectory | Hit distance: 02.437
+Trajectory | Hit distance: 01.799
+Trajectory | Hit distance: 01.107
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 08.112
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 28.531
+Trajectory | Hit distance: 03.608
+Trajectory | Hit distance: 01.282
+Trajectory | Hit distance: 01.298
+Trajectory | Hit distance: 01.412
+Trajectory | Hit distance: 01.453
+Trajectory | Hit distance: 01.396
+Trajectory | Hit distance: 01.257
+Trajectory | Hit distance: 01.076
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 06.402
+Trajectory | Hit distance: 06.431
+Trajectory | Hit distance: 05.863
+Trajectory | Hit distance: 06.008
+Trajectory | Hit distance: 05.966
+Trajectory | Hit distance: 05.903
+Trajectory | Hit distance: 04.992
+Trajectory | Hit distance: 06.208
+Trajectory | Hit distance: 05.777
+Trajectory | Hit distance: 05.886
+Trajectory | Hit distance: 05.712
+Trajectory | Hit distance: 06.151
+Trajectory | Hit distance: 06.013
+Trajectory | Hit distance: 05.982
+Trajectory | Hit distance: 05.920
+Trajectory | Hit distance: 05.846
+Trajectory | Hit distance: 05.753
+Trajectory | Hit distance: 06.151
+Trajectory | Hit distance: 05.549
+Trajectory | Hit distance: 05.750
+Trajectory | Hit distance: 05.726
+Trajectory | Hit distance: 05.680
+Trajectory | Hit distance: 06.133
+Trajectory | Hit distance: 05.250
+Trajectory | Hit distance: 05.365
+Trajectory | Hit distance: 05.714
+Trajectory | Hit distance: 06.210
+Trajectory | Hit distance: 05.562
+Trajectory | Hit distance: 05.437
+Trajectory | Hit distance: 05.830
+Trajectory | Hit distance: 05.477
+Trajectory | Hit distance: 05.346
+Trajectory | Hit distance: 05.350
+Trajectory | Hit distance: 05.371
+Trajectory | Hit distance: 05.360
+Trajectory | Hit distance: 05.343
+Trajectory | Hit distance: 05.623
+Trajectory | Hit distance: 07.057
+Trajectory | Hit distance: 05.208
+Trajectory | Hit distance: 06.029
+Trajectory | Hit distance: 05.591
+Trajectory | Hit distance: 05.236
+Trajectory | Hit distance: 04.943
+Trajectory | Hit distance: 04.974
+Trajectory | Hit distance: 05.328
+Trajectory | Hit distance: 05.367
+Trajectory | Hit distance: 06.288
+Trajectory | Hit distance: 06.200
+Trajectory | Hit distance: 06.195
+Trajectory | Hit distance: 06.257
+Trajectory | Hit distance: 06.406
+Trajectory | Hit distance: 06.239
+Trajectory | Hit distance: 06.044
+Trajectory | Hit distance: 06.461
+Trajectory | Hit distance: 06.417
+Trajectory | Hit distance: 06.343
+Trajectory | Hit distance: 05.921
+Trajectory | Hit distance: 06.528
+Trajectory | Hit distance: 06.392
+Trajectory | Hit distance: 06.345
+Trajectory | Hit distance: 06.316
+Trajectory | Hit distance: 06.288
+Trajectory | Hit distance: 06.254
+Trajectory | Hit distance: 06.208
+Trajectory | Hit distance: 06.150
+Trajectory | Hit distance: 06.077
+Trajectory | Hit distance: 05.989
+Trajectory | Hit distance: 05.886
+Trajectory | Hit distance: 05.772
+Trajectory | Hit distance: 05.886
+Trajectory | Hit distance: 05.529
+Trajectory | Hit distance: 05.887
+Trajectory | Hit distance: 06.173
+Trajectory | Hit distance: 06.050
+Trajectory | Hit distance: 06.009
+Trajectory | Hit distance: 05.969
+Trajectory | Hit distance: 05.926
+Trajectory | Hit distance: 05.879
+Trajectory | Hit distance: 05.833
+Trajectory | Hit distance: 06.144
+Trajectory | Hit distance: 06.083
+Trajectory | Hit distance: 06.019
+Trajectory | Hit distance: 06.987
+Trajectory | Hit distance: 05.001
+Trajectory | Hit distance: 05.578
+Trajectory | Hit distance: 06.039
+Trajectory | Hit distance: 06.669
+Trajectory | Hit distance: 05.570
+Trajectory | Hit distance: 05.735
+Trajectory | Hit distance: 05.608
+Trajectory | Hit distance: 06.585
+Trajectory | Hit distance: 05.634
+Trajectory | Hit distance: 05.616
+Trajectory | Hit distance: 05.660
+Trajectory | Hit distance: 05.636
+Trajectory | Hit distance: 05.612
+Trajectory | Hit distance: 04.811
+Trajectory | Hit distance: 05.722
+Trajectory | Hit distance: 05.628
+Trajectory | Hit distance: 05.841
+Trajectory | Hit distance: 05.292
+Trajectory | Hit distance: 05.445
+Trajectory | Hit distance: 05.464
+Trajectory | Hit distance: 05.424
+Trajectory | Hit distance: 05.402
+Trajectory | Hit distance: 05.377
+Trajectory | Hit distance: 04.615
+Trajectory | Hit distance: 04.847
+Trajectory | Hit distance: 05.512
+Trajectory | Hit distance: 06.186
+Trajectory | Hit distance: 05.532
+Trajectory | Hit distance: 05.150
+Trajectory | Hit distance: 04.903
+Trajectory | Hit distance: 04.888
+Trajectory | Hit distance: 05.217
+Trajectory | Hit distance: 05.327
+Trajectory | Hit distance: 05.444
+Trajectory | Hit distance: 04.946
+Trajectory | Hit distance: 05.288
+Trajectory | Hit distance: 05.888
+Trajectory | Hit distance: 05.409
+Trajectory | Hit distance: 05.861
+Trajectory | Hit distance: 06.420
+Trajectory | Hit distance: 06.289
+Trajectory | Hit distance: 05.755
+Trajectory | Hit distance: 05.811
+Trajectory | Hit distance: 05.862
+Trajectory | Hit distance: 05.882
+Trajectory | Hit distance: 05.905
+Trajectory | Hit distance: 05.317
+Trajectory | Hit distance: 06.585
+Trajectory | Hit distance: 05.866
+Trajectory | Hit distance: 05.243
+Trajectory | Hit distance: 06.341
+Trajectory | Hit distance: 06.161
+Trajectory | Hit distance: 05.969
+Trajectory | Hit distance: 27.347
+Trajectory | Hit distance: 06.597
+Trajectory | Hit distance: 06.895
+Trajectory | Hit distance: 07.238
+Trajectory | Hit distance: 06.695
+Trajectory | Hit distance: 07.253
+Trajectory | Hit distance: 07.427
+Trajectory | Hit distance: 07.384
+Trajectory | Hit distance: 07.416
+Trajectory | Hit distance: 07.417
+Trajectory | Hit distance: 07.304
+Trajectory | Hit distance: 06.246
+Trajectory | Hit distance: 27.398
+Trajectory | Hit distance: 07.199
+Trajectory | Hit distance: 07.383
+Trajectory | Hit distance: 07.272
+Trajectory | upwards...
+Trajectory | Hit distance: 07.778
+Trajectory | Hit distance: 05.585
+Trajectory | Hit distance: 05.358
+Trajectory | Hit distance: 05.492
+Trajectory | Hit distance: 05.541
+Trajectory | Hit distance: 05.530
+Trajectory | Hit distance: 06.321
+Trajectory | Hit distance: 05.518
+Trajectory | Hit distance: 05.386
+Trajectory | Hit distance: 05.520
+Trajectory | Hit distance: 05.485
+Trajectory | Hit distance: 05.479
+Trajectory | Hit distance: 05.475
+Trajectory | Hit distance: 06.061
+Trajectory | Hit distance: 05.454
+Trajectory | Hit distance: 05.376
+Trajectory | Hit distance: 05.444
+Trajectory | Hit distance: 05.450
+Trajectory | Hit distance: 05.453
+Trajectory | Hit distance: 05.445
+Trajectory | Hit distance: 05.444
+Trajectory | Hit distance: 05.444
+Trajectory | Hit distance: 05.446
+Trajectory | Hit distance: 05.448
+Trajectory | Hit distance: 05.451
+Trajectory | Hit distance: 05.454
+Trajectory | Hit distance: 05.348
+Trajectory | Hit distance: 27.659
+Trajectory | Hit distance: 27.594
+Trajectory | Hit distance: 06.811
+Trajectory | Hit distance: 07.067
+Trajectory | Hit distance: 07.088
+Trajectory | Hit distance: 07.095
+Trajectory | Hit distance: 29.671
+Trajectory | Hit distance: 06.702
+Trajectory | Hit distance: 07.043
+Trajectory | Hit distance: 07.139
+Trajectory | Hit distance: 07.174
+Trajectory | Hit distance: 07.225
+Trajectory | Hit distance: 07.221
+Trajectory | Hit distance: 07.240
+Trajectory | Hit distance: 07.215
+Trajectory | Hit distance: 07.260
+Trajectory | upwards...
+Trajectory | Hit distance: 06.928
+Trajectory | Hit distance: 06.860
+Trajectory | Hit distance: 27.555
+Trajectory | Hit distance: 06.823
+Trajectory | Hit distance: 07.113
+Trajectory | Hit distance: 07.531
+Trajectory | Hit distance: 07.408
+Trajectory | Hit distance: 07.412
+Trajectory | Hit distance: 07.421
+Trajectory | Hit distance: 07.367
+Trajectory | Hit distance: 07.340
+Trajectory | Hit distance: 07.327
+Trajectory | Hit distance: 04.341
+Trajectory | Hit distance: 05.405
+Trajectory | Hit distance: 05.994
+Trajectory | Hit distance: 06.229
+Trajectory | Hit distance: 06.023
+Trajectory | Hit distance: 05.436
+Trajectory | Hit distance: 05.437
+Trajectory | Hit distance: 07.425
+Trajectory | Hit distance: 05.630
+Trajectory | Hit distance: 05.285
+Trajectory | Hit distance: 05.369
+Trajectory | Hit distance: 05.459
+Trajectory | Hit distance: 05.456
+Trajectory | Hit distance: 04.123
+Trajectory | Hit distance: 28.708
+Trajectory | Hit distance: 27.900
+Trajectory | Hit distance: 07.028
+Trajectory | Hit distance: 28.285
+Trajectory | Hit distance: 27.057
+Trajectory | Hit distance: 07.059
+Trajectory | Hit distance: 27.910
+Trajectory | Hit distance: 26.989
+Trajectory | Hit distance: 06.866
+Trajectory | Hit distance: 07.059
+Trajectory | Hit distance: 07.071
+Trajectory | Hit distance: 06.996
+Trajectory | Hit distance: 06.922
+Trajectory | Hit distance: 27.483
+Trajectory | Hit distance: 05.346
+Trajectory | Hit distance: 07.046
+Trajectory | upwards...
+Trajectory | Hit distance: 26.873
+Trajectory | Hit distance: 06.233
+Trajectory | Hit distance: 06.491
+Trajectory | Hit distance: 06.416
+Trajectory | Hit distance: 06.337
+Trajectory | Hit distance: 06.261
+Trajectory | Hit distance: 05.406
+Trajectory | Hit distance: 05.696
+Trajectory | Hit distance: 06.357
+Trajectory | Hit distance: 05.886
+Trajectory | Hit distance: 05.964
+Trajectory | Hit distance: 05.941
+Trajectory | Hit distance: 04.281
+Trajectory | Hit distance: 03.838
+Trajectory | Hit distance: 08.318
+Trajectory | Hit distance: 06.901
+Trajectory | Hit distance: 06.200
+Trajectory | Hit distance: 07.271
+Trajectory | Hit distance: 06.094
+Trajectory | Hit distance: 26.649
+Trajectory | Hit distance: 05.993
+Trajectory | Hit distance: 05.803
+Trajectory | Hit distance: 05.736
+Trajectory | Hit distance: 06.692
+Trajectory | Hit distance: 06.441
+Trajectory | Hit distance: 06.051
+Trajectory | Hit distance: 05.612
+Trajectory | Hit distance: 26.897
+Trajectory | Hit distance: 07.884
+Trajectory | Hit distance: 06.954
+Trajectory | Hit distance: 06.109
+Trajectory | Hit distance: 06.438
+Trajectory | Hit distance: 26.505
+Trajectory | Hit distance: 06.987
+Trajectory | Hit distance: 05.934
+Trajectory | Hit distance: 06.033
+Trajectory | Hit distance: 06.829
+Trajectory | Hit distance: 06.910
+Trajectory | Hit distance: 06.040
+Trajectory | Hit distance: 26.465
+Trajectory | Hit distance: 07.299
+Trajectory | Hit distance: 06.063
+Trajectory | Hit distance: 05.688
+Trajectory | Hit distance: 05.898
+Trajectory | Hit distance: 26.032
+Trajectory | Hit distance: 26.241
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 19.378
+Trajectory | Hit distance: 17.594
+Trajectory | Hit distance: 17.347
+Trajectory | Hit distance: 17.396
+Trajectory | Hit distance: 17.075
+Trajectory | Hit distance: 16.086
+Trajectory | Hit distance: 15.520
+Trajectory | Hit distance: 15.124
+Trajectory | Hit distance: 14.245
+Trajectory | Hit distance: 13.690
+Trajectory | Hit distance: 12.968
+Trajectory | Hit distance: 13.147
+Trajectory | Hit distance: 12.550
+Trajectory | Hit distance: 11.729
+Trajectory | Hit distance: 11.548
+Trajectory | Hit distance: 11.122
+Trajectory | Hit distance: 09.671
+Trajectory | Hit distance: 08.979
+Trajectory | Hit distance: 09.037
+Trajectory | Hit distance: 07.769
+Trajectory | Hit distance: 07.527
+Trajectory | Hit distance: 06.577
+Trajectory | Hit distance: 05.680
+Trajectory | Hit distance: 05.391
+Trajectory | Hit distance: 04.887
+Trajectory | Hit distance: 04.366
+Trajectory | Hit distance: 04.097
+Trajectory | Hit distance: 03.643
+Trajectory | Hit distance: 03.523
+Trajectory | Hit distance: 03.151
+Trajectory | Hit distance: 03.010
+Trajectory | Hit distance: 03.242
+Trajectory | Hit distance: 03.119
+Trajectory | Hit distance: 03.201
+Trajectory | Hit distance: 03.232
+Trajectory | Hit distance: 02.964
+Trajectory | Hit distance: 03.244
+Trajectory | Hit distance: 03.275
+Trajectory | Hit distance: 03.127
+Trajectory | Hit distance: 03.024
+Trajectory | Hit distance: 02.960
+Trajectory | Hit distance: 02.905
+Trajectory | Hit distance: 03.133
+Trajectory | Hit distance: 03.459
+Trajectory | Hit distance: 03.452
+Trajectory | Hit distance: 03.322
+Trajectory | Hit distance: 03.210
+Trajectory | Hit distance: 03.109
+Trajectory | Hit distance: 03.002
+Trajectory | Hit distance: 02.959
+Trajectory | Hit distance: 02.901
+Trajectory | Hit distance: 02.357
+Trajectory | Hit distance: 02.920
+Trajectory | Hit distance: 02.969
+Trajectory | Hit distance: 02.773
+Trajectory | Hit distance: 02.759
+Trajectory | Hit distance: 02.628
+Trajectory | Hit distance: 02.844
+Trajectory | Hit distance: 02.751
+Trajectory | Hit distance: 02.721
+Trajectory | Hit distance: 02.712
+Trajectory | Hit distance: 02.698
+Trajectory | Hit distance: 02.679
+Trajectory | Hit distance: 03.444
+Trajectory | Hit distance: 03.757
+Trajectory | Hit distance: 03.627
+Trajectory | Hit distance: 03.550
+Trajectory | Hit distance: 03.568
+Trajectory | Hit distance: 02.745
+Trajectory | Hit distance: 04.219
+Trajectory | Hit distance: 03.587
+Trajectory | Hit distance: 03.427
+Trajectory | Hit distance: 03.539
+Trajectory | Hit distance: 03.543
+Trajectory | Hit distance: 03.527
+Trajectory | Hit distance: 02.748
+Trajectory | Hit distance: 02.750
+Trajectory | Hit distance: 02.740
+Trajectory | Hit distance: 02.731
+Trajectory | Hit distance: 03.090
+Trajectory | Hit distance: 03.341
+Trajectory | Hit distance: 03.370
+Trajectory | Hit distance: 03.542
+Trajectory | Hit distance: 03.525
+Trajectory | Hit distance: 03.525
+Trajectory | Hit distance: 02.767
+Trajectory | Hit distance: 03.361
+Trajectory | Hit distance: 03.738
+Trajectory | Hit distance: 03.496
+Trajectory | Hit distance: 03.465
+Trajectory | Hit distance: 03.463
+Trajectory | Hit distance: 03.469
+Trajectory | Hit distance: 02.802
+Trajectory | Hit distance: 03.018
+Trajectory | Hit distance: 02.770
+Trajectory | Hit distance: 02.765
+Trajectory | Hit distance: 02.761
+Trajectory | Hit distance: 02.751
+Trajectory | Hit distance: 02.734
+Trajectory | Hit distance: 02.883
+Trajectory | Hit distance: 03.150
+Trajectory | Hit distance: 03.446
+Trajectory | Hit distance: 03.566
+Trajectory | Hit distance: 03.531
+Trajectory | Hit distance: 03.515
+Trajectory | Hit distance: 02.728
+Trajectory | Hit distance: 02.825
+Trajectory | Hit distance: 02.666
+Trajectory | Hit distance: 02.721
+Trajectory | Hit distance: 02.712
+Trajectory | Hit distance: 02.706
+Trajectory | Hit distance: 02.692
+Trajectory | Hit distance: 02.672
+Trajectory | Hit distance: 02.651
+Trajectory | Hit distance: 02.625
+Trajectory | Hit distance: 02.935
+Trajectory | Hit distance: 02.229
+Trajectory | Hit distance: 02.825
+Trajectory | Hit distance: 02.922
+Trajectory | Hit distance: 02.737
+Trajectory | Hit distance: 02.681
+Trajectory | Hit distance: 02.778
+Trajectory | Hit distance: 02.798
+Trajectory | Hit distance: 02.762
+Trajectory | Hit distance: 03.225
+Trajectory | Hit distance: 03.125
+Trajectory | Hit distance: 03.068
+Trajectory | Hit distance: 03.105
+Trajectory | Hit distance: 03.099
+Trajectory | Hit distance: 03.047
+Trajectory | Hit distance: 03.046
+Trajectory | Hit distance: 03.084
+Trajectory | Hit distance: 03.084
+Trajectory | Hit distance: 03.021
+Trajectory | Hit distance: 03.104
+Trajectory | Hit distance: 03.056
+Trajectory | Hit distance: 02.711
+Trajectory | Hit distance: 02.968
+Trajectory | Hit distance: 03.047
+Trajectory | Hit distance: 03.146
+Trajectory | Hit distance: 03.045
+Trajectory | Hit distance: 03.041
+Trajectory | Hit distance: 03.039
+Trajectory | Hit distance: 03.208
+Trajectory | Hit distance: 03.130
+Trajectory | Hit distance: 03.013
+Trajectory | Hit distance: 03.057
+Trajectory | Hit distance: 02.996
+Trajectory | Hit distance: 02.986
+Trajectory | Hit distance: 03.120
+Trajectory | Hit distance: 02.991
+Trajectory | Hit distance: 02.940
+Trajectory | Hit distance: 02.963
+Trajectory | Hit distance: 03.050
+Trajectory | Hit distance: 02.932
+Trajectory | Hit distance: 02.927
+Trajectory | Hit distance: 02.936
+Trajectory | Hit distance: 02.872
+Trajectory | Hit distance: 02.892
+Trajectory | Hit distance: 02.842
+Trajectory | Hit distance: 02.866
+Trajectory | Hit distance: 02.851
+Trajectory | Hit distance: 02.817
+Trajectory | Hit distance: 02.714
+Trajectory | Hit distance: 02.766
+Trajectory | Hit distance: 02.755
+Trajectory | Hit distance: 02.743
+Trajectory | Hit distance: 02.693
+Trajectory | Hit distance: 02.840
+Trajectory | Hit distance: 03.031
+Trajectory | Hit distance: 03.051
+Trajectory | Hit distance: 03.458
+Trajectory | Hit distance: 03.329
+Trajectory | Hit distance: 03.282
+Trajectory | Hit distance: 03.337
+Trajectory | Hit distance: 03.266
+Trajectory | Hit distance: 03.093
+Trajectory | Hit distance: 03.131
+Trajectory | Hit distance: 03.138
+Trajectory | Hit distance: 03.068
+Trajectory | Hit distance: 03.048
+Trajectory | Hit distance: 03.017
+Trajectory | Hit distance: 02.958
+Trajectory | Hit distance: 02.949
+Trajectory | Hit distance: 02.833
+Trajectory | Hit distance: 02.788
+Trajectory | Hit distance: 02.747
+Trajectory | Hit distance: 02.663
+Trajectory | Hit distance: 02.621
+Trajectory | Hit distance: 02.525
+Trajectory | Hit distance: 02.490
+Trajectory | Hit distance: 02.798
+Trajectory | Hit distance: 02.809
+Trajectory | Hit distance: 03.291
+Trajectory | Hit distance: 03.330
+Trajectory | Hit distance: 03.314
+Trajectory | Hit distance: 03.271
+Trajectory | Hit distance: 03.300
+Trajectory | Hit distance: 03.246
+Trajectory | Hit distance: 03.197
+Trajectory | Hit distance: 03.202
+Trajectory | Hit distance: 03.144
+Trajectory | Hit distance: 03.065
+Trajectory | Hit distance: 03.481
+Trajectory | Hit distance: 03.409
+Trajectory | Hit distance: 04.957
+Trajectory | Hit distance: 04.386
+Trajectory | Hit distance: 04.108
+Trajectory | Hit distance: 03.907
+Trajectory | Hit distance: 03.712
+Trajectory | Hit distance: 03.557
+Trajectory | Hit distance: 03.429
+Trajectory | Hit distance: 03.337
+Trajectory | Hit distance: 03.846
+Trajectory | Hit distance: 03.750
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 01.866
+Trajectory | Hit distance: 01.727
+Trajectory | Hit distance: 02.368
+Trajectory | Hit distance: 02.708
+Trajectory | Hit distance: 02.937
+Trajectory | Hit distance: 03.100
+Trajectory | Hit distance: 03.236
+Trajectory | Hit distance: 03.274
+Trajectory | Hit distance: 03.201
+Trajectory | Hit distance: 03.051
+Trajectory | Hit distance: 02.860
+Trajectory | Hit distance: 02.953
+Trajectory | Hit distance: 02.871
+Trajectory | Hit distance: 02.955
+Trajectory | Hit distance: 02.925
+Trajectory | Hit distance: 02.957
+Trajectory | Hit distance: 03.005
+Trajectory | Hit distance: 03.059
+Trajectory | Hit distance: 03.064
+Trajectory | Hit distance: 02.985
+Trajectory | Hit distance: 02.805
+Trajectory | Hit distance: 02.598
+Trajectory | Hit distance: 02.997
+Trajectory | Hit distance: 03.086
+Trajectory | Hit distance: 03.392
+Trajectory | Hit distance: 03.129
+Trajectory | Hit distance: 03.107
+Trajectory | Hit distance: 03.061
+Trajectory | Hit distance: 03.019
+Trajectory | Hit distance: 02.975
+Trajectory | Hit distance: 02.633
+Trajectory | Hit distance: 03.083
+Trajectory | Hit distance: 03.310
+Trajectory | Hit distance: 03.057
+Trajectory | Hit distance: 03.020
+Trajectory | Hit distance: 02.863
+Trajectory | Hit distance: 02.870
+Trajectory | Hit distance: 02.844
+Trajectory | Hit distance: 02.785
+Trajectory | Hit distance: 03.240
+Trajectory | Hit distance: 03.410
+Trajectory | Hit distance: 03.230
+Trajectory | Hit distance: 03.145
+Trajectory | Hit distance: 03.106
+Trajectory | Hit distance: 03.133
+Trajectory | Hit distance: 03.053
+Trajectory | Hit distance: 03.072
+Trajectory | Hit distance: 03.005
+Trajectory | Hit distance: 02.955
+Trajectory | Hit distance: 02.834
+Trajectory | Hit distance: 02.802
+Trajectory | Hit distance: 02.849
+Trajectory | Hit distance: 02.887
+Trajectory | Hit distance: 02.838
+Trajectory | Hit distance: 02.778
+Trajectory | Hit distance: 02.691
+Trajectory | Hit distance: 03.070
+Trajectory | Hit distance: 03.087
+Trajectory | Hit distance: 03.090
+Trajectory | Hit distance: 04.529
+Trajectory | Hit distance: 04.187
+Trajectory | Hit distance: 04.158
+Trajectory | Hit distance: 04.186
+Trajectory | Hit distance: 04.192
+Trajectory | Hit distance: 04.185
+Trajectory | Hit distance: 04.188
+Trajectory | Hit distance: 04.167
+Trajectory | Hit distance: 04.105
+Trajectory | Hit distance: 04.020
+Trajectory | Hit distance: 03.941
+Trajectory | Hit distance: 04.679
+Trajectory | Hit distance: 04.458
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 04.987
+Trajectory | Hit distance: 04.013
+Trajectory | Hit distance: 03.346
+Trajectory | Hit distance: 02.282
+Trajectory | Hit distance: 01.826
+Trajectory | Hit distance: 02.960
+Trajectory | Hit distance: 03.145
+Trajectory | Hit distance: 03.193
+Trajectory | Hit distance: 03.177
+Trajectory | Hit distance: 03.134
+Trajectory | Hit distance: 03.048
+Trajectory | Hit distance: 02.935
+Trajectory | Hit distance: 02.813
+Trajectory | Hit distance: 03.017
+Trajectory | Hit distance: 03.181
+Trajectory | Hit distance: 03.059
+Trajectory | Hit distance: 02.938
+Trajectory | Hit distance: 02.852
+Trajectory | Hit distance: 02.823
+Trajectory | Hit distance: 02.825
+Trajectory | Hit distance: 02.875
+Trajectory | Hit distance: 02.949
+Trajectory | Hit distance: 03.025
+Trajectory | Hit distance: 03.094
+Trajectory | Hit distance: 03.049
+Trajectory | Hit distance: 02.901
+Trajectory | Hit distance: 02.700
+Trajectory | Hit distance: 02.756
+Trajectory | Hit distance: 02.168
+Trajectory | Hit distance: 00.933
+Trajectory | Hit distance: 02.123
+Trajectory | Hit distance: 03.604
+Trajectory | Hit distance: 04.657
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 04.764
+Trajectory | Hit distance: 03.770
+Trajectory | Hit distance: 03.253
+Trajectory | Hit distance: 03.100
+Trajectory | Hit distance: 03.174
+Trajectory | Hit distance: 03.477
+Trajectory | Hit distance: 03.964
+Trajectory | Hit distance: 04.628
+Trajectory | Hit distance: 04.898
+Trajectory | upwards...
+Trajectory | Hit distance: 04.645
+Trajectory | Hit distance: 03.711
+Trajectory | Hit distance: 04.582
+Trajectory | Hit distance: 04.013
+Trajectory | Hit distance: 04.758
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 02.918
+Trajectory | Hit distance: 02.193
+Trajectory | Hit distance: 02.289
+Trajectory | Hit distance: 02.584
+Trajectory | Hit distance: 02.870
+Trajectory | Hit distance: 03.149
+Trajectory | Hit distance: 03.163
+Trajectory | Hit distance: 03.645
+Trajectory | Hit distance: 03.092
+Trajectory | Hit distance: 02.922
+Trajectory | Hit distance: 02.777
+Trajectory | Hit distance: 02.871
+Trajectory | Hit distance: 03.083
+Trajectory | Hit distance: 03.354
+Trajectory | Hit distance: 03.531
+Trajectory | Hit distance: 03.314
+Trajectory | Hit distance: 02.866
+Trajectory | Hit distance: 02.484
+Trajectory | Hit distance: 02.343
+Trajectory | Hit distance: 02.494
+Trajectory | Hit distance: 02.881
+Trajectory | Hit distance: 03.460
+Trajectory | Hit distance: 03.640
+Trajectory | Hit distance: 03.014
+Trajectory | Hit distance: 02.288
+Trajectory | Hit distance: 01.947
+Trajectory | Hit distance: 01.394
+Trajectory | Hit distance: 02.208
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 03.837
+Trajectory | Hit distance: 02.543
+Trajectory | Hit distance: 02.399
+Trajectory | Hit distance: 03.293
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 04.120
+Trajectory | Hit distance: 02.957
+Trajectory | Hit distance: 02.667
+Trajectory | Hit distance: 03.088
+Trajectory | Hit distance: 04.282
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 04.078
+Trajectory | Hit distance: 03.070
+Trajectory | Hit distance: 03.029
+Trajectory | Hit distance: 03.204
+Trajectory | Hit distance: 04.429
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 02.758
+Trajectory | Hit distance: 01.516
+Trajectory | Hit distance: 00.904
+Trajectory | Hit distance: 06.089
+Trajectory | Hit distance: 05.669
+Trajectory | Hit distance: 03.321
+Trajectory | Hit distance: 02.878
+Trajectory | Hit distance: 02.814
+Trajectory | Hit distance: 02.813
+Trajectory | Hit distance: 03.017
+Trajectory | Hit distance: 03.027
+Trajectory | Hit distance: 03.181
+Trajectory | Hit distance: 03.070
+Trajectory | Hit distance: 02.958
+Trajectory | Hit distance: 02.822
+Trajectory | Hit distance: 02.766
+Trajectory | Hit distance: 02.644
+Trajectory | Hit distance: 02.732
+Trajectory | Hit distance: 03.134
+Trajectory | Hit distance: 03.012
+Trajectory | Hit distance: 02.912
+Trajectory | Hit distance: 02.803
+Trajectory | Hit distance: 02.702
+Trajectory | Hit distance: 02.876
+Trajectory | Hit distance: 03.347
+Trajectory | Hit distance: 03.383
+Trajectory | Hit distance: 05.221
+Trajectory | Hit distance: 02.893
+Trajectory | Hit distance: 02.684
+Trajectory | Hit distance: 02.580
+Trajectory | Hit distance: 03.040
+Trajectory | Hit distance: 03.065
+Trajectory | Hit distance: 03.006
+Trajectory | Hit distance: 03.001
+Trajectory | Hit distance: 03.673
+Trajectory | Hit distance: 03.175
+Trajectory | Hit distance: 03.713
+Trajectory | Hit distance: 03.707
+Trajectory | Hit distance: 03.644
+Trajectory | Hit distance: 03.614
+Trajectory | Hit distance: 03.644
+Trajectory | Hit distance: 03.884
+Trajectory | Hit distance: 03.915
+Trajectory | Hit distance: 03.638
+Trajectory | Hit distance: 03.593
+Trajectory | Hit distance: 03.692
+Trajectory | Hit distance: 03.641
+Trajectory | Hit distance: 03.551
+Trajectory | Hit distance: 03.613
+Trajectory | Hit distance: 03.529
+Trajectory | Hit distance: 03.443
+Trajectory | Hit distance: 03.643
+Trajectory | Hit distance: 03.633
+Trajectory | Hit distance: 03.480
+Trajectory | Hit distance: 03.357
+Trajectory | Hit distance: 03.403
+Trajectory | Hit distance: 03.384
+Trajectory | Hit distance: 03.258
+Trajectory | Hit distance: 03.325
+Trajectory | Hit distance: 03.163
+Trajectory | Hit distance: 03.090
+Trajectory | Hit distance: 02.992
+Trajectory | Hit distance: 03.011
+Trajectory | Hit distance: 02.956
+Trajectory | Hit distance: 02.877
+Trajectory | Hit distance: 02.858
+Trajectory | Hit distance: 03.019
+Trajectory | Hit distance: 03.058
+Trajectory | Hit distance: 03.700
+Trajectory | Hit distance: 03.864
+Trajectory | Hit distance: 03.836
+Trajectory | Hit distance: 03.759
+Trajectory | Hit distance: 03.747
+Trajectory | Hit distance: 03.737
+Trajectory | Hit distance: 03.731
+Trajectory | Hit distance: 03.721
+Trajectory | Hit distance: 03.732
+Trajectory | Hit distance: 03.729
+Trajectory | Hit distance: 04.599
+Trajectory | Hit distance: 04.560
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 02.869
+Trajectory | Hit distance: 00.910
+Trajectory | Hit distance: 02.193
+Trajectory | Hit distance: 02.644
+Trajectory | Hit distance: 02.816
+Trajectory | Hit distance: 02.950
+Trajectory | Hit distance: 03.027
+Trajectory | Hit distance: 03.050
+Trajectory | Hit distance: 03.034
+Trajectory | Hit distance: 02.945
+Trajectory | Hit distance: 03.474
+Trajectory | Hit distance: 03.226
+Trajectory | Hit distance: 03.223
+Trajectory | Hit distance: 03.059
+Trajectory | Hit distance: 02.946
+Trajectory | Hit distance: 02.832
+Trajectory | Hit distance: 02.796
+Trajectory | Hit distance: 02.806
+Trajectory | Hit distance: 02.842
+Trajectory | Hit distance: 02.918
+Trajectory | Hit distance: 02.990
+Trajectory | Hit distance: 02.992
+Trajectory | Hit distance: 02.949
+Trajectory | Hit distance: 02.830
+Trajectory | Hit distance: 03.660
+Trajectory | Hit distance: 02.321
+Trajectory | Hit distance: 00.966
+Trajectory | Hit distance: 02.155
+Trajectory | Hit distance: 02.541
+Trajectory | Hit distance: 03.331
+Trajectory | Hit distance: 04.075
+Trajectory | Hit distance: 04.772
+Trajectory | Hit distance: 05.526
+Trajectory | Hit distance: 05.833
+Trajectory | Hit distance: 05.178
+Trajectory | Hit distance: 04.488
+Trajectory | Hit distance: 03.916
+Trajectory | Hit distance: 03.505
+Trajectory | Hit distance: 03.239
+Trajectory | Hit distance: 03.145
+Trajectory | Hit distance: 03.222
+Trajectory | Hit distance: 03.448
+Trajectory | Hit distance: 04.731
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 03.418
+Trajectory | Hit distance: 02.709
+Trajectory | Hit distance: 02.456
+Trajectory | upwards...
+Trajectory | Hit distance: 05.132
+Trajectory | Hit distance: 04.335
+Trajectory | Hit distance: 03.475
+Trajectory | Hit distance: 02.944
+Trajectory | Hit distance: 02.840
+Trajectory | Hit distance: 02.756
+Trajectory | Hit distance: 03.136
+Trajectory | Hit distance: 03.090
+Trajectory | Hit distance: 02.938
+Trajectory | Hit distance: 02.841
+Trajectory | Hit distance: 02.653
+Trajectory | Hit distance: 02.888
+Trajectory | Hit distance: 03.142
+Trajectory | Hit distance: 03.023
+Trajectory | Hit distance: 02.926
+Trajectory | Hit distance: 02.846
+Trajectory | Hit distance: 02.792
+Trajectory | Hit distance: 02.746
+Trajectory | Hit distance: 02.726
+Trajectory | Hit distance: 02.794
+Trajectory | Hit distance: 03.570
+Trajectory | Hit distance: 03.903
+Trajectory | Hit distance: 03.722
+Trajectory | Hit distance: 03.686
+Trajectory | Hit distance: 03.603
+Trajectory | Hit distance: 03.568
+Trajectory | Hit distance: 03.597
+Trajectory | Hit distance: 03.556
+Trajectory | Hit distance: 03.432
+Trajectory | Hit distance: 03.534
+Trajectory | Hit distance: 03.333
+Trajectory | Hit distance: 03.223
+Trajectory | Hit distance: 03.274
+Trajectory | Hit distance: 03.247
+Trajectory | Hit distance: 03.061
+Trajectory | Hit distance: 03.030
+Trajectory | Hit distance: 03.045
+Trajectory | Hit distance: 02.897
+Trajectory | Hit distance: 02.862
+Trajectory | Hit distance: 02.799
+Trajectory | Hit distance: 03.184
+Trajectory | Hit distance: 03.116
+Trajectory | Hit distance: 04.170
+Trajectory | Hit distance: 03.969
+Trajectory | Hit distance: 03.905
+Trajectory | Hit distance: 03.875
+Trajectory | Hit distance: 03.817
+Trajectory | Hit distance: 03.814
+Trajectory | Hit distance: 03.808
+Trajectory | Hit distance: 03.625
+Trajectory | Hit distance: 03.710
+Trajectory | Hit distance: 03.793
+Trajectory | Hit distance: 03.766
+Trajectory | Hit distance: 03.784
+Trajectory | Hit distance: 03.784
+Trajectory | Hit distance: 03.770
+Trajectory | Hit distance: 03.499
+Trajectory | Hit distance: 04.698
+Trajectory | Hit distance: 04.597
+Trajectory | Hit distance: 04.666
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 03.361
+Trajectory | Hit distance: 02.909
+Trajectory | Hit distance: 02.804
+Trajectory | Hit distance: 02.740
+Trajectory | Hit distance: 03.069
+Trajectory | Hit distance: 02.946
+Trajectory | Hit distance: 02.894
+Trajectory | Hit distance: 02.866
+Trajectory | Hit distance: 03.025
+Trajectory | Hit distance: 02.987
+Trajectory | Hit distance: 02.971
+Trajectory | Hit distance: 02.949
+Trajectory | Hit distance: 02.997
+Trajectory | Hit distance: 03.058
+Trajectory | Hit distance: 03.134
+Trajectory | Hit distance: 03.249
+Trajectory | Hit distance: 03.422
+Trajectory | Hit distance: 03.623
+Trajectory | Hit distance: 03.903
+Trajectory | Hit distance: 04.530
+Trajectory | Hit distance: 06.515
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 04.838
+Trajectory | Hit distance: 04.073
+Trajectory | Hit distance: 03.803
+Trajectory | Hit distance: 03.592
+Trajectory | Hit distance: 03.476
+Trajectory | Hit distance: 03.390
+Trajectory | Hit distance: 03.371
+Trajectory | Hit distance: 03.352
+Trajectory | Hit distance: 03.325
+Trajectory | Hit distance: 03.499
+Trajectory | Hit distance: 03.296
+Trajectory | Hit distance: 03.260
+Trajectory | Hit distance: 03.074
+Trajectory | Hit distance: 03.053
+Trajectory | Hit distance: 02.996
+Trajectory | Hit distance: 02.939
+Trajectory | Hit distance: 02.971
+Trajectory | Hit distance: 02.866
+Trajectory | Hit distance: 02.734
+Trajectory | Hit distance: 03.554
+Trajectory | Hit distance: 03.280
+Trajectory | Hit distance: 03.172
+Trajectory | Hit distance: 03.101
+Trajectory | Hit distance: 03.006
+Trajectory | Hit distance: 02.894
+Trajectory | Hit distance: 02.766
+Trajectory | Hit distance: 02.726
+Trajectory | Hit distance: 02.619
+Trajectory | Hit distance: 03.429
+Trajectory | Hit distance: 03.401
+Trajectory | Hit distance: 03.179
+Trajectory | Hit distance: 03.317
+Trajectory | Hit distance: 03.242
+Trajectory | Hit distance: 03.152
+Trajectory | Hit distance: 03.244
+Trajectory | Hit distance: 03.259
+Trajectory | Hit distance: 03.225
+Trajectory | Hit distance: 03.223
+Trajectory | Hit distance: 03.188
+Trajectory | Hit distance: 03.144
+Trajectory | Hit distance: 03.092
+Trajectory | Hit distance: 03.032
+Trajectory | Hit distance: 02.921
+Trajectory | Hit distance: 02.876
+Trajectory | Hit distance: 02.845
+Trajectory | Hit distance: 02.850
+Trajectory | Hit distance: 03.330
+Trajectory | Hit distance: 03.170
+Trajectory | Hit distance: 03.134
+Trajectory | Hit distance: 03.081
+Trajectory | Hit distance: 03.048
+Trajectory | Hit distance: 03.088
+Trajectory | Hit distance: 03.057
+Trajectory | Hit distance: 03.087
+Trajectory | Hit distance: 03.070
+Trajectory | Hit distance: 03.029
+Trajectory | Hit distance: 03.031
+Trajectory | Hit distance: 02.969
+Trajectory | Hit distance: 02.909
+Trajectory | Hit distance: 02.864
+Trajectory | Hit distance: 02.829
+Trajectory | Hit distance: 02.775
+Trajectory | Hit distance: 02.720
+Trajectory | Hit distance: 02.673
+Trajectory | Hit distance: 02.641
+Trajectory | Hit distance: 02.620
+Trajectory | Hit distance: 03.394
+Trajectory | Hit distance: 03.377
+Trajectory | Hit distance: 03.339
+Trajectory | Hit distance: 03.965
+Trajectory | Hit distance: 03.165
+Trajectory | Hit distance: 02.706
+Trajectory | Hit distance: 02.675
+Trajectory | Hit distance: 03.330
+Trajectory | Hit distance: 03.299
+Trajectory | Hit distance: 03.265
+Trajectory | Hit distance: 03.615
+Trajectory | Hit distance: 03.110
+Trajectory | Hit distance: 03.142
+Trajectory | Hit distance: 02.973
+Trajectory | Hit distance: 03.099
+Trajectory | Hit distance: 03.178
+Trajectory | Hit distance: 03.073
+Trajectory | Hit distance: 02.824
+Trajectory | Hit distance: 03.090
+Trajectory | Hit distance: 03.110
+Trajectory | Hit distance: 03.095
+Trajectory | Hit distance: 03.085
+Trajectory | Hit distance: 03.046
+Trajectory | Hit distance: 02.995
+Trajectory | Hit distance: 02.936
+Trajectory | Hit distance: 02.869
+Trajectory | Hit distance: 02.787
+Trajectory | Hit distance: 02.742
+Trajectory | Hit distance: 02.703
+Trajectory | Hit distance: 03.551
+Trajectory | Hit distance: 03.133
+Trajectory | Hit distance: 03.112
+Trajectory | Hit distance: 03.577
+Trajectory | Hit distance: 04.932
+Trajectory | Hit distance: 02.488
+Trajectory | Hit distance: 02.577
+Trajectory | Hit distance: 02.462
+Trajectory | Hit distance: 02.863
+Trajectory | Hit distance: 02.924
+Trajectory | Hit distance: 02.879
+Trajectory | Hit distance: 03.295
+Trajectory | Hit distance: 02.684
+Trajectory | Hit distance: 03.117
+Trajectory | Hit distance: 03.378
+Trajectory | Hit distance: 02.938
+Trajectory | Hit distance: 03.072
+Trajectory | Hit distance: 03.267
+Trajectory | Hit distance: 03.139
+Trajectory | Hit distance: 03.610
+Trajectory | Hit distance: 03.549
+Trajectory | Hit distance: 03.647
+Trajectory | Hit distance: 03.698
+Trajectory | Hit distance: 03.585
+Trajectory | Hit distance: 03.458
+Trajectory | Hit distance: 03.491
+Trajectory | Hit distance: 03.480
+Trajectory | Hit distance: 03.464
+Trajectory | Hit distance: 03.445
+Trajectory | Hit distance: 03.419
+Trajectory | Hit distance: 03.390
+Trajectory | Hit distance: 03.355
+Trajectory | Hit distance: 03.312
+Trajectory | Hit distance: 03.264
+Trajectory | Hit distance: 03.124
+Trajectory | Hit distance: 02.884
+Trajectory | Hit distance: 02.745
+Trajectory | Hit distance: 02.851
+Trajectory | Hit distance: 02.891
+Trajectory | Hit distance: 03.232
+Trajectory | Hit distance: 03.220
+Trajectory | Hit distance: 03.212
+Trajectory | Hit distance: 03.197
+Trajectory | Hit distance: 03.174
+Trajectory | Hit distance: 03.035
+Trajectory | Hit distance: 03.113
+Trajectory | Hit distance: 03.166
+Trajectory | Hit distance: 03.174
+Trajectory | Hit distance: 03.121
+Trajectory | Hit distance: 03.102
+Trajectory | Hit distance: 03.077
+Trajectory | Hit distance: 03.875
+Trajectory | Hit distance: 02.965
+Trajectory | Hit distance: 03.032
+Trajectory | Hit distance: 03.036
+Trajectory | Hit distance: 03.015
+Trajectory | Hit distance: 02.992
+Trajectory | Hit distance: 02.778
+Trajectory | Hit distance: 03.338
+Trajectory | Hit distance: 03.121
+Trajectory | Hit distance: 02.932
+Trajectory | Hit distance: 02.915
+Trajectory | Hit distance: 02.903
+Trajectory | Hit distance: 02.877
+Trajectory | Hit distance: 03.295
+Trajectory | Hit distance: 03.286
+Trajectory | Hit distance: 03.253
+Trajectory | Hit distance: 03.010
+Trajectory | Hit distance: 03.216
+Trajectory | Hit distance: 02.851
+Trajectory | Hit distance: 02.812
+Trajectory | Hit distance: 02.863
+Trajectory | Hit distance: 02.861
+Trajectory | Hit distance: 02.851
+Trajectory | Hit distance: 02.844
+Trajectory | Hit distance: 02.834
+Trajectory | Hit distance: 02.826
+Trajectory | Hit distance: 02.819
+Trajectory | Hit distance: 02.811
+Trajectory | Hit distance: 03.290
+Trajectory | Hit distance: 02.745
+Trajectory | Hit distance: 03.746
+Trajectory | Hit distance: 03.124
+Trajectory | Hit distance: 03.127
+Trajectory | Hit distance: 03.137
+Trajectory | Hit distance: 03.091
+Trajectory | Hit distance: 02.918
+Trajectory | Hit distance: 02.906
+Trajectory | Hit distance: 02.889
+Trajectory | Hit distance: 02.880
+Trajectory | Hit distance: 03.306
+Trajectory | Hit distance: 03.281
+Trajectory | Hit distance: 03.256
+Trajectory | Hit distance: 03.230
+Trajectory | Hit distance: 03.776
+Trajectory | Hit distance: 02.980
+Trajectory | Hit distance: 03.143
+Trajectory | Hit distance: 03.341
+Trajectory | Hit distance: 03.511
+Trajectory | Hit distance: 03.523
+Trajectory | Hit distance: 03.497
+Trajectory | Hit distance: 03.448
+Trajectory | Hit distance: 03.376
+Trajectory | Hit distance: 03.373
+Trajectory | Hit distance: 03.646
+Trajectory | Hit distance: 03.524
+Trajectory | Hit distance: 03.298
+Trajectory | Hit distance: 03.105
+Trajectory | Hit distance: 02.920
+Trajectory | Hit distance: 03.147
+Trajectory | Hit distance: 03.307
+Trajectory | Hit distance: 03.230
+Trajectory | Hit distance: 03.094
+Trajectory | Hit distance: 03.197
+Trajectory | Hit distance: 04.091
+Trajectory | Hit distance: 03.408
+Trajectory | Hit distance: 03.132
+Trajectory | Hit distance: 03.189
+Trajectory | Hit distance: 03.177
+Trajectory | Hit distance: 03.165
+Trajectory | Hit distance: 03.058
+Trajectory | Hit distance: 02.959
+Trajectory | Hit distance: 03.152
+Trajectory | Hit distance: 03.043
+Trajectory | Hit distance: 03.214
+Trajectory | Hit distance: 03.085
+Trajectory | Hit distance: 02.955
+Trajectory | Hit distance: 02.951
+Trajectory | Hit distance: 03.287
+Trajectory | Hit distance: 02.978
+Trajectory | Hit distance: 02.886
+Trajectory | Hit distance: 02.903
+Trajectory | Hit distance: 02.891
+Trajectory | Hit distance: 02.874
+Trajectory | Hit distance: 02.467
+Trajectory | Hit distance: 02.645
+Trajectory | Hit distance: 02.850
+Trajectory | Hit distance: 02.840
+Trajectory | Hit distance: 02.818
+Trajectory | Hit distance: 02.802
+Trajectory | Hit distance: 02.783
+Trajectory | Hit distance: 02.820
+Trajectory | Hit distance: 02.616
+Trajectory | Hit distance: 02.712
+Trajectory | Hit distance: 02.831
+Trajectory | Hit distance: 02.727
+Trajectory | Hit distance: 02.942
+Trajectory | Hit distance: 02.866
+Trajectory | Hit distance: 02.939
+Trajectory | Hit distance: 02.932
+Trajectory | Hit distance: 02.863
+Trajectory | Hit distance: 02.824
+Trajectory | Hit distance: 02.393
+Trajectory | Hit distance: 03.180
+Trajectory | Hit distance: 03.142
+Trajectory | Hit distance: 03.366
+Trajectory | Hit distance: 03.181
+Trajectory | Hit distance: 03.083
+Trajectory | Hit distance: 03.157
+Trajectory | Hit distance: 03.143
+Trajectory | Hit distance: 03.081
+Trajectory | Hit distance: 03.104
+Trajectory | Hit distance: 03.008
+Trajectory | Hit distance: 02.994
+Trajectory | Hit distance: 02.971
+Trajectory | Hit distance: 02.924
+Trajectory | Hit distance: 02.901
+Trajectory | Hit distance: 02.886
+Trajectory | Hit distance: 02.853
+Trajectory | Hit distance: 02.829
+Trajectory | Hit distance: 02.813
+Trajectory | Hit distance: 02.803
+Trajectory | Hit distance: 02.795
+Trajectory | Hit distance: 02.794
+Trajectory | Hit distance: 03.230
+Trajectory | Hit distance: 03.012
+Trajectory | Hit distance: 02.764
+Trajectory | Hit distance: 02.600
+Trajectory | Hit distance: 02.597
+Trajectory | Hit distance: 02.686
+Trajectory | Hit distance: 02.730
+Trajectory | Hit distance: 02.896
+Trajectory | Hit distance: 02.556
+Trajectory | Hit distance: 02.639
+Trajectory | Hit distance: 02.536
+Trajectory | Hit distance: 00.934
+Trajectory | Hit distance: 03.393
+Trajectory | Hit distance: 01.513
+Trajectory | Hit distance: 02.059
+Trajectory | Hit distance: 02.548
+Trajectory | Hit distance: 02.715
+Trajectory | Hit distance: 02.671
+Trajectory | Hit distance: 02.725
+Trajectory | Hit distance: 02.670
+Trajectory | Hit distance: 02.294
+Trajectory | Hit distance: 02.534
+Trajectory | Hit distance: 02.639
+Trajectory | Hit distance: 02.539
+Trajectory | Hit distance: 02.539
+Trajectory | Hit distance: 02.590
+Trajectory | Hit distance: 02.591
+Trajectory | Hit distance: 02.655
+Trajectory | Hit distance: 02.941
+Trajectory | Hit distance: 02.823
+Trajectory | Hit distance: 02.902
+Trajectory | Hit distance: 03.175
+Trajectory | Hit distance: 03.325
+Trajectory | Hit distance: 03.315
+Trajectory | Hit distance: 03.293
+Trajectory | Hit distance: 03.238
+Trajectory | Hit distance: 03.196
+Trajectory | Hit distance: 03.172
+Trajectory | Hit distance: 03.118
+Trajectory | Hit distance: 03.048
+Trajectory | Hit distance: 02.963
+Trajectory | Hit distance: 02.941
+Trajectory | Hit distance: 02.919
+Trajectory | Hit distance: 02.546
+Trajectory | Hit distance: 02.587
+Trajectory | Hit distance: 02.801
+Trajectory | Hit distance: 02.888
+Trajectory | Hit distance: 03.182
+Trajectory | Hit distance: 03.151
+Trajectory | Hit distance: 03.121
+Trajectory | Hit distance: 03.701
+Trajectory | Hit distance: 02.868
+Trajectory | Hit distance: 02.988
+Trajectory | Hit distance: 03.173
+Trajectory | Hit distance: 03.046
+Trajectory | Hit distance: 03.002
+Trajectory | Hit distance: 02.952
+Trajectory | Hit distance: 03.084
+Trajectory | upwards...
+Trajectory | Hit distance: 02.812
+Trajectory | Hit distance: 03.354
+Trajectory | Hit distance: 03.214
+Trajectory | Hit distance: 03.081
+Trajectory | Hit distance: 02.944
+Trajectory | Hit distance: 02.909
+Trajectory | Hit distance: 02.970
+Trajectory | Hit distance: 02.975
+Trajectory | Hit distance: 03.049
+Trajectory | Hit distance: 02.851
+Trajectory | Hit distance: 02.877
+Trajectory | Hit distance: 02.407
+Trajectory | Hit distance: 02.771
+Trajectory | Hit distance: 02.890
+Trajectory | Hit distance: 02.941
+Trajectory | Hit distance: 03.185
+Trajectory | Hit distance: 03.154
+Trajectory | Hit distance: 03.118
+Trajectory | Hit distance: 03.278
+Trajectory | Hit distance: 03.003
+Trajectory | Hit distance: 03.010
+Trajectory | Hit distance: 02.963
+Trajectory | Hit distance: 03.021
+Trajectory | Hit distance: 02.982
+Trajectory | Hit distance: 02.881
+Trajectory | Hit distance: 02.834
+Trajectory | Hit distance: 02.470
+Trajectory | Hit distance: 02.878
+Trajectory | Hit distance: 02.857
+Trajectory | Hit distance: 02.834
+Trajectory | Hit distance: 02.791
+Trajectory | Hit distance: 02.737
+Trajectory | Hit distance: 02.672
+Trajectory | Hit distance: 03.002
+Trajectory | Hit distance: 03.399
+Trajectory | Hit distance: 03.386
+Trajectory | Hit distance: 02.755
+Trajectory | Hit distance: 02.680
+Trajectory | Hit distance: 02.962
+Trajectory | Hit distance: 02.690
+Trajectory | Hit distance: 02.659
+Trajectory | Hit distance: 02.708
+Trajectory | Hit distance: 02.825
+Trajectory | Hit distance: 02.685
+Trajectory | Hit distance: 02.549
+Trajectory | Hit distance: 02.738
+Trajectory | Hit distance: 02.663
+Trajectory | Hit distance: 02.952
+Trajectory | Hit distance: 02.600
+Trajectory | Hit distance: 03.033
+Trajectory | Hit distance: 02.976
+Trajectory | Hit distance: 02.970
+Trajectory | Hit distance: 03.039
+Trajectory | Hit distance: 03.027
+Trajectory | Hit distance: 02.999
+Trajectory | Hit distance: 03.241
+Trajectory | Hit distance: 02.914
+Trajectory | Hit distance: 02.976
+Trajectory | Hit distance: 03.071
+Trajectory | Hit distance: 02.945
+Trajectory | Hit distance: 03.394
+Trajectory | Hit distance: 03.445
+Trajectory | Hit distance: 03.368
+Trajectory | Hit distance: 03.324
+Trajectory | Hit distance: 03.227
+Trajectory | Hit distance: 03.183
+Trajectory | Hit distance: 03.208
+Trajectory | Hit distance: 03.189
+Trajectory | Hit distance: 03.113
+Trajectory | Hit distance: 03.121
+Trajectory | Hit distance: 03.040
+Trajectory | Hit distance: 03.040
+Trajectory | Hit distance: 02.908
+Trajectory | Hit distance: 02.834
+Trajectory | Hit distance: 02.817
+Trajectory | Hit distance: 02.735
+Trajectory | Hit distance: 02.659
+Trajectory | Hit distance: 02.625
+Trajectory | Hit distance: 02.636
+Trajectory | Hit distance: 02.517
+Trajectory | Hit distance: 02.767
+Trajectory | Hit distance: 03.369
+Trajectory | Hit distance: 03.319
+Trajectory | Hit distance: 03.290
+Trajectory | Hit distance: 03.228
+Trajectory | Hit distance: 03.160
+Trajectory | Hit distance: 03.165
+Trajectory | Hit distance: 03.143
+Trajectory | Hit distance: 03.028
+Trajectory | Hit distance: 03.046
+Trajectory | Hit distance: 03.041
+Trajectory | Hit distance: 02.982
+Trajectory | Hit distance: 03.633
+Trajectory | Hit distance: 03.396
+Trajectory | Hit distance: 04.433
+Trajectory | Hit distance: 04.471
+Trajectory | Hit distance: 04.351
+Trajectory | Hit distance: 04.237
+Trajectory | Hit distance: 04.136
+Trajectory | Hit distance: 04.011
+Trajectory | Hit distance: 03.879
+Trajectory | Hit distance: 03.754
+Trajectory | Hit distance: 03.612
+Trajectory | Hit distance: 03.491
+Trajectory | Hit distance: 03.917
+Trajectory | Hit distance: 03.812
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | upwards...
+Trajectory | Hit distance: 05.174
+Trajectory | Hit distance: 03.540
+Trajectory | Hit distance: 03.148
+Trajectory | Hit distance: 02.955
+Trajectory | Hit distance: 02.848
+Trajectory | Hit distance: 02.782
+Trajectory | Hit distance: 02.748
+Trajectory | Hit distance: 02.719
+Trajectory | Hit distance: 02.688
+Trajectory | Hit distance: 02.877
+Trajectory | Hit distance: 03.195
+Trajectory | Hit distance: 03.241
+Trajectory | Hit distance: 03.239
+Trajectory | Hit distance: 03.231
+Trajectory | Hit distance: 03.160
+Trajectory | Hit distance: 03.046
+Trajectory | Hit distance: 02.909
+Trajectory | Hit distance: 02.757
+Trajectory | Hit distance: 02.631
+Trajectory | Hit distance: 02.533
+Trajectory | Hit distance: 02.523
+Trajectory | Hit distance: 02.573
+Trajectory | Hit distance: 03.576
+Trajectory | Hit distance: 03.538
+Trajectory | upwards...
+Trajectory | Hit distance: 05.238
+Trajectory | Hit distance: 05.442
+Trajectory | Hit distance: 04.755
+Trajectory | Hit distance: 03.945
+Trajectory | Hit distance: 03.492
+Trajectory | Hit distance: 03.437
+Trajectory | Hit distance: 03.285
+Trajectory | Hit distance: 03.351
+Setting up 14 worker threads for Enlighten.
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [8.0 KB-16.0 KB]: 2 frames, [16.0 KB-32.0 KB]: 445 frames, [2.0 MB-4.0 MB]: 1 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 2.1 MB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 244.5 KB
+      Overflow Count 4
+    [ALLOC_TEMP_Background Job.worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 16]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_CloudJob.worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 3.4 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 19]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 1.6 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.6 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 20]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 23]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 27
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 56 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.6 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 50 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 38 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 26]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 15]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.7 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.3 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 14
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 19.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 21]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.7 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 25]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 48 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_UnityGfxDeviceWorker]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 2.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 22]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.7 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 19.8 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 17]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 18]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 4.5 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.worker 24]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 369 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 2799
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 1.5 MB
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 448 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 2
+      Peak Allocated memory 29.0 MB
+      Peak Large allocation bytes 8.0 MB
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [32.0 MB-64.0 MB]: 448 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 52.8 MB
+      Peak Large allocation bytes 38.8 MB
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 0
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 1
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 1.5 MB
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [256.0 KB-0.5 MB]: 448 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 475.2 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [32.0 KB-64.0 KB]: 448 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 36.8 KB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 2
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 1.5 MB
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [0.5 MB-1.0 MB]: 448 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 1.0 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [2.0 MB-4.0 MB]: 448 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 2.8 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 1.5 MB
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [8.0 KB-16.0 KB]: 448 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 11.3 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [4.0 KB-8.0 KB]: 448 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 7.7 KB
+      Peak Large allocation bytes 0 B
