@@ -9,15 +9,51 @@
                 "auxillary_file_paths": [
                     "results\\HillClimber2\\HillClimber\\HillClimber-280326.pt"
                 ]
+            },
+            {
+                "steps": 300267,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-300267.onnx",
+                "reward": 56.70000705718994,
+                "creation_time": 1729184092.235611,
+                "auxillary_file_paths": [
+                    "results\\HillClimber2\\HillClimber\\HillClimber-300267.pt"
+                ]
+            },
+            {
+                "steps": 499807,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-499807.onnx",
+                "reward": 48.175008058547974,
+                "creation_time": 1729187526.5785954,
+                "auxillary_file_paths": [
+                    "results\\HillClimber2\\HillClimber\\HillClimber-499807.pt"
+                ]
+            },
+            {
+                "steps": 999904,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-999904.onnx",
+                "reward": 55.7375066280365,
+                "creation_time": 1729195814.8268638,
+                "auxillary_file_paths": [
+                    "results\\HillClimber2\\HillClimber\\HillClimber-999904.pt"
+                ]
+            },
+            {
+                "steps": 1000160,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-1000160.onnx",
+                "reward": 55.7375066280365,
+                "creation_time": 1729195814.9491522,
+                "auxillary_file_paths": [
+                    "results\\HillClimber2\\HillClimber\\HillClimber-1000160.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 280326,
+            "steps": 1000160,
             "file_path": "results\\HillClimber2\\HillClimber.onnx",
-            "reward": 43.512505888938904,
-            "creation_time": 1729180899.8850505,
+            "reward": 55.7375066280365,
+            "creation_time": 1729195814.9491522,
             "auxillary_file_paths": [
-                "results\\HillClimber2\\HillClimber\\HillClimber-280326.pt"
+                "results\\HillClimber2\\HillClimber\\HillClimber-1000160.pt"
             ]
         }
     },

@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4536955731157490673}
   - component: {fileID: 4536955731157490672}
-  - component: {fileID: 4536955731157490679}
+  - component: {fileID: 3262229088737940007}
   m_Layer: 0
   m_Name: GroundDetector
   m_TagString: Untagged
@@ -243,7 +243,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.8, y: 0.25}
   m_EdgeRadius: 0
---- !u!114 &4536955731157490679
+--- !u!114 &3262229088737940007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
