@@ -2,58 +2,58 @@
     "HillClimber": {
         "checkpoints": [
             {
-                "steps": 999904,
-                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-999904.onnx",
-                "reward": 55.7375066280365,
-                "creation_time": 1729195814.8268638,
+                "steps": 3639863,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-3639863.onnx",
+                "reward": 30.666670362154644,
+                "creation_time": 1729280492.9516268,
                 "auxillary_file_paths": [
-                    "results\\HillClimber2\\HillClimber\\HillClimber-999904.pt"
+                    "results\\HillClimber2\\HillClimber\\HillClimber-3639863.pt"
                 ]
             },
             {
-                "steps": 1000160,
-                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-1000160.onnx",
-                "reward": 55.7375066280365,
-                "creation_time": 1729195814.9491522,
+                "steps": 3999953,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-3999953.onnx",
+                "reward": 47.800004959106445,
+                "creation_time": 1729353153.7058918,
                 "auxillary_file_paths": [
-                    "results\\HillClimber2\\HillClimber\\HillClimber-1000160.pt"
+                    "results\\HillClimber2\\HillClimber\\HillClimber-3999953.pt"
                 ]
             },
             {
-                "steps": 1499881,
-                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-1499881.onnx",
-                "reward": 51.92500692605972,
-                "creation_time": 1729259644.9515607,
+                "steps": 4499772,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-4499772.onnx",
+                "reward": 51.675008058547974,
+                "creation_time": 1729357059.5301957,
                 "auxillary_file_paths": [
-                    "results\\HillClimber2\\HillClimber\\HillClimber-1499881.pt"
+                    "results\\HillClimber2\\HillClimber\\HillClimber-4499772.pt"
                 ]
             },
             {
-                "steps": 1999897,
-                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-1999897.onnx",
-                "reward": null,
-                "creation_time": 1729264191.3886285,
+                "steps": 4999942,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-4999942.onnx",
+                "reward": 55.70000743865967,
+                "creation_time": 1729361344.986398,
                 "auxillary_file_paths": [
-                    "results\\HillClimber2\\HillClimber\\HillClimber-1999897.pt"
+                    "results\\HillClimber2\\HillClimber\\HillClimber-4999942.pt"
                 ]
             },
             {
-                "steps": 2000097,
-                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-2000097.onnx",
-                "reward": 79.2500114440918,
-                "creation_time": 1729264191.4824688,
+                "steps": 5000198,
+                "file_path": "results\\HillClimber2\\HillClimber\\HillClimber-5000198.onnx",
+                "reward": 55.70000743865967,
+                "creation_time": 1729361345.1097796,
                 "auxillary_file_paths": [
-                    "results\\HillClimber2\\HillClimber\\HillClimber-2000097.pt"
+                    "results\\HillClimber2\\HillClimber\\HillClimber-5000198.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 2000097,
+            "steps": 5000198,
             "file_path": "results\\HillClimber2\\HillClimber.onnx",
-            "reward": 79.2500114440918,
-            "creation_time": 1729264191.4824688,
+            "reward": 55.70000743865967,
+            "creation_time": 1729361345.1097796,
             "auxillary_file_paths": [
-                "results\\HillClimber2\\HillClimber\\HillClimber-2000097.pt"
+                "results\\HillClimber2\\HillClimber\\HillClimber-5000198.pt"
             ]
         }
     },
