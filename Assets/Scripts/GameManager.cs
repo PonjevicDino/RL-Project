@@ -31,6 +31,8 @@ public class GameManager : Singleton<GameManager> {
 
     [SerializeField] private float maxLevelDistance = 2000.0f;
     public float levelProgress;
+    private float highScore = 0.0f;
+    private Text highScoreText;
 
     public bool GasBtnPressed { get; set; }
     public bool BrakeBtnPressed { get; set; }
@@ -43,6 +45,7 @@ public class GameManager : Singleton<GameManager> {
         Time.timeScale = 1f;
         isDie = false;
         ReachGoal = false;
+        highScoreText = GameObject.Find("HighScoreDistance").GetComponent<Text>();
         fadeIn.GetComponent<Animator>().SetTrigger("FadeIn");  //페이드 인 애니메이션 실행
         Initialize();
     }
@@ -51,7 +54,7 @@ public class GameManager : Singleton<GameManager> {
     {
         if (!gameOverUI.activeSelf)
         {
-            levelProgress = (carController.transform.position.x - carController.StartPos.x) / maxLevelDistance;
+            levelProgress = (carController.transform.position.x - carController.StartPos.x); /* / maxLevelDistance; */ // Why is that in here!?;
         }
     }
 
@@ -71,6 +74,12 @@ public class GameManager : Singleton<GameManager> {
         //엔진/브레이크 버튼 누를 시에 사운드 재생
         if(GasBtnPressed || BrakeBtnPressed)
             PlaySound("engine");
+
+        if ((carController.transform.position.x - carController.StartPos.x) > highScore)
+        {
+            highScore = carController.transform.position.x - carController.StartPos.x;
+            highScoreText.text = "Max: " + (int)highScore + "m";
+        }
     }
 
     //게임 초기 세팅 함수

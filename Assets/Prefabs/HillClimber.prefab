@@ -1176,6 +1176,8 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  printRewardInfo: 1
+  terrainRaycastsInViewport: 11
 --- !u!114 &6877186084156993669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 24
+    VectorObservationSize: 39
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
