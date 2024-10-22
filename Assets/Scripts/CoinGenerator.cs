@@ -10,7 +10,7 @@ public class CoinGenerator : MonoBehaviour
     public void SpawnCoins(Vector3 spawnPosition)
     {
         GameManager gameManager = Object.FindAnyObjectByType<GameManager>();
-        levelProgress = gameManager.levelProgress;
+        levelProgress = gameManager.levelProgress / 2000.0f;
 
         // Define the coin values
         int[] coinTypes = { 500, 100, 25, 5 };

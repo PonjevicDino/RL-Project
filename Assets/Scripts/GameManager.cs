@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager> {
     private CarController carController;
 
     [SerializeField] private float maxLevelDistance = 2000.0f;
-    public float levelProgress;
+    public float levelProgress { get; set; }
     private float highScore = 0.0f;
     private Text highScoreText;
 
@@ -54,6 +54,7 @@ public class GameManager : Singleton<GameManager> {
     {
         if (!gameOverUI.activeSelf)
         {
+            // TODO: Standardize "levelProgress" calculation
             levelProgress = (carController.transform.position.x - carController.StartPos.x); /* / maxLevelDistance; */ // Why is that in here!?;
         }
     }

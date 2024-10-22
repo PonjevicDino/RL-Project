@@ -69,7 +69,15 @@ public class HillClimberAgent : Agent
             transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit = false;
             //SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
         }
+
         lastLevelProgress = 0.0f;
+        lastFuel = 1.0f;
+        lastSectionTime = DateTime.Now;
+
+        totalLevelProgressReward = 0.0f;
+        totalFuelStateReward = 0.0f;
+        totalMoneyReward = 0.0f;
+        totalAcceleratorReward = 0.0f;
 
         //Prefill the Velocity-Histroy
         velocityHistory = new List<Vector3>();
@@ -77,7 +85,6 @@ public class HillClimberAgent : Agent
         {
             velocityHistory.Add(Vector3.zero);
         }
-        lastFuel = 1.0f;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -232,7 +239,7 @@ public class HillClimberAgent : Agent
         // - Level Progress
         if (GameManager.Instance.levelProgress - lastLevelProgress >= 10.0f)
         {
-            levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + Mathf.Max(0, 10.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds);
+            levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds);
             SetReward(levelProgressReward);
             lastLevelProgress = GameManager.Instance.levelProgress;
             lastSectionTime = DateTime.Now;
@@ -247,7 +254,9 @@ public class HillClimberAgent : Agent
             levelProgressReward = 0.0f;
         }
         // - Fuel State
-        fuelStateReward = (1.0f - transform.parent.gameObject.GetComponent<CarController>().Fuel) / 10000.0f;
+        // -- Fuel > 50% = Reward
+        // -- Fuel < 50% = Punishment
+        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 1000.0f; 
         SetReward(fuelStateReward);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
@@ -261,7 +270,7 @@ public class HillClimberAgent : Agent
             acceleratorHeldStepsText.enabled = true;
             if (acceleratorHeldSteps > 3)
             {
-                acceleratorReward = 0.01f * acceleratorHeldSteps;
+                acceleratorReward = 0.01f * acceleratorHeldSteps / 100.0f;
                 AddReward(acceleratorReward);  // Small reward for holding accelerator
             }
         }
@@ -309,16 +318,30 @@ public class HillClimberAgent : Agent
         }
     }
 
+    #region --> Total Rewards for Debug
+    private float totalLevelProgressReward = 0.0f;
+    private float totalFuelStateReward = 0.0f;
+    private float totalMoneyReward = 0.0f;
+    private float totalAcceleratorReward = 0.0f;
+    #endregion
+
     private void PrintRewardInfo(float levelProgressReward, float fuelStateReward, float moneyReward, float acceleratorReward)
     {
         rewardInfoText.SetActive(true);
        
-        levelProgressRewardText.text = "LVL-Prog: " + levelProgressReward;
-        fuelStateRewardText.text = "Fuel: " + fuelStateReward;
-        moneyRewardText.text = "Coins: " + moneyReward;
-        acceleratorRewardText.text = "ACC-Mult." + acceleratorReward;
+        levelProgressRewardText.text = "LVL-Prog: " + levelProgressReward.ToString("00.000");
+        fuelStateRewardText.text = "Fuel: " + fuelStateReward.ToString(".00000");
+        moneyRewardText.text = "Coins: " + moneyReward.ToString(".000");
+        acceleratorRewardText.text = "ACC-Mult." + acceleratorReward.ToString("0.0000");
 
         acceleratorHeldStepsText.text = acceleratorHeldSteps + "x";
         brakeHeldStepsText.text = brakeHeldSteps + "x";
+
+        totalLevelProgressReward += levelProgressReward;
+        totalFuelStateReward += fuelStateReward;
+        totalMoneyReward += moneyReward;
+        totalAcceleratorReward += acceleratorReward;
+        Debug.Log("Rewards: LVL - " + totalLevelProgressReward + " | Fuel - " + totalFuelStateReward +
+                  " | Money - " + totalMoneyReward + " | ACC - " + totalAcceleratorReward);
     }
 }
