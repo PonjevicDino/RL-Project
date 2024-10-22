@@ -256,7 +256,7 @@ public class HillClimberAgent : Agent
         // - Fuel State
         // -- Fuel > 50% = Reward
         // -- Fuel < 50% = Punishment
-        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 1000.0f; 
+        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 10.0f; 
         SetReward(fuelStateReward);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
