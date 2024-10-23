@@ -15,6 +15,8 @@ using TMPro;
 
 public class HillClimberAgent : Agent
 {
+    [SerializeField] private string categoryName;
+
     [SerializeField] private bool printRewardInfo = true;
     private GameObject rewardInfoText;
     private TextMeshProUGUI levelProgressRewardText;
@@ -37,6 +39,10 @@ public class HillClimberAgent : Agent
 
     private Text agentGasText;
     private Text agentBrakeText;
+
+    private string mapName = string.Empty;
+    private string vehicleName = string.Empty;
+    private int totalAcceleratorHeldSteps = 0;
 
     void Start()
     {
@@ -79,12 +85,19 @@ public class HillClimberAgent : Agent
         totalMoneyReward = 0.0f;
         totalAcceleratorReward = 0.0f;
 
+        GameManager.Instance.totalFuelTanksCollected = 0;
+        GameManager.Instance.totalCoinsCollected = 0;
+        totalAcceleratorHeldSteps = 0;
+
         //Prefill the Velocity-Histroy
         velocityHistory = new List<Vector3>();
         for (int item = 0; item < 5; item++)
         {
             velocityHistory.Add(Vector3.zero);
         }
+
+        mapName = GameManager.Instance.mapName;
+        vehicleName = GameManager.Instance.vehicleName;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -266,6 +279,7 @@ public class HillClimberAgent : Agent
         // - Holding the Pedals
         if (GameManager.Instance.GasBtnPressed)
         {
+            totalAcceleratorHeldSteps++;
             acceleratorHeldSteps++;
             acceleratorHeldStepsText.enabled = true;
             if (acceleratorHeldSteps > 3)
@@ -289,26 +303,42 @@ public class HillClimberAgent : Agent
         }
 
         // End Episode conditions
+        Dictionary<string, float> stats = new Dictionary<string, float>
+        {
+            { "totalLevelProgress",  GameManager.Instance.levelProgress },
+            { "totalLevelProgressReward", totalLevelProgressReward },
+            { "totalFuelTanksCollected",  GameManager.Instance.totalFuelTanksCollected },
+            { "totalFuelStateReward", totalFuelStateReward },
+            { "totalCollectedCoins", GameManager.Instance.totalCoinsCollected },
+            { "totalMoneyReward", totalMoneyReward },
+            { "totalAcceleratorHeld", totalAcceleratorHeldSteps },
+            { "totalAcceleratorReward", totalAcceleratorReward }            
+        };
+
         // - No Fuel
         if (transform.parent.gameObject.GetComponent<CarController>().Fuel <= 0.0f)
         {
-            EndEpisode(reloadScene: true);
+            stats.Add("deathCause", 1.0f);
+            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car on Roof
-        if (transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit)
+        else if (transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit)
         {
-            EndEpisode(reloadScene: true);
+            stats.Add("deathCause", 2.0f);
+            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car out of Map
-        if (transform.parent.position.y <= -100.0f)
+        else if (transform.parent.position.y <= -100.0f)
         {
-            EndEpisode(reloadScene: true);
+            stats.Add("deathCause", 3.0f);
+            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car reached Goal
-        if (transform.parent.position.x >= 9900.0f)
+        else if (transform.parent.position.x >= 9900.0f)
         {
             SetReward(1000.0f);
-            EndEpisode(reloadScene: true);
+            stats.Add("deathCause", 0.0f);
+            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
 
         // Print Debug Info
@@ -341,7 +371,14 @@ public class HillClimberAgent : Agent
         totalFuelStateReward += fuelStateReward;
         totalMoneyReward += moneyReward;
         totalAcceleratorReward += acceleratorReward;
-        Debug.Log("Rewards: LVL - " + totalLevelProgressReward + " | Fuel - " + totalFuelStateReward +
-                  " | Money - " + totalMoneyReward + " | ACC - " + totalAcceleratorReward);
+        //Debug.Log("Rewards: LVL - " + totalLevelProgressReward + " | Fuel - " + totalFuelStateReward +
+        //          " | Money - " + totalMoneyReward + " | ACC - " + totalAcceleratorReward);
+    }
+    void DisplayScores(Dictionary<string, int> scores)
+    {
+        foreach (KeyValuePair<string, int> entry in scores)
+        {
+            Debug.Log($"Player: {entry.Key}, Score: {entry.Value}");
+        }
     }
 }

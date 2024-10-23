@@ -41,6 +41,11 @@ public class GameManager : Singleton<GameManager> {
 
     public bool isControlledByAI { get; set; }
 
+    public string mapName = "";
+    public string vehicleName = "";
+    public int totalFuelTanksCollected = 0;
+    public int totalCoinsCollected = 0;
+
     public void Start() {
         Time.timeScale = 1f;
         isDie = false;
@@ -85,28 +90,27 @@ public class GameManager : Singleton<GameManager> {
 
     //게임 초기 세팅 함수
     private void Initialize() {
-        string objName = "";
         int stageIndex = PlayerPrefs.GetInt("Stage"), vehicleIndex = PlayerPrefs.GetInt("Vehicle");
 
         //선택한 맵 불러오기
         if(stageIndex.Equals(0)) {
-            objName = "Ground";
+            mapName = "Ground";
             Camera.main.backgroundColor = new Color(0.5803922f, 0.8470589f, 0.937255f, 0);
         }
         else if(stageIndex.Equals(1)) {
-            objName = "Moon";
+            mapName = "Moon";
             Camera.main.backgroundColor = new Color(0.0111764f, 0.050980f, 0.223529f, 0);
         }
         else if(stageIndex.Equals(2))
-            objName = "Cave";
+            mapName = "Cave";
 
-        Debug.Log(objName);
-        chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(objName, false));
+        Debug.Log(mapName);
+        chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(mapName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
-        if(vehicleIndex.Equals(0)) objName = "HillClimber";
-        else if(vehicleIndex.Equals(1)) objName = "Motorcycle";
-        CarController vehicle = objectManager.GetObject(objName).GetComponent<CarController>();
+        if(vehicleIndex.Equals(0)) vehicleName = "HillClimber";
+        else if(vehicleIndex.Equals(1)) vehicleName = "Motorcycle";
+        CarController vehicle = objectManager.GetObject(vehicleName).GetComponent<CarController>();
         carController = vehicle;
 
         //카메라 조정
@@ -138,6 +142,7 @@ public class GameManager : Singleton<GameManager> {
 
     //연료를 획득하면 연료 게이지를 꽉 채운다.
     public void FuelCharge() {
+        totalFuelTanksCollected++;
         carController.Fuel = 1;
         fuelGauge.fillAmount = 1;  //게이지 바 꽉 채운다
         PlaySound("refuel"); //연료충전 사운드 재생
@@ -145,6 +150,7 @@ public class GameManager : Singleton<GameManager> {
 
     //코인 얻었을 때 함수
     public void GetCoin(int price) {
+        totalCoinsCollected++;
         totalMoney += price;
         moneyEarned += price;
         moneyText.text = totalMoney.ToString(); //text에 금액 갱신
