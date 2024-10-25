@@ -36,6 +36,7 @@ public class HillClimberAgent : Agent
     private DateTime lastSectionTime;
     private int acceleratorHeldSteps = 0;
     private int brakeHeldSteps = 0;
+    private float distanceToGround = 0.0f; 
 
     private Text agentGasText;
     private Text agentBrakeText;
@@ -43,6 +44,7 @@ public class HillClimberAgent : Agent
     private string mapName = string.Empty;
     private string vehicleName = string.Empty;
     private int totalAcceleratorHeldSteps = 0;
+    private float totalDistanceToGround = 0.0f;
 
     void Start()
     {
@@ -84,6 +86,7 @@ public class HillClimberAgent : Agent
         totalFuelStateReward = 0.0f;
         totalMoneyReward = 0.0f;
         totalAcceleratorReward = 0.0f;
+        totalDistanceToGround = 0.0f;
 
         GameManager.Instance.totalFuelTanksCollected = 0;
         GameManager.Instance.totalCoinsCollected = 0;
@@ -231,6 +234,20 @@ public class HillClimberAgent : Agent
             }
         }
         sensor.AddObservation(terrainHeights);
+
+        // Get distance to ground
+        RaycastHit2D[] distanceToGroundHits = Physics2D.RaycastAll(carTransform.position, Vector3.down);
+        distanceToGround = 1000.0f;
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
+            {
+                Debug.DrawRay(carTransform.position, carTrajectory * hit.distance, Color.white);
+                distanceToGround = hit.distance;
+                totalDistanceToGround += distanceToGround;
+                break;
+            }
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -266,6 +283,8 @@ public class HillClimberAgent : Agent
         {
             levelProgressReward = 0.0f;
         }
+        // - Distance to Ground
+        SetReward((2.0f - distanceToGround) / 1000.0f);
         // - Fuel State
         // -- Fuel > 50% = Reward
         // -- Fuel < 50% = Punishment
@@ -284,7 +303,7 @@ public class HillClimberAgent : Agent
             acceleratorHeldStepsText.enabled = true;
             if (acceleratorHeldSteps > 3)
             {
-                acceleratorReward = 0.01f * acceleratorHeldSteps / 100.0f;
+                acceleratorReward = 0.01f * acceleratorHeldSteps / 5000.0f;
                 AddReward(acceleratorReward);  // Small reward for holding accelerator
             }
         }
@@ -312,7 +331,8 @@ public class HillClimberAgent : Agent
             { "totalCollectedCoins", GameManager.Instance.totalCoinsCollected },
             { "totalMoneyReward", totalMoneyReward },
             { "totalAcceleratorHeld", totalAcceleratorHeldSteps },
-            { "totalAcceleratorReward", totalAcceleratorReward }            
+            { "totalAcceleratorReward", totalAcceleratorReward },
+            { "totalDistanceToGround", totalDistanceToGround }
         };
 
         // - No Fuel
