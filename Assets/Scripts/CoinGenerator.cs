@@ -7,6 +7,11 @@ public class CoinGenerator : MonoBehaviour
     [SerializeField] private List<Sprite> coinTextures;
     [SerializeField] private float levelProgress;
 
+    private void Start()
+    {
+        //Random.InitState(0);
+    }
+
     public void SpawnCoins(Vector3 spawnPosition)
     {
         GameManager gameManager = Object.FindAnyObjectByType<GameManager>();

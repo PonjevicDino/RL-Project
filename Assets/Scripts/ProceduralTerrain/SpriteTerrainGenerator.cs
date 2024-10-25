@@ -31,6 +31,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
     private void Start()
     {
         Physics.gravity = gravity;
+        //Random.InitState(0);
     }
 
     public void SpawnChunkBasedOnFourier(Vector3[] points, int chunkNumber, Vector3 previousEndPoint)

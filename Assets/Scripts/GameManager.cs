@@ -50,6 +50,7 @@ public class GameManager : Singleton<GameManager> {
         Time.timeScale = 1f;
         isDie = false;
         ReachGoal = false;
+        levelProgress = 0;
         highScoreText = GameObject.Find("HighScoreDistance").GetComponent<Text>();
         fadeIn.GetComponent<Animator>().SetTrigger("FadeIn");  //페이드 인 애니메이션 실행
         Initialize();
@@ -105,6 +106,7 @@ public class GameManager : Singleton<GameManager> {
             mapName = "Cave";
 
         Debug.Log(mapName);
+        // TODO: Enable for procedural generation
         chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(mapName, false));
 
         //선택한 차량 불러오기/오브젝트 생성

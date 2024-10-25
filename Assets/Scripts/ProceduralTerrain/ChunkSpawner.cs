@@ -9,6 +9,8 @@ public class ChunkSpawner : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
+    [SerializeField] private Transform totalChunks;
+
     private ContinuousFourierTransform terrain;
     private Vector3[] points;
 
@@ -47,11 +49,23 @@ public class ChunkSpawner : MonoBehaviour
 
     public void ReloadAllChunks()
     {
+        
         while (transform.childCount > 0)
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
         }
         chunkNumber = 0;
+
+        // TODO: Enable for procedural generation
         InitializeChunkSpawning(chunkPrefab);
+
+        // TODO: ENable for fixed generation
+        /*
+        for (int childChunk = 0; childChunk < totalChunks.childCount; childChunk++)
+        {
+            GameObject copiedChunk = Instantiate(totalChunks.GetChild(childChunk).gameObject, this.transform);
+            copiedChunk.SetActive(true);
+        }
+        */
     }
 }

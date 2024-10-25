@@ -24,6 +24,8 @@ public class ContinuousFourierTransform : MonoBehaviour
         // Precompute the Fourier transformation points
         //ComputeFourierTransform();
         //UpdateRenderer();
+
+        //Random.InitState(0);
     }
 
     public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation)
