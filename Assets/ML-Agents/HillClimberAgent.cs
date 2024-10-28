@@ -248,6 +248,7 @@ public class HillClimberAgent : Agent
                 break;
             }
         }
+        sensor.AddObservation(distanceToGround);
     }
 
     public override void OnActionReceived(ActionBuffers actions)

@@ -107,7 +107,7 @@ public class GameManager : Singleton<GameManager> {
 
         Debug.Log(mapName);
         // TODO: Enable for procedural generation
-        chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(mapName, false));
+        //chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(mapName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
         if(vehicleIndex.Equals(0)) vehicleName = "HillClimber";

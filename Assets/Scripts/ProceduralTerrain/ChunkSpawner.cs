@@ -57,15 +57,13 @@ public class ChunkSpawner : MonoBehaviour
         chunkNumber = 0;
 
         // TODO: Enable for procedural generation
-        InitializeChunkSpawning(chunkPrefab);
+        //InitializeChunkSpawning(chunkPrefab);
 
-        // TODO: ENable for fixed generation
-        /*
+        // TODO: Enable for fixed generation 
         for (int childChunk = 0; childChunk < totalChunks.childCount; childChunk++)
         {
             GameObject copiedChunk = Instantiate(totalChunks.GetChild(childChunk).gameObject, this.transform);
             copiedChunk.SetActive(true);
-        }
-        */
+        }     
     }
 }
