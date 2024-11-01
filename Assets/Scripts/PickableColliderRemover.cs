@@ -32,9 +32,9 @@ public class PickableColliderRemover : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.position.y < -20.0f)
+        if (transform.position.y < -50.0f)
         {
-            transform.SetPositionAndRotation(transform.position + Vector3.up * 120.0f, Quaternion.identity);
+            transform.SetPositionAndRotation(transform.position + Vector3.up * 100.0f, Quaternion.identity);
         }
     }
 }

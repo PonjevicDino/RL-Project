@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 
 public class ChunkSpawner : MonoBehaviour
 {
-    [SerializeField] private Vector3 spawnPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField] private Vector3 spawnPosition = new Vector3(-9.0f, 0.0f, 0.0f);
 
     [SerializeField] private Transform totalChunks;
 
@@ -26,14 +26,14 @@ public class ChunkSpawner : MonoBehaviour
         SpriteTerrainGenerator.FourierTransformation fourierTransformation = chunkPrefab.GetComponent<SpriteTerrainGenerator>().fourierTransformation;
         terrain = transform.GetComponent<ContinuousFourierTransform>();
 
-        points = terrain.ComputeFourierTransform(fourierTransformation);
+        points = terrain.ComputeFourierTransform(fourierTransformation, spawnPosition);
         SpawnNewChunkBasedOnFourier();
     }
 
     public void SpawnNewChunkBasedOnFourier()
     {
         //If there is a previous chunk, collect it´s endpoint.y as the new startHeight otherwise use 0
-        Vector3 previousEndPoint = new Vector3(0.0f, 0.0f);
+        Vector3 previousEndPoint = spawnPosition;
 
         if (chunk)
         {
@@ -41,7 +41,7 @@ public class ChunkSpawner : MonoBehaviour
         }
 
         //Use the spawnOffset of the prefab to determine where to spawn the next chunk and position it based on its chunkNumber
-        Vector3 spawnOffset = previousEndPoint + spawnPosition + (new Vector3(1.0f, 0.0f) * chunkNumber);
+        Vector3 spawnOffset = previousEndPoint;
         chunk = Instantiate(chunkPrefab, new Vector3(spawnOffset.x, spawnPosition.y), Quaternion.identity, this.transform);
         chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint); 
         chunkNumber++;
@@ -60,7 +60,8 @@ public class ChunkSpawner : MonoBehaviour
         InitializeChunkSpawning(chunkPrefab);
 
         // TODO: Enable for fixed generation 
-        /*for (int childChunk = 0; childChunk < totalChunks.childCount; childChunk++)
+        /*
+        for (int childChunk = 0; childChunk < totalChunks.childCount; childChunk++)
         {
             GameObject copiedChunk = Instantiate(totalChunks.GetChild(childChunk).gameObject, this.transform);
             copiedChunk.SetActive(true);

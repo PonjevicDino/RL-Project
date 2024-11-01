@@ -5,16 +5,21 @@ using static SpriteTerrainGenerator;
 
 public class ContinuousFourierTransform : MonoBehaviour
 {
-    [SerializeField] private float initialFrequency = 1f; // Standard frequency
-    [SerializeField] private float initialAmplitude = 0.125f; // Initial amplitude to start higher
-    [SerializeField] private float amplitudeIncrease = 0.125f; // Increase in amplitude
-    [SerializeField] private int pointCount = 100; // Number of points to render
-    [SerializeField] private float initialPointSpacing = 0.1f; // Initial spacing between points
-    [SerializeField] private float spacingIncreaseFactor = 0.01f; // Factor by which to increase spacing
-    [SerializeField] private float randomnessFactor = 0.5f; // Initial randomness factor
+    [System.Serializable]
+    public struct FourierTransformation
+    {
+        public float initialFrequency;     // Standard frequency
+        public float initialAmplitude;     // Initial amplitude to start higher
+        public float amplitudeIncrease;    // Increase in amplitude
+        public int pointCount;             // Number of points to render
+        public float initialPointSpacing;  // Initial spacing between points
+        public float spacingIncreaseFactor; // Factor by which to increase spacing
+        public float randomnessFactor;     // Initial randomness factor
+    }
 
     private Vector3[] points;
     private LineRenderer lineRenderer;
+    [SerializeField] public FourierTransformation fourierTransformation;
 
     private void Start()
     {
@@ -22,13 +27,13 @@ public class ContinuousFourierTransform : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         // Precompute the Fourier transformation points
-        //ComputeFourierTransform();
+        //ComputeFourierTransform(fourierTransformation);
         //UpdateRenderer();
 
         //Random.InitState(0);
     }
 
-    public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation)
+    public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation, Vector3 offset)
     {
         float amplitude = fourierTransformation.initialAmplitude;
         points = new Vector3[fourierTransformation.pointCount];
@@ -57,9 +62,10 @@ public class ContinuousFourierTransform : MonoBehaviour
             amplitude += fourierTransformation.amplitudeIncrease; // Increase amplitude for the next point
 
             // Assign the calculated point position
-            points[i] = new Vector3(x, y, 0);
+            points[i] = new Vector3(x, y, 0) + offset;
         }
 
+        //UpdateRenderer();
         return points;
     }
 

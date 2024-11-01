@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2267716341390590846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86,8 +86,8 @@ SpriteShapeRenderer:
   m_Sprites:
   - {fileID: 21300000, guid: c0cba385a5730324fb18be9983914ee7, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0, y: 0.08000004, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0800002, z: 0}
+    m_Center: {x: 0.50000006, y: 0.08000004, z: 0}
+    m_Extent: {x: 0.50000006, y: 1.0800002, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &6159609550362384126
 MonoBehaviour:
@@ -104,21 +104,21 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -1, y: -1, z: 0}
+    - position: {x: 0, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-    - position: {x: -1, y: 1, z: 0}
+    - position: {x: 0, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 053cd766bd4976d45ae4b548be81fb81, type: 2}
   m_FillPixelPerUnit: 100
@@ -188,7 +188,7 @@ MonoBehaviour:
     amplitudeIncrease: 0.02
     pointCount: 1000
     initialPointSpacing: 10
-    spacingIncreaseFactor: 0
+    spacingIncreaseFactor: 0.02
     randomnessFactor: 3
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &4074610699751182046

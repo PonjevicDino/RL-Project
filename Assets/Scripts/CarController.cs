@@ -16,28 +16,7 @@ public class CarController : MonoBehaviour {
     public Vector3 StartPos { get; set; }
 
     private void Update() {
-        //PC : movement = Input.GetAxis("Horizontal");
-        //엔진 버튼 누를 시
-        if(GameManager.Instance.GasBtnPressed) {
-            movement += 0.009f;
-            if(movement > 1f)
-                movement = 1f;
-        }
 
-        //브레이크 버튼 누를 시
-        else if(GameManager.Instance.BrakeBtnPressed) {
-            movement -= 0.009f;
-            if(movement < -1f)
-                movement = -1f;
-        }
-
-        //아무 버튼도 누르지 않을 시
-        else if(!GameManager.Instance.GasBtnPressed && !GameManager.Instance.BrakeBtnPressed) {
-            movement = 0;
-        }
-        moveSpeed = movement * speed;
-
-        GameManager.Instance.FuelConsume();  //연료 소모에 따라 여러가지를 갱신
     }
 
     private void FixedUpdate() {
@@ -63,6 +42,32 @@ public class CarController : MonoBehaviour {
         }
 
         //움직이는 만큼 계속해서 연료 소비
-        fuel -= fuelConsumption * Mathf.Abs(movement) * Time.fixedDeltaTime;
+        fuel -= fuelConsumption * Mathf.Abs(movement) * Time.fixedDeltaTime + 0.00025f;
+
+        //PC : movement = Input.GetAxis("Horizontal");
+        //엔진 버튼 누를 시
+        if (GameManager.Instance.GasBtnPressed)
+        {
+            movement += 0.05f;
+            if (movement > 1f)
+                movement = 1f;
+        }
+
+        //브레이크 버튼 누를 시
+        else if (GameManager.Instance.BrakeBtnPressed)
+        {
+            movement -= 0.05f;
+            if (movement < -1f)
+                movement = -1f;
+        }
+
+        //아무 버튼도 누르지 않을 시
+        else if (!GameManager.Instance.GasBtnPressed && !GameManager.Instance.BrakeBtnPressed)
+        {
+            movement = 0;
+        }
+        moveSpeed = movement * speed;
+
+        GameManager.Instance.FuelConsume();  //연료 소모에 따라 여러가지를 갱신
     }
 }

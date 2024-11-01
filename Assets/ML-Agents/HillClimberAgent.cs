@@ -45,6 +45,8 @@ public class HillClimberAgent : Agent
     private string vehicleName = string.Empty;
     private int totalAcceleratorHeldSteps = 0;
     private float totalDistanceToGround = 0.0f;
+    private int idleReward = 0;
+    private int tooFastPunishment = 0;
 
     void Start()
     {
@@ -70,8 +72,19 @@ public class HillClimberAgent : Agent
         if (reloadScene)
         {
             Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Terrain").ToList()[0].GetComponent<ChunkSpawner>().ReloadAllChunks();
-            transform.parent.SetPositionAndRotation(new Vector3(-5.8757452f, 0.527813f, 0.0f), Quaternion.identity);
-            transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            transform.parent.SetPositionAndRotation(new Vector3(3.108311f, 4.527813f, 0.0f), Quaternion.identity);
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().Sleep();
+            transform.parent.Find("FrontTire").gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.parent.Find("FrontTire").gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+            transform.parent.Find("FrontTire").gameObject.GetComponent<Rigidbody2D>().Sleep();
+            transform.parent.Find("BackTire").gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.parent.Find("BackTire").gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+            transform.parent.Find("BackTire").gameObject.GetComponent<Rigidbody2D>().Sleep();
+            transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+            transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().Sleep();
             GameManager.Instance.isDie = false;
             GameManager.Instance.FuelCharge();
             transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit = false;
@@ -87,6 +100,8 @@ public class HillClimberAgent : Agent
         totalMoneyReward = 0.0f;
         totalAcceleratorReward = 0.0f;
         totalDistanceToGround = 0.0f;
+        idleReward = 0;
+        tooFastPunishment = 0;
 
         GameManager.Instance.totalFuelTanksCollected = 0;
         GameManager.Instance.totalCoinsCollected = 0;
@@ -174,15 +189,17 @@ public class HillClimberAgent : Agent
             if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
             {
                 Debug.DrawRay(carTransform.position, carTrajectory * hit.distance, Color.green);
-                Debug.Log("Trajectory | Hit distance: " + hit.distance.ToString("00.000"));
+                //Debug.Log("Trajectory | Hit distance: " + hit.distance.ToString("00.000"));
                 hitTerrain = true;
+                trajectoryHitDistance = hit.distance;
+                trajectoryHitNormal = hit.normal;
                 break;
             }
         }
         if (!hitTerrain)
         {
             Debug.DrawRay(carTransform.position, carTrajectory * 999.9f, Color.red);
-            Debug.Log("Trajectory | upwards...");
+            //Debug.Log("Trajectory | upwards...");
         }
         sensor.AddObservation(trajectoryHitDistance);
         sensor.AddObservation(trajectoryHitNormal);
@@ -236,13 +253,13 @@ public class HillClimberAgent : Agent
         sensor.AddObservation(terrainHeights);
 
         // Get distance to ground
-        RaycastHit2D[] distanceToGroundHits = Physics2D.RaycastAll(carTransform.position, Vector3.down);
-        distanceToGround = 1000.0f;
-        foreach (RaycastHit2D hit in hits)
+        RaycastHit2D[] distanceToGroundHits = Physics2D.RaycastAll(carTransform.position, -carTransform.up);
+        distanceToGround = -1.0f;
+        foreach (RaycastHit2D hit in distanceToGroundHits)
         {
             if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
             {
-                Debug.DrawRay(carTransform.position, carTrajectory * hit.distance, Color.white);
+                Debug.DrawRay(carTransform.position, -carTransform.up * hit.distance, Color.white);
                 distanceToGround = hit.distance;
                 totalDistanceToGround += distanceToGround;
                 break;
@@ -268,33 +285,57 @@ public class HillClimberAgent : Agent
 
         // Rewards
         // - Level Progress
-        if (GameManager.Instance.levelProgress - lastLevelProgress >= 10.0f)
+        if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
         {
-            levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds);
-            SetReward(levelProgressReward);
-            lastLevelProgress = GameManager.Instance.levelProgress;
-            lastSectionTime = DateTime.Now;
+            levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
+            AddReward(levelProgressReward);
+            //lastSectionTime = DateTime.Now;
         }
         else if (GameManager.Instance.levelProgress - lastLevelProgress < -5.0f)
         {
             levelProgressReward = -0.05f;
-            SetReward(levelProgressReward); // Punishment for going backwards
+            AddReward(levelProgressReward); // Punishment for going backwards
         }
         else
         {
             levelProgressReward = 0.0f;
         }
+
+        // - No input action if car is moving
+        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 3.0f && !GameManager.Instance.BrakeBtnPressed)
+        {
+            AddReward(0.001f);
+            idleReward++;
+        }
+        // - Punishment if agent doesn't do anything
+        else if (transform.parent.GetComponent<Rigidbody2D>().velocityX <= 1.0f && !GameManager.Instance.GasBtnPressed && !GameManager.Instance.BrakeBtnPressed)
+        {
+            AddReward(-0.001f);
+            idleReward--;
+        }
+
+        // - Punishment if car too fast
+        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 8.0f && GameManager.Instance.GasBtnPressed)
+        {
+            AddReward(-0.005f);
+            tooFastPunishment++;
+        }
+
         // - Distance to Ground
-        SetReward((2.0f - distanceToGround) / 1000.0f);
+        if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
+        {
+            AddReward((2.0f - distanceToGround) / 50.0f);
+            lastLevelProgress = GameManager.Instance.levelProgress;
+        }
         // - Fuel State
         // -- Fuel > 50% = Reward
         // -- Fuel < 50% = Punishment
-        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 10.0f; 
-        SetReward(fuelStateReward);
+        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 500.0f; 
+        //SetReward(fuelStateReward);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
         moneyReward = moneyDifference / 100.0f;
-        SetReward(moneyReward);
+        //SetReward(moneyReward);
         lastTotalMoney += moneyDifference;
         // - Holding the Pedals
         if (GameManager.Instance.GasBtnPressed)
@@ -305,7 +346,7 @@ public class HillClimberAgent : Agent
             if (acceleratorHeldSteps > 3)
             {
                 acceleratorReward = 0.01f * acceleratorHeldSteps / 5000.0f;
-                AddReward(acceleratorReward);  // Small reward for holding accelerator
+                //AddReward(acceleratorReward);  // Small reward for holding accelerator
             }
         }
         else
@@ -333,7 +374,9 @@ public class HillClimberAgent : Agent
             { "totalMoneyReward", totalMoneyReward },
             { "totalAcceleratorHeld", totalAcceleratorHeldSteps },
             { "totalAcceleratorReward", totalAcceleratorReward },
-            { "totalDistanceToGround", totalDistanceToGround }
+            { "totalDistanceToGround", totalDistanceToGround },
+            { "totalIdleReward", idleReward },
+            { "totalTooFastPunishment", tooFastPunishment },
         };
 
         // - No Fuel
@@ -355,9 +398,9 @@ public class HillClimberAgent : Agent
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car reached Goal
-        else if (transform.parent.position.x >= 9900.0f)
+        else if (transform.parent.position.x >= 19900.0f)
         {
-            SetReward(1000.0f);
+            AddReward(1000.0f);
             stats.Add("deathCause", 0.0f);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
