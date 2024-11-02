@@ -183,13 +183,13 @@ MonoBehaviour:
   material: {fileID: 6200000, guid: fc1518726b20f55428fe0e899f021098, type: 2}
   gravity: {x: 0, y: -9.81, z: 0}
   fourierTransformation:
-    initialFrequency: 1000
-    initialAmplitude: 0.5
-    amplitudeIncrease: 0.05
+    initialFrequency: 1
+    initialAmplitude: 3
+    amplitudeIncrease: 0.075
     pointCount: 1000
     initialPointSpacing: 10
     spacingIncreaseFactor: 0.02
-    randomnessFactor: 0
+    randomnessFactor: 1.5
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &4074610699751182046
 GameObject:

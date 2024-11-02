@@ -25,7 +25,7 @@ public class ObjectManager : MonoBehaviour {
         return null;
         }
 
-    public GameObject GetObject(string type, bool spawn = true) {
+    public GameObject GetOrGenerateObject(string type, bool spawn = true) {
         foreach(GameObject obj in pooledObjs) {
             if(obj.name.Equals(type) && !obj.activeInHierarchy) {
                 obj.SetActive(true);

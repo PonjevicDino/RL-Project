@@ -15,10 +15,6 @@ public class CarController : MonoBehaviour {
 
     public Vector3 StartPos { get; set; }
 
-    private void Update() {
-
-    }
-
     private JointMotor2D motor;
 
     private void Start()
@@ -30,25 +26,14 @@ public class CarController : MonoBehaviour {
         backTire.motor = motor;
     }
 
+    private void Update()
+    {
+        //moveSpeed = Mathf.Clamp(movement * speed, -speed, speed);
+    }
+
     private void FixedUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, StartPos.x, transform.position.x), transform.position.y);
-
-        moveSpeed = Mathf.Clamp(movement * speed, -speed, speed);
-
-        if (moveSpeed.Equals(0) || fuel <= 0)
-        {   // Stop the car if no input or no fuel
-            frontTire.useMotor = false;
-            backTire.useMotor = false;
-        }
-        else
-        {
-            frontTire.useMotor = true;
-            backTire.useMotor = true;
-            motor.motorSpeed = moveSpeed;  // Update only the speed
-            frontTire.motor = motor;
-            backTire.motor = motor;
-        }
 
         // Stop car speed on game over
         if (GameManager.Instance.isDie && moveStop)
@@ -71,6 +56,23 @@ public class CarController : MonoBehaviour {
         else
         {
             movement = 0;
+        }
+
+
+        moveSpeed = Mathf.Clamp(movement * speed, -speed, speed);
+
+        if (moveSpeed.Equals(0) || fuel <= 0)
+        {   // Stop the car if no input or no fuel
+            frontTire.useMotor = false;
+            backTire.useMotor = false;
+        }
+        else
+        {
+            frontTire.useMotor = true;
+            backTire.useMotor = true;
+            motor.motorSpeed = moveSpeed;  // Update only the speed
+            frontTire.motor = motor;
+            backTire.motor = motor;
         }
 
         GameManager.Instance.FuelConsume();  // Update fuel usage

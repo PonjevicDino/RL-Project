@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -8,7 +9,7 @@ using UnityEngine.U2D;
 public class ChunkSpawner : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnPosition = new Vector3(-9.0f, 0.0f, 0.0f);
-
+    [SerializeField] private float fourierThreshold = 0.5f;
     [SerializeField] private Transform totalChunks;
 
     private ContinuousFourierTransform terrain;
@@ -20,23 +21,26 @@ public class ChunkSpawner : MonoBehaviour
 
     private Vector3 previousEndPoint;
 
-    public void InitializeChunkSpawning(GameObject chunkPrefab)
+    public Vector3 InitializeChunkSpawning(GameObject chunkPrefab)
     {
         this.chunkPrefab = chunkPrefab;
         SpriteTerrainGenerator.FourierTransformation fourierTransformation = chunkPrefab.GetComponent<SpriteTerrainGenerator>().fourierTransformation;
         terrain = transform.GetComponent<ContinuousFourierTransform>();
 
-        points = terrain.ComputeFourierTransform(fourierTransformation, spawnPosition);
-        for (int i = 0; i < 99; i++)
+        points = terrain.ComputeFourierTransform(fourierTransformation, spawnPosition, fourierThreshold);
+
+        for (int i = 0; i < (points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints)-1; i++)
         {
             SpawnNewChunkBasedOnFourier();
         }
+
+        return points[0];
     }
 
     public void SpawnNewChunkBasedOnFourier()
     {
         //If there is a previous chunk, collect it´s endpoint.y as the new startHeight otherwise use 0
-        Vector3 previousEndPoint = spawnPosition;
+        Vector3 previousEndPoint = points[0] + spawnPosition;
 
         if (chunk)
         {

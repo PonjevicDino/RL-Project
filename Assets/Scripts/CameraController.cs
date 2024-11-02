@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
         vehiclePos.position = new Vector3(Camera.main.ViewportToWorldPoint(new Vector3(0, 0)).x + 3f, vehiclePos.position.y, 0f);
         CarController carController = vehiclePos.gameObject.GetComponent<CarController>();
         carController.StartPos = vehiclePos.position;
-        offset = transform.position - vehiclePos.position;
+        offset = transform.position + Vector3.left * 3.0f;
     }
 
     private void Update() {

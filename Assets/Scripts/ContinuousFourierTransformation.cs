@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static SpriteTerrainGenerator;
 
@@ -33,40 +34,50 @@ public class ContinuousFourierTransform : MonoBehaviour
         //Random.InitState(0);
     }
 
-    public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation, Vector3 offset)
+    public Vector3[] ComputeFourierTransform(SpriteTerrainGenerator.FourierTransformation fourierTransformation, Vector3 offset, float threshold)
     {
+        int fourierThreshold = (int)(fourierTransformation.pointCount * (threshold % 1.0f));
+        Vector3 fourierThresholdOffset = Vector3.zero;
+
         float amplitude = fourierTransformation.initialAmplitude;
-        points = new Vector3[fourierTransformation.pointCount];
+        points = new Vector3[fourierTransformation.pointCount - fourierThreshold];
 
         for (int i = 0; i < fourierTransformation.pointCount; i++)
         {
             float randomnessFactorOffset = (1 + (i / (float)fourierTransformation.pointCount));
 
             // Calculate the x position, increasing spacing further into the function
-            float x = i * (fourierTransformation.initialPointSpacing + (i * (fourierTransformation.spacingIncreaseFactor / randomnessFactorOffset)));
+            float x = i * (fourierTransformation.initialPointSpacing +
+                          (i * (fourierTransformation.spacingIncreaseFactor / randomnessFactorOffset)));
 
             // Increase the randomness factor over time
             float currentRandomnessFactor = fourierTransformation.randomnessFactor * randomnessFactorOffset;
 
             // Add randomness to the amplitude based on the increasing randomness factor
             float randomAmplitude = Random.Range(-currentRandomnessFactor, currentRandomnessFactor);
-            //float y = Mathf.Sin(x * fourierTransformation.initialFrequency) * (amplitude + randomAmplitude);
-            float y = Mathf.PerlinNoise(x, 0.0f) * (amplitude + randomAmplitude) * 10.0f;
 
-            // Make sure the first point leads into a valley
-            if (i == 0)
-            {
-                y = amplitude; // Start higher for the first point
-            }
+            // Reduce frequency to make oscillations less frequent
+            float adjustedFrequency = fourierTransformation.initialFrequency * 0.5f; // Reduce by 50%
+
+            // Use Perlin noise with a scaled x value to make the function smoother and less frequent
+            float y = Mathf.PerlinNoise(x * 0.1f, 0.0f) * (amplitude + randomAmplitude); // Scale x by 0.1 to reduce frequency
 
             // Update amplitude for the next point
             amplitude += fourierTransformation.amplitudeIncrease; // Increase amplitude for the next point
 
-            // Assign the calculated point position
-            points[i] = new Vector3(x, y, 0) + offset;
+            if (i == fourierThreshold)
+            {
+                fourierThresholdOffset = new Vector3(x, y, 0) + offset;
+            }
+
+            if (i >= fourierThreshold)
+            {
+                // Assign the calculated point position
+                points[i-fourierThreshold] = new Vector3(x - fourierThresholdOffset.x, y, 0) + offset;
+            }
         }
 
-        //UpdateRenderer();
+        points[0].y = points[1].y + fourierTransformation.initialAmplitude; // Make sure the first point leads into a valley
         return points;
     }
 

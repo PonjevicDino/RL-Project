@@ -18,7 +18,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
         public float randomnessFactor;     // Initial randomness factor
     }
 
-    [SerializeField] private int numOfPoints = 10;
+    [SerializeField] public int numOfPoints = 10;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject fuelTankPrefab;
     [SerializeField] private PhysicsMaterial2D material;

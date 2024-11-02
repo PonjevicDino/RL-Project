@@ -107,12 +107,13 @@ public class GameManager : Singleton<GameManager> {
 
         Debug.Log(mapName);
         // TODO: Enable for procedural generation
-        chunkSpawner.InitializeChunkSpawning(objectManager.GetObject(mapName, false));
+        Vector3 chunkStart = chunkSpawner.InitializeChunkSpawning(objectManager.GetOrGenerateObject(mapName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
         if(vehicleIndex.Equals(0)) vehicleName = "HillClimber";
         else if(vehicleIndex.Equals(1)) vehicleName = "Motorcycle";
-        CarController vehicle = objectManager.GetObject(vehicleName).GetComponent<CarController>();
+        CarController vehicle = objectManager.GetOrGenerateObject(vehicleName).GetComponent<CarController>();
+        vehicle.gameObject.transform.SetPositionAndRotation(chunkStart + (Vector3.up * 2), Quaternion.identity);
         carController = vehicle;
 
         //카메라 조정
