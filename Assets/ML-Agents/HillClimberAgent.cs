@@ -48,6 +48,8 @@ public class HillClimberAgent : Agent
     private int idleReward = 0;
     private int tooFastPunishment = 0;
 
+    private Vector3 mapEndPosition;
+
     void Start()
     {
         agentGasText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentGas").ToList()[0].GetComponent<Text>();
@@ -71,8 +73,8 @@ public class HillClimberAgent : Agent
         GameManager.Instance.isControlledByAI = true;
         if (reloadScene)
         {
-            Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Terrain").ToList()[0].GetComponent<ChunkSpawner>().ReloadAllChunks();
-            transform.parent.SetPositionAndRotation(new Vector3(3.108311f, 4.527813f, 0.0f), Quaternion.identity);
+            Vector3 carStartPosition = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Terrain").ToList()[0].GetComponent<ChunkSpawner>().ReloadAllChunks();
+            transform.parent.SetPositionAndRotation(carStartPosition, Quaternion.identity);
             transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
             transform.parent.gameObject.GetComponent<Rigidbody2D>().Sleep();
@@ -398,7 +400,7 @@ public class HillClimberAgent : Agent
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car reached Goal
-        else if (transform.parent.position.x >= 19900.0f)
+        else if (transform.parent.position.x >= GameManager.Instance.mapEndPoint.x - 1.0f)
         {
             AddReward(1000.0f);
             stats.Add("deathCause", 0.0f);

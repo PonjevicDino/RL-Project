@@ -6,21 +6,8 @@ using static SpriteTerrainGenerator;
 
 public class ContinuousFourierTransform : MonoBehaviour
 {
-    [System.Serializable]
-    public struct FourierTransformation
-    {
-        public float initialFrequency;     // Standard frequency
-        public float initialAmplitude;     // Initial amplitude to start higher
-        public float amplitudeIncrease;    // Increase in amplitude
-        public int pointCount;             // Number of points to render
-        public float initialPointSpacing;  // Initial spacing between points
-        public float spacingIncreaseFactor; // Factor by which to increase spacing
-        public float randomnessFactor;     // Initial randomness factor
-    }
-
     private Vector3[] points;
     private LineRenderer lineRenderer;
-    [SerializeField] public FourierTransformation fourierTransformation;
 
     private void Start()
     {
@@ -42,6 +29,8 @@ public class ContinuousFourierTransform : MonoBehaviour
         float amplitude = fourierTransformation.initialAmplitude;
         points = new Vector3[fourierTransformation.pointCount - fourierThreshold];
 
+        float randomOffsetForPerlin = Random.Range(-100.0f, 100.0f);
+
         for (int i = 0; i < fourierTransformation.pointCount; i++)
         {
             float randomnessFactorOffset = (1 + (i / (float)fourierTransformation.pointCount));
@@ -60,7 +49,7 @@ public class ContinuousFourierTransform : MonoBehaviour
             float adjustedFrequency = fourierTransformation.initialFrequency * 0.5f; // Reduce by 50%
 
             // Use Perlin noise with a scaled x value to make the function smoother and less frequent
-            float y = Mathf.PerlinNoise(x * 0.1f, 0.0f) * (amplitude + randomAmplitude); // Scale x by 0.1 to reduce frequency
+            float y = Mathf.PerlinNoise((x + randomOffsetForPerlin) * 0.1f, 0.0f) * (amplitude + randomAmplitude); // Scale x by 0.1 to reduce frequency
 
             // Update amplitude for the next point
             amplitude += fourierTransformation.amplitudeIncrease; // Increase amplitude for the next point

@@ -46,6 +46,8 @@ public class GameManager : Singleton<GameManager> {
     public int totalFuelTanksCollected = 0;
     public int totalCoinsCollected = 0;
 
+    public Vector3 mapEndPoint = new Vector3(100.0f, 0.0f, 0.0f);
+
     public void Start() {
         Time.timeScale = 1f;
         isDie = false;
@@ -113,7 +115,7 @@ public class GameManager : Singleton<GameManager> {
         if(vehicleIndex.Equals(0)) vehicleName = "HillClimber";
         else if(vehicleIndex.Equals(1)) vehicleName = "Motorcycle";
         CarController vehicle = objectManager.GetOrGenerateObject(vehicleName).GetComponent<CarController>();
-        vehicle.gameObject.transform.SetPositionAndRotation(chunkStart + (Vector3.up * 2), Quaternion.identity);
+        vehicle.gameObject.transform.SetPositionAndRotation(chunkStart, Quaternion.identity);
         carController = vehicle;
 
         //카메라 조정

@@ -106,15 +106,13 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
     private void PlaceFuelTanks(float spawnOffset)
     {
-        Vector3 fuelTankSpawnPoint = shape.spline.GetPosition(5);
-        Vector3 heightOffset = GetHighestPointBetweenSplinePoints(4, 6) + Vector3.up * 3.0f;
-        Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) + Vector3.right * spawnOffset,
-                                                Quaternion.identity, transform);
-        fuelTankSpawnPoint = shape.spline.GetPosition(10);
-        heightOffset = GetHighestPointBetweenSplinePoints(9, 11) + Vector3.up * 3.0f;
-        Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) + Vector3.right * spawnOffset,
-                                                Quaternion.identity, transform);
-
+        for (int splinePoint = 5; splinePoint < shape.spline.GetPointCount() - 2; splinePoint += 5)
+        {
+            Vector3 fuelTankSpawnPoint = shape.spline.GetPosition(splinePoint);
+            Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint - 1, splinePoint + 1) + Vector3.up * 3.0f;
+            Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) + Vector3.right * spawnOffset,
+                                                    Quaternion.identity, transform);
+        }
     }
 
     private void PlaceCollider()

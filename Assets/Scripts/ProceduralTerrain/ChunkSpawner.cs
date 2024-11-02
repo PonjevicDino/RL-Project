@@ -19,8 +19,6 @@ public class ChunkSpawner : MonoBehaviour
     private GameObject chunkPrefab;
     private int chunkNumber = 0;
 
-    private Vector3 previousEndPoint;
-
     public Vector3 InitializeChunkSpawning(GameObject chunkPrefab)
     {
         this.chunkPrefab = chunkPrefab;
@@ -34,7 +32,7 @@ public class ChunkSpawner : MonoBehaviour
             SpawnNewChunkBasedOnFourier();
         }
 
-        return points[0];
+        return points[0] + (Vector3.up * 2);
     }
 
     public void SpawnNewChunkBasedOnFourier()
@@ -46,17 +44,25 @@ public class ChunkSpawner : MonoBehaviour
         {
             previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
         }
+               
+        if (chunkNumber <= points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints)
+        {
+            //Use the spawnOffset of the prefab to determine where to spawn the next chunk and position it based on its chunkNumber
+            Vector3 spawnOffset = previousEndPoint;
+            chunk = Instantiate(chunkPrefab, new Vector3(spawnOffset.x, spawnPosition.y), Quaternion.identity, this.transform);
+            chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint);
+            GameManager.Instance.mapEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
+            chunkNumber++;
+        }
 
-        //Use the spawnOffset of the prefab to determine where to spawn the next chunk and position it based on its chunkNumber
-        Vector3 spawnOffset = previousEndPoint;
-        chunk = Instantiate(chunkPrefab, new Vector3(spawnOffset.x, spawnPosition.y), Quaternion.identity, this.transform);
-        chunk.GetComponent<SpriteTerrainGenerator>().SpawnChunkBasedOnFourier(points, chunkNumber, previousEndPoint); 
-        chunkNumber++;
+        if (chunkNumber == (points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints) - 1)
+        {
+            GameManager.Instance.mapEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
+        }
     }
 
-    public void ReloadAllChunks()
+    public Vector3 ReloadAllChunks()
     {
-        
         while (transform.childCount > 0)
         {
             DestroyImmediate(transform.GetChild(0).gameObject);
@@ -64,7 +70,7 @@ public class ChunkSpawner : MonoBehaviour
         chunkNumber = 0;
 
         // TODO: Enable for procedural generation
-        InitializeChunkSpawning(chunkPrefab);
+        return InitializeChunkSpawning(chunkPrefab);
 
         // TODO: Enable for fixed generation 
         /*
