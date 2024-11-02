@@ -183,13 +183,13 @@ MonoBehaviour:
   material: {fileID: 6200000, guid: fc1518726b20f55428fe0e899f021098, type: 2}
   gravity: {x: 0, y: -9.81, z: 0}
   fourierTransformation:
-    initialFrequency: 1
-    initialAmplitude: 2
-    amplitudeIncrease: 0.02
+    initialFrequency: 1000
+    initialAmplitude: 0.5
+    amplitudeIncrease: 0.05
     pointCount: 1000
     initialPointSpacing: 10
     spacingIncreaseFactor: 0.02
-    randomnessFactor: 3
+    randomnessFactor: 0
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &4074610699751182046
 GameObject:
@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8079300051117485467
 Transform:
   m_ObjectHideFlags: 0
@@ -299,7 +299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4753347211281137966
 Transform:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public class ContinuousFourierTransform : MonoBehaviour
     private void Start()
     {
         // Get the LineRenderer component attached to this GameObject
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer = GetComponent<LineRenderer>();
 
         // Precompute the Fourier transformation points
         //ComputeFourierTransform(fourierTransformation);
@@ -50,7 +50,8 @@ public class ContinuousFourierTransform : MonoBehaviour
 
             // Add randomness to the amplitude based on the increasing randomness factor
             float randomAmplitude = Random.Range(-currentRandomnessFactor, currentRandomnessFactor);
-            float y = Mathf.Sin(x * fourierTransformation.initialFrequency) * (amplitude + randomAmplitude);
+            //float y = Mathf.Sin(x * fourierTransformation.initialFrequency) * (amplitude + randomAmplitude);
+            float y = Mathf.PerlinNoise(x, 0.0f) * (amplitude + randomAmplitude) * 10.0f;
 
             // Make sure the first point leads into a valley
             if (i == 0)

@@ -8,7 +8,7 @@ public class PickableColliderRemover : MonoBehaviour
     {
         if (transform.gameObject.activeSelf)
         {
-            StartCoroutine(SetTriggerAfterDelay(2.0f));
+            StartCoroutine(SetTriggerAfterDelay(0.5f));
         }
     }
 
@@ -16,7 +16,7 @@ public class PickableColliderRemover : MonoBehaviour
     {
         if (transform.gameObject.activeSelf && !collision.gameObject.name.Contains("Collider"))
         {
-            StartCoroutine(SetTriggerAfterDelay(2.0f));
+            StartCoroutine(SetTriggerAfterDelay(0.5f));
         }
     }
 

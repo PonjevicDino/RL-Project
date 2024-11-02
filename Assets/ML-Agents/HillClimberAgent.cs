@@ -315,7 +315,7 @@ public class HillClimberAgent : Agent
         }
 
         // - Punishment if car too fast
-        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 8.0f && GameManager.Instance.GasBtnPressed)
+        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 7.0f && GameManager.Instance.GasBtnPressed)
         {
             AddReward(-0.005f);
             tooFastPunishment++;
@@ -328,9 +328,9 @@ public class HillClimberAgent : Agent
             lastLevelProgress = GameManager.Instance.levelProgress;
         }
         // - Fuel State
-        // -- Fuel > 50% = Reward
-        // -- Fuel < 50% = Punishment
-        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.5f) / 500.0f; 
+        // -- Fuel > 75% = Reward
+        // -- Fuel < 75% = Punishment
+        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.75f) / 1000.0f; 
         //SetReward(fuelStateReward);
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;

@@ -88,6 +88,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
         EdgeCollider2D collider = transform.gameObject.AddComponent<EdgeCollider2D>();
         collider.sharedMaterial = material;
+        shape.BakeMesh();
     }
     private void PlaceCoins(float spawnOffset)
     {

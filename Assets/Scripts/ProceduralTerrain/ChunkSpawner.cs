@@ -27,7 +27,10 @@ public class ChunkSpawner : MonoBehaviour
         terrain = transform.GetComponent<ContinuousFourierTransform>();
 
         points = terrain.ComputeFourierTransform(fourierTransformation, spawnPosition);
-        SpawnNewChunkBasedOnFourier();
+        for (int i = 0; i < 99; i++)
+        {
+            SpawnNewChunkBasedOnFourier();
+        }
     }
 
     public void SpawnNewChunkBasedOnFourier()
