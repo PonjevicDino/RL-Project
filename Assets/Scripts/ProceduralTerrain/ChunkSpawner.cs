@@ -32,18 +32,17 @@ public class ChunkSpawner : MonoBehaviour
 
         if (debug)
         {
-            Debug.Log("MaxSpacing: " + (points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints] - points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints-1]));
-            chunkPrefab.transform.Find("DeleteCollider").gameObject.SetActive(false);
-            chunkPrefab.transform.Find("SpawnCollider").gameObject.SetActive(false);
+            Debug.Log("MaxSpacing: " + (points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints - 1] - points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints - 2]));
+
             for (int i = 0; i < chunksToSpawn - 1; i++)
             {
                 SpawnNewChunkBasedOnFourier();
+                chunk.transform.Find("DeleteCollider").gameObject.SetActive(false);
+                chunk.transform.Find("SpawnCollider").gameObject.SetActive(false);
             }
         }
         else
         {
-            chunkPrefab.transform.Find("DeleteCollider").gameObject.SetActive(true);
-            chunkPrefab.transform.Find("SpawnCollider").gameObject.SetActive(true);
             SpawnNewChunkBasedOnFourier();
         }
 

@@ -290,7 +290,7 @@ public class HillClimberAgent : Agent
         if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
         {
             levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
-            AddReward(levelProgressReward);
+            AddReward(levelProgressReward + (GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x) * 10.0f);
             //lastSectionTime = DateTime.Now;
         }
         else if (GameManager.Instance.levelProgress - lastLevelProgress < -5.0f)
@@ -303,6 +303,7 @@ public class HillClimberAgent : Agent
             levelProgressReward = 0.0f;
         }
 
+        /*
         // - No input action if car is moving
         if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 3.0f && !GameManager.Instance.BrakeBtnPressed)
         {
@@ -315,9 +316,10 @@ public class HillClimberAgent : Agent
             AddReward(-0.001f);
             idleReward--;
         }
+        */
 
         // - Punishment if car too fast
-        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 7.0f && GameManager.Instance.GasBtnPressed)
+        if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 7.0f || transform.parent.GetComponent<Rigidbody2D>().velocityX <= 3.0f)
         {
             AddReward(-0.005f);
             tooFastPunishment++;
@@ -326,7 +328,7 @@ public class HillClimberAgent : Agent
         // - Distance to Ground
         if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
         {
-            AddReward((2.0f - distanceToGround) / 50.0f);
+            AddReward((2.0f - distanceToGround) / 5.0f);
             lastLevelProgress = GameManager.Instance.levelProgress;
         }
         // - Fuel State
@@ -378,7 +380,7 @@ public class HillClimberAgent : Agent
             { "totalAcceleratorReward", totalAcceleratorReward },
             { "totalDistanceToGround", totalDistanceToGround },
             { "totalIdleReward", idleReward },
-            { "totalTooFastPunishment", tooFastPunishment },
+            { "totalSpeedDisagreePunishment", tooFastPunishment },
         };
 
         // - No Fuel

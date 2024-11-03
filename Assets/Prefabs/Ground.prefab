@@ -186,7 +186,7 @@ MonoBehaviour:
   gravity: {x: 0, y: -9.81, z: 0}
   fourierTransformation:
     initialFrequency: 1
-    initialAmplitude: 1
+    initialAmplitude: 0
     amplitudeIncrease: 0.015
     maxAmplitudePercentage: 1.2
     pointCount: 2000
