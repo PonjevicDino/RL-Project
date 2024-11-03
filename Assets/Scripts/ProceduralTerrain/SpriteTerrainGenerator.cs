@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using static SpriteTerrainGenerator;
 
 public class SpriteTerrainGenerator : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
         public float initialFrequency;     // Standard frequency
         public float initialAmplitude;     // Initial amplitude to start higher
         public float amplitudeIncrease;    // Increase in amplitude
+        public float maxAmplitudePercentage;     // Maximum Percentage between height and width
         public int pointCount;             // Number of points to render
         public float initialPointSpacing;  // Initial spacing between points
         public float spacingIncreaseFactor; // Factor by which to increase spacing
@@ -19,6 +21,8 @@ public class SpriteTerrainGenerator : MonoBehaviour
     }
 
     [SerializeField] public int numOfPoints = 10;
+    [SerializeField] private int distanceBetweenCoins = 4;
+    [SerializeField] private int distanceBetweenFuelTanks = 7;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject fuelTankPrefab;
     [SerializeField] private PhysicsMaterial2D material;
@@ -82,37 +86,51 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
         float spawnOffset = previousEndPoint.x;
 
-        PlaceCoins(spawnOffset);
-        PlaceFuelTanks(spawnOffset);
+        PlacePickables(spawnOffset);
         PlaceCollider();
 
         EdgeCollider2D collider = transform.gameObject.AddComponent<EdgeCollider2D>();
         collider.sharedMaterial = material;
         shape.BakeMesh();
     }
-    private void PlaceCoins(float spawnOffset)
+    private void PlacePickables(float spawnOffset)
     {
-        for (int splinePoint = 3; splinePoint < shape.spline.GetPointCount()-2; splinePoint += 3)
+        for (int splinePoint = 1; splinePoint < shape.spline.GetPointCount()-2; splinePoint++)
         {
-            int spawnSplinePoint = splinePoint + Random.Range(-1, 1);
-            Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint, spawnSplinePoint) + Vector3.up * 3.0f;
-            Vector3 spawnPosition = GetMeanBetweenSplinePoints(splinePoint, spawnSplinePoint);
-            GameObject coinPrefabInstance = Instantiate(coinPrefab,
-                                                        new Vector3(spawnPosition.x, heightOffset.y) + Vector3.right * spawnOffset,
-                                                        Quaternion.identity, transform);
-            coinPrefabInstance.GetComponent<CoinGenerator>().SpawnCoins(spawnPosition);
+            int spawnSplineOffset = splinePoint;
+            if (splinePoint % distanceBetweenCoins == 0)
+            {
+                spawnSplineOffset = PlaceCoins(spawnOffset, splinePoint);
+            }
+            if (splinePoint % distanceBetweenFuelTanks == 0)
+            {
+                if (spawnSplineOffset == 0)
+                {
+                    spawnSplineOffset += 1;
+                }
+
+                PlaceFuelTanks(spawnOffset, spawnSplineOffset);
+            }
         }
     }
 
-    private void PlaceFuelTanks(float spawnOffset)
+    private int PlaceCoins(float spawnOffset, int splinePoint)
     {
-        for (int splinePoint = 5; splinePoint < shape.spline.GetPointCount() - 2; splinePoint += 5)
-        {
-            Vector3 fuelTankSpawnPoint = shape.spline.GetPosition(splinePoint);
-            Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint - 1, splinePoint + 1) + Vector3.up * 3.0f;
-            Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) + Vector3.right * spawnOffset,
-                                                    Quaternion.identity, transform);
-        }
+        int spawnSplinePoint = splinePoint + Random.Range(-1, 1);
+        Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint, spawnSplinePoint) + Vector3.up * 5.0f;
+        Vector3 spawnPosition = GetMeanBetweenSplinePoints(splinePoint, spawnSplinePoint);
+        GameObject coinPrefabInstance = Instantiate(coinPrefab, new Vector3(spawnPosition.x, heightOffset.y) 
+            + Vector3.right * spawnOffset, Quaternion.identity, transform);
+        coinPrefabInstance.GetComponent<CoinGenerator>().SpawnCoins(spawnPosition);
+        return spawnSplinePoint;
+    }
+
+    private void PlaceFuelTanks(float spawnOffset, int splinePoint)
+    {
+        Vector3 fuelTankSpawnPoint = shape.spline.GetPosition(splinePoint);
+        Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint - 1, splinePoint + 1) + Vector3.up * 5.0f;
+        Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) 
+            + Vector3.right * spawnOffset, Quaternion.identity, transform);
     }
 
     private void PlaceCollider()

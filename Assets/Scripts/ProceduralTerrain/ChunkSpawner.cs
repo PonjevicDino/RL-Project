@@ -10,6 +10,7 @@ public class ChunkSpawner : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnPosition = new Vector3(-9.0f, 0.0f, 0.0f);
     [SerializeField] private float fourierThreshold = 0.5f;
+    [SerializeField] private bool debug = false;
     [SerializeField] private Transform totalChunks;
 
     private ContinuousFourierTransform terrain;
@@ -18,6 +19,7 @@ public class ChunkSpawner : MonoBehaviour
     private GameObject chunk;
     private GameObject chunkPrefab;
     private int chunkNumber = 0;
+    private int chunksToSpawn = 0;
 
     public Vector3 InitializeChunkSpawning(GameObject chunkPrefab)
     {
@@ -26,9 +28,22 @@ public class ChunkSpawner : MonoBehaviour
         terrain = transform.GetComponent<ContinuousFourierTransform>();
 
         points = terrain.ComputeFourierTransform(fourierTransformation, spawnPosition, fourierThreshold);
+        chunksToSpawn = points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints;
 
-        for (int i = 0; i < (points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints)-1; i++)
+        if (debug)
         {
+            Debug.Log("MaxSpacing: " + (points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints] - points[chunksToSpawn * chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints-1]));
+            chunkPrefab.transform.Find("DeleteCollider").gameObject.SetActive(false);
+            chunkPrefab.transform.Find("SpawnCollider").gameObject.SetActive(false);
+            for (int i = 0; i < chunksToSpawn - 1; i++)
+            {
+                SpawnNewChunkBasedOnFourier();
+            }
+        }
+        else
+        {
+            chunkPrefab.transform.Find("DeleteCollider").gameObject.SetActive(true);
+            chunkPrefab.transform.Find("SpawnCollider").gameObject.SetActive(true);
             SpawnNewChunkBasedOnFourier();
         }
 
@@ -45,7 +60,7 @@ public class ChunkSpawner : MonoBehaviour
             previousEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
         }
                
-        if (chunkNumber <= points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints)
+        if (chunkNumber <= chunksToSpawn)
         {
             //Use the spawnOffset of the prefab to determine where to spawn the next chunk and position it based on its chunkNumber
             Vector3 spawnOffset = previousEndPoint;
@@ -55,7 +70,7 @@ public class ChunkSpawner : MonoBehaviour
             chunkNumber++;
         }
 
-        if (chunkNumber == (points.Length / chunkPrefab.GetComponent<SpriteTerrainGenerator>().numOfPoints) - 1)
+        if (chunkNumber == chunksToSpawn - 1)
         {
             GameManager.Instance.mapEndPoint = chunk.GetComponent<SpriteTerrainGenerator>().endPoint;
         }

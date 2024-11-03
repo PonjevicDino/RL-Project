@@ -782,7 +782,7 @@ WheelJoint2D:
   m_Suspension:
     m_DampingRatio: 0.5
     m_Frequency: 1000000
-    m_Angle: 90
+    m_Angle: 270
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -959,7 +959,7 @@ WheelJoint2D:
   m_Suspension:
     m_DampingRatio: 0.5
     m_Frequency: 1000000
-    m_Angle: 90
+    m_Angle: 270
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

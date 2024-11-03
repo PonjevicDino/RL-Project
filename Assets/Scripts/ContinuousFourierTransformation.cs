@@ -8,6 +8,7 @@ public class ContinuousFourierTransform : MonoBehaviour
 {
     private Vector3[] points;
     private LineRenderer lineRenderer;
+    private Vector3 lastPoint = Vector3.zero;
 
     private void Start()
     {
@@ -59,10 +60,22 @@ public class ContinuousFourierTransform : MonoBehaviour
                 fourierThresholdOffset = new Vector3(x, y, 0) + offset;
             }
 
+            //Adjust the y-coordinate if necessary, based on a specific percentage between height and width to ensure doable terrain
+            if(y / (x - lastPoint.x) >= fourierTransformation.maxAmplitudePercentage)
+            {
+                y = lastPoint.y + (fourierTransformation.maxAmplitudePercentage * (x - lastPoint.x));
+            }
+            else if (y / (x - lastPoint.x) <= -fourierTransformation.maxAmplitudePercentage)
+            {
+                y = lastPoint.y - (fourierTransformation.maxAmplitudePercentage * (x - lastPoint.x));
+            }
+
             if (i >= fourierThreshold)
             {
+                y = Mathf.Clamp(y, lastPoint.y - 15, lastPoint.y + 15);
                 // Assign the calculated point position
                 points[i-fourierThreshold] = new Vector3(x - fourierThresholdOffset.x, y, 0) + offset;
+                lastPoint = points[i - fourierThreshold];
             }
         }
 

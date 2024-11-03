@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numOfPoints: 25
+  distanceBetweenCoins: 4
+  distanceBetweenFuelTanks: 7
   coinPrefab: {fileID: 7897156915498184797, guid: 937c7ff61e3f40a4a831f4a4faf74bad,
     type: 3}
   fuelTankPrefab: {fileID: 840678049715806552, guid: 4d5ef3535a7b60d4cad89880af19b151,
@@ -184,8 +186,9 @@ MonoBehaviour:
   gravity: {x: 0, y: -9.81, z: 0}
   fourierTransformation:
     initialFrequency: 1
-    initialAmplitude: 3
+    initialAmplitude: 1
     amplitudeIncrease: 0.015
+    maxAmplitudePercentage: 1.2
     pointCount: 2000
     initialPointSpacing: 5
     spacingIncreaseFactor: 0.005
@@ -208,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8079300051117485467
 Transform:
   m_ObjectHideFlags: 0
@@ -258,7 +261,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 25}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -268,7 +271,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 100}
+  m_Size: {x: 1, y: 200}
   m_EdgeRadius: 0
 --- !u!114 &8853286868020826186
 MonoBehaviour:
@@ -299,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4753347211281137966
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +352,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 25}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -359,7 +362,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 100}
+  m_Size: {x: 1, y: 200}
   m_EdgeRadius: 0
 --- !u!114 &7772507254287174286
 MonoBehaviour:

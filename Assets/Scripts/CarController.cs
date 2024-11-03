@@ -26,11 +26,6 @@ public class CarController : MonoBehaviour {
         backTire.motor = motor;
     }
 
-    private void Update()
-    {
-        //moveSpeed = Mathf.Clamp(movement * speed, -speed, speed);
-    }
-
     private void FixedUpdate()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, StartPos.x, transform.position.x), transform.position.y);
