@@ -386,7 +386,7 @@ public class HillClimberAgent : Agent
         {
             if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
             {
-                levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + ((GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x)) * agentRewards.rewardLevelProgressForwardMultiplier; /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
+                levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + (GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x) * agentRewards.rewardLevelProgressForwardMultiplier; /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
                 //lastSectionTime = DateTime.Now;
             }
             else if (GameManager.Instance.levelProgress - lastLevelProgress < -agentRewards.rewardLevelProgressBackwardThreshold)
@@ -456,6 +456,7 @@ public class HillClimberAgent : Agent
             agentRewards.rewardGroundDistance)
         {
             AddReward((agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier);
+            lastLevelProgress = GameManager.Instance.levelProgress;
         }
         else if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
         {
