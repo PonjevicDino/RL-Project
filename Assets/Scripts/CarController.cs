@@ -40,13 +40,13 @@ public class CarController : MonoBehaviour {
         fuel -= fuelConsumption * Mathf.Abs(movement) * Time.fixedDeltaTime + 0.00025f;
 
         // Adjust movement based on button presses
-        if (GameManager.Instance.GasBtnPressed)
-        {
-            movement = Mathf.Clamp(movement + 0.05f, 0f, 1f);
-        }
-        else if (GameManager.Instance.BrakeBtnPressed)
+        if (GameManager.Instance.BrakeBtnPressed)
         {
             movement = Mathf.Clamp(movement - 0.05f, -1f, 0f);
+        }
+        else if (GameManager.Instance.GasBtnPressed)
+        {
+            movement = Mathf.Clamp(movement + 0.05f, 0f, 1f);
         }
         else
         {

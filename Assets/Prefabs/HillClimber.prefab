@@ -1078,6 +1078,8 @@ Transform:
   - {fileID: 4536955731321792214}
   - {fileID: 4536955731919613365}
   - {fileID: 4536955732052728163}
+  - {fileID: 6368438718095056757}
+  - {fileID: 6496480684731983355}
   - {fileID: 4536955732413204306}
   - {fileID: 4536955731089873838}
   - {fileID: 3857835335351056404}
@@ -1126,6 +1128,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &5499236696101136771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6368438718095056757}
+  m_Layer: 0
+  m_Name: BackTireRaycaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6368438718095056757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499236696101136771}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.805, y: -0.8397422, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4536955732796367315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7316341316952488530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,18 +1216,18 @@ MonoBehaviour:
     rewardLevelProgressBackwardThreshold: 5
     rewardLevelProgressBackwardValue: 0.005
     rewardGroundDistance: 1
-    rewardGroundDistanceThreshold: 2
-    rewardGroundDistanceMultiplier: 0.2
+    rewardGroundDistanceThreshold: 0.25
+    rewardGroundDistanceMultiplier: 0.5
     rewardFuel: 1
-    rewardFuelCenter: 0.5
-    rewardFuelMultiplier: 0.001
-    rewardIdealSpeed: 1
+    rewardFuelThreshold: 0.2
+    rewardFuelMultiplier: 5
+    rewardIdealSpeed: 0
     rewardIdealSpeedValue: 0.001
     rewardMinSpeed: 1
     rewardSlowSpeedValue: 0.001
     rewardMaxSpeed: 7
     rewardFastSpeedValue: 0.05
-    rewardMoney: 1
+    rewardMoney: 0
     rewardMoneyMultiplier: 0.01
   categoryName: Car
   printRewardInfo: 1
@@ -1245,3 +1278,34 @@ MonoBehaviour:
   DecisionPeriod: 4
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
+--- !u!1 &7429565143703748535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6496480684731983355}
+  m_Layer: 0
+  m_Name: FrontTireRaycaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6496480684731983355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429565143703748535}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.815, y: -0.8397422, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4536955732796367315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

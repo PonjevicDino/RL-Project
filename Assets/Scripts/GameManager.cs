@@ -45,6 +45,7 @@ public class GameManager : Singleton<GameManager> {
     public string vehicleName = "";
     public int totalFuelTanksCollected = 0;
     public int totalCoinsCollected = 0;
+    public bool hasCollectedFuel = false;
 
     public Vector3 mapEndPoint = new Vector3(100.0f, 0.0f, 0.0f);
 
@@ -148,6 +149,7 @@ public class GameManager : Singleton<GameManager> {
     //연료를 획득하면 연료 게이지를 꽉 채운다.
     public void FuelCharge() {
         totalFuelTanksCollected++;
+        hasCollectedFuel = true;
         carController.Fuel = 1;
         fuelGauge.fillAmount = 1;  //게이지 바 꽉 채운다
         PlaySound("refuel"); //연료충전 사운드 재생

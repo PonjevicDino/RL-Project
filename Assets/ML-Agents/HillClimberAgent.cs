@@ -33,7 +33,7 @@ public class HillClimberAgent : Agent
         public float rewardGroundDistanceMultiplier;
 
         public bool rewardFuel;
-        public float rewardFuelCenter; 
+        public float rewardFuelThreshold; 
         public float rewardFuelMultiplier;
 
         public bool rewardIdealSpeed;
@@ -58,7 +58,7 @@ public class HillClimberAgent : Agent
         agentRewards.rewardGroundDistanceMultiplier = Mathf.Max(agentRewards.rewardGroundDistanceMultiplier, 0.0f);
         agentRewards.rewardGroundDistanceThreshold = Mathf.Max(agentRewards.rewardGroundDistanceThreshold, 0.1f);
 
-        agentRewards.rewardFuelCenter = Mathf.Clamp01(agentRewards.rewardFuelCenter);
+        agentRewards.rewardFuelThreshold = Mathf.Clamp01(agentRewards.rewardFuelThreshold);
         agentRewards.rewardFuelMultiplier = Mathf.Max(agentRewards.rewardFuelMultiplier, 0.0f);
 
         agentRewards.rewardIdealSpeedValue = Mathf.Max(agentRewards.rewardIdealSpeedValue, 0.0f);
@@ -108,6 +108,8 @@ public class HillClimberAgent : Agent
 
     private Vector3 mapEndPosition;
 
+    private bool alreadyFuelStatePunished = false;
+
     void Start()
     {
         GenerateModelInfo();             
@@ -144,7 +146,7 @@ public class HillClimberAgent : Agent
                           "Reward | GroundDistance | Multiplier : " + agentRewards.rewardGroundDistanceMultiplier + "\n" +
                           "\n" +
                           "Reward | Fuel : " + agentRewards.rewardFuel + "\n" +
-                          "Reward | Fuel | Center : " + agentRewards.rewardFuelCenter + "\n" +
+                          "Reward | Fuel | Center : " + agentRewards.rewardFuelThreshold + "\n" +
                           "Reward | Fuel | Multiplier : " + agentRewards.rewardFuelMultiplier + "\n" +
                           "\n" +
                           "Reward | IdealSpeed : " + agentRewards.rewardIdealSpeed + "\n" +
@@ -350,16 +352,32 @@ public class HillClimberAgent : Agent
         sensor.AddObservation(terrainHeights);
 
         // Get distance to ground
-        RaycastHit2D[] distanceToGroundHits = Physics2D.RaycastAll(carTransform.position, -carTransform.up);
+        RaycastHit2D[] distanceToGroundHitsBT = Physics2D.RaycastAll(carTransform.Find("BackTireRaycaster").position, -carTransform.up);
+        RaycastHit2D[] distanceToGroundHitsFT = Physics2D.RaycastAll(carTransform.Find("FrontTireRaycaster").position, -carTransform.up);
+
         distanceToGround = -1.0f;
-        foreach (RaycastHit2D hit in distanceToGroundHits)
+        float backTireHitDistance = -1.0f;
+        
+        foreach (RaycastHit2D hit in distanceToGroundHitsBT)
         {
             if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
             {
                 Debug.DrawRay(carTransform.position, -carTransform.up * hit.distance, Color.white);
-                distanceToGround = hit.distance;
-                totalDistanceToGround += distanceToGround;
+                backTireHitDistance = hit.distance;
                 break;
+            }
+        }
+        if (backTireHitDistance == -1.0f)
+        {
+            foreach (RaycastHit2D hit in distanceToGroundHitsFT)
+            {
+                if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
+                {
+                    Debug.DrawRay(carTransform.position, -carTransform.up * hit.distance, Color.white);
+                    distanceToGround = (hit.distance + backTireHitDistance) / 2;
+                    totalDistanceToGround += distanceToGround;
+                    break;
+                }
             }
         }
         sensor.AddObservation(distanceToGround);
@@ -465,10 +483,16 @@ public class HillClimberAgent : Agent
         // - Fuel State
         // -- Fuel > 75% = Reward
         // -- Fuel < 75% = Punishment
-        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - agentRewards.rewardFuelCenter) * agentRewards.rewardFuelMultiplier; 
-        if (agentRewards.rewardFuel)
+        if (agentRewards.rewardFuel && transform.parent.gameObject.GetComponent<CarController>().Fuel <= agentRewards.rewardFuelThreshold && !alreadyFuelStatePunished)
         {
-            AddReward(fuelStateReward);
+            alreadyFuelStatePunished = true;
+            AddReward(-agentRewards.rewardFuelMultiplier);
+        }
+        if (agentRewards.rewardFuel && GameManager.Instance.hasCollectedFuel)
+        {
+            GameManager.Instance.hasCollectedFuel = false;
+            alreadyFuelStatePunished = false;
+            AddReward(agentRewards.rewardFuelMultiplier * 2.0f);
         }
         
         // - Collected coin
