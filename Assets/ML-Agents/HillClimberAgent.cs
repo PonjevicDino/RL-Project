@@ -12,9 +12,64 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 using Unity.Burst.CompilerServices;
 using TMPro;
+using System.IO.Abstractions;
+using System.IO;
 
 public class HillClimberAgent : Agent
 {
+    [SerializeField]
+    private AgentRewards agentRewards;
+    [Serializable]
+    private struct AgentRewards
+    {
+        public bool rewardLevelProgress;
+        public float rewardLevelProgressForwardThreshold;
+        public float rewardLevelProgressForwardMultiplier;
+        public float rewardLevelProgressBackwardThreshold;
+        public float rewardLevelProgressBackwardValue;
+
+        public bool rewardGroundDistance;
+        public float rewardGroundDistanceThreshold;
+        public float rewardGroundDistanceMultiplier;
+
+        public bool rewardFuel;
+        public float rewardFuelCenter; 
+        public float rewardFuelMultiplier;
+
+        public bool rewardIdealSpeed;
+        public float rewardIdealSpeedValue;
+        public float rewardMinSpeed;
+        public float rewardSlowSpeedValue;
+        public float rewardMaxSpeed;
+        public float rewardFastSpeedValue;
+
+        public bool rewardMoney;
+        public float rewardMoneyMultiplier;
+    }
+    [ExecuteInEditMode]
+    void OnValidate()
+    {
+        agentRewards.rewardLevelProgressForwardThreshold = Mathf.Max(agentRewards.rewardLevelProgressForwardThreshold, 0.0f);
+        agentRewards.rewardLevelProgressForwardMultiplier = Mathf.Max(agentRewards.rewardLevelProgressForwardMultiplier, 0.0f);
+
+        agentRewards.rewardLevelProgressBackwardThreshold = Mathf.Max(agentRewards.rewardLevelProgressBackwardThreshold, 0.0f);
+        agentRewards.rewardLevelProgressBackwardValue = Mathf.Max(agentRewards.rewardLevelProgressBackwardValue, 0.0f);
+
+        agentRewards.rewardGroundDistanceMultiplier = Mathf.Max(agentRewards.rewardGroundDistanceMultiplier, 0.0f);
+        agentRewards.rewardGroundDistanceThreshold = Mathf.Max(agentRewards.rewardGroundDistanceThreshold, 0.1f);
+
+        agentRewards.rewardFuelCenter = Mathf.Clamp01(agentRewards.rewardFuelCenter);
+        agentRewards.rewardFuelMultiplier = Mathf.Max(agentRewards.rewardFuelMultiplier, 0.0f);
+
+        agentRewards.rewardIdealSpeedValue = Mathf.Max(agentRewards.rewardIdealSpeedValue, 0.0f);
+        agentRewards.rewardMinSpeed = Mathf.Clamp(agentRewards.rewardMinSpeed, 0.0f, agentRewards.rewardMaxSpeed);
+        agentRewards.rewardSlowSpeedValue = Mathf.Max(agentRewards.rewardSlowSpeedValue, 0.0f);
+        agentRewards.rewardMaxSpeed = Mathf.Max(agentRewards.rewardMaxSpeed, agentRewards.rewardMinSpeed);
+        agentRewards.rewardFastSpeedValue = Mathf.Max(agentRewards.rewardFastSpeedValue, 0.0f);
+
+        agentRewards.rewardMoneyMultiplier = Mathf.Max(agentRewards.rewardMoneyMultiplier, 0.0f);
+    }
+
     [SerializeField] private string categoryName;
 
     [SerializeField] private bool printRewardInfo = true;
@@ -46,12 +101,17 @@ public class HillClimberAgent : Agent
     private int totalAcceleratorHeldSteps = 0;
     private float totalDistanceToGround = 0.0f;
     private int idleReward = 0;
+
+    private int idealSpeedReward = 0;
+    private int tooSlowPunishment = 0;
     private int tooFastPunishment = 0;
 
     private Vector3 mapEndPosition;
 
     void Start()
     {
+        GenerateModelInfo();             
+        
         agentGasText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentGas").ToList()[0].GetComponent<Text>();
         agentBrakeText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentBrake").ToList()[0].GetComponent<Text>();
 
@@ -66,6 +126,38 @@ public class HillClimberAgent : Agent
         brakeHeldStepsText = GameObject.Find("BrakeHoldText").GetComponent<Text>();
 
         terrainRaycastDistance = 17.783374f / (terrainRaycastsInViewport - 1);
+    }
+
+    private void GenerateModelInfo()
+    {
+        string fsString = "[" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "]" + "\n" +
+                          "Agent Rewards Struct: \n" +
+                          "\n" +
+                          "Reward | LevelProgress : " + agentRewards.rewardLevelProgress + "\n" +
+                          "Reward | LevelProgress | ForwardThreshold : " + agentRewards.rewardLevelProgressForwardThreshold + "\n" +
+                          "Reward | LevelProgress | ForwardMultiplier : " + agentRewards.rewardLevelProgressForwardMultiplier + "\n" +
+                          "Reward | LevelProgress | BackwardThreshold : " + agentRewards.rewardLevelProgressBackwardThreshold + "\n" +
+                          "Reward | LevelProgress | BackwardValue : " + agentRewards.rewardLevelProgressBackwardValue + "\n" +
+                          "\n" +
+                          "Reward | GroundDistance : " + agentRewards.rewardGroundDistance + "\n" +
+                          "Reward | GroundDistance | Threshold : " + agentRewards.rewardGroundDistanceThreshold + "\n" +
+                          "Reward | GroundDistance | Multiplier : " + agentRewards.rewardGroundDistanceMultiplier + "\n" +
+                          "\n" +
+                          "Reward | Fuel : " + agentRewards.rewardFuel + "\n" +
+                          "Reward | Fuel | Center : " + agentRewards.rewardFuelCenter + "\n" +
+                          "Reward | Fuel | Multiplier : " + agentRewards.rewardFuelMultiplier + "\n" +
+                          "\n" +
+                          "Reward | IdealSpeed : " + agentRewards.rewardIdealSpeed + "\n" +
+                          "Reward | IdealSpeed | Value : " + agentRewards.rewardIdealSpeedValue + "\n" +
+                          "Reward | IdealSpeed | MinSpeed : " + agentRewards.rewardMinSpeed + "\n" +
+                          "Reward | IdealSpeed | SlowSpeedValue : " + agentRewards.rewardSlowSpeedValue + "\n" +
+                          "Reward | IdealSpeed | MaxSpeed : " + agentRewards.rewardMaxSpeed + "\n" +
+                          "Reward | IdealSpeed | FastSpeedValue : " + agentRewards.rewardFastSpeedValue + "\n" +
+                          "\n" +
+                          "Reward | Money : " + agentRewards.rewardMoney + "\n" +
+                          "Reward | Money | Multiplier : " + agentRewards.rewardMoneyMultiplier + "\n\n\n";
+
+        File.AppendAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Ml-Agents_Model_Info.txt", fsString);
     }
 
     public override void OnEpisodeBegin(bool reloadScene = false)
@@ -102,8 +194,11 @@ public class HillClimberAgent : Agent
         totalMoneyReward = 0.0f;
         totalAcceleratorReward = 0.0f;
         totalDistanceToGround = 0.0f;
+        
         idleReward = 0;
+        idealSpeedReward = 0;
         tooFastPunishment = 0;
+        tooSlowPunishment = 0;
 
         GameManager.Instance.totalFuelTanksCollected = 0;
         GameManager.Instance.totalCoinsCollected = 0;
@@ -287,22 +382,53 @@ public class HillClimberAgent : Agent
 
         // Rewards
         // - Level Progress
-        if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
+        if (agentRewards.rewardLevelProgress)
         {
-            levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
-            AddReward(levelProgressReward + (GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x) * 10.0f);
-            //lastSectionTime = DateTime.Now;
-        }
-        else if (GameManager.Instance.levelProgress - lastLevelProgress < -5.0f)
-        {
-            levelProgressReward = -0.05f;
-            AddReward(levelProgressReward); // Punishment for going backwards
-        }
-        else
-        {
-            levelProgressReward = 0.0f;
+            if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
+            {
+                levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + ((GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x)) * agentRewards.rewardLevelProgressForwardMultiplier; /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
+                //lastSectionTime = DateTime.Now;
+            }
+            else if (GameManager.Instance.levelProgress - lastLevelProgress < -agentRewards.rewardLevelProgressBackwardThreshold)
+            {
+                levelProgressReward = -agentRewards.rewardLevelProgressBackwardValue; // Punishment for going backwards
+            }
+            else
+            {
+                levelProgressReward = 0.0f;
+            }
+
+            AddReward(levelProgressReward);
         }
 
+        if (transform.parent.GetComponent<Rigidbody2D>().velocityX > -0.5f &&
+            (transform.parent.GetComponent<Rigidbody2D>().velocityX >= agentRewards.rewardMinSpeed &&
+             transform.parent.GetComponent<Rigidbody2D>().velocityX <= agentRewards.rewardMaxSpeed))
+        {
+            if (agentRewards.rewardIdealSpeed)
+            {
+                AddReward(agentRewards.rewardIdealSpeedValue);
+            }
+
+            idealSpeedReward++;
+        }
+        else if (transform.parent.GetComponent<Rigidbody2D>().velocityX < agentRewards.rewardMinSpeed)
+        {
+            if (agentRewards.rewardIdealSpeed)
+            {
+                AddReward(-agentRewards.rewardSlowSpeedValue);
+            }
+            tooSlowPunishment++;
+        }
+        else if (transform.parent.GetComponent<Rigidbody2D>().velocityX > agentRewards.rewardMaxSpeed)
+        {
+            if (agentRewards.rewardIdealSpeed)
+            {
+                AddReward(-agentRewards.rewardFastSpeedValue);
+            }
+            tooFastPunishment++;
+        }
+        
         /*
         // - No input action if car is moving
         if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 3.0f && !GameManager.Instance.BrakeBtnPressed)
@@ -316,31 +442,43 @@ public class HillClimberAgent : Agent
             AddReward(-0.001f);
             idleReward--;
         }
-        */
-
-        // - Punishment if car too fast
+        
+        // - Punishment if car is too fast
         if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 7.0f || transform.parent.GetComponent<Rigidbody2D>().velocityX <= 3.0f)
         {
-            AddReward(-0.005f);
-            tooFastPunishment++;
+            AddReward(-0.05f);
+            tooFastPunishment += 0.05f;
         }
+        */
 
         // - Distance to Ground
-        if (GameManager.Instance.levelProgress - lastLevelProgress >= 1.0f)
+        if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold &&
+            agentRewards.rewardGroundDistance)
         {
-            AddReward((2.0f - distanceToGround) / 5.0f);
-            lastLevelProgress = GameManager.Instance.levelProgress;
+            AddReward((agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier);
+        }
+        else if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
+        {
+            lastLevelProgress = GameManager.Instance.levelProgress; // Must be updated even if no reward is given
         }
         // - Fuel State
         // -- Fuel > 75% = Reward
         // -- Fuel < 75% = Punishment
-        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - 0.75f) / 1000.0f; 
-        //SetReward(fuelStateReward);
+        fuelStateReward = (transform.parent.gameObject.GetComponent<CarController>().Fuel - agentRewards.rewardFuelCenter) * agentRewards.rewardFuelMultiplier; 
+        if (agentRewards.rewardFuel)
+        {
+            AddReward(fuelStateReward);
+        }
+        
         // - Collected coin
         int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
-        moneyReward = moneyDifference / 100.0f;
-        //SetReward(moneyReward);
+        moneyReward = moneyDifference * agentRewards.rewardMoneyMultiplier;
+        if (agentRewards.rewardMoney)
+        {
+            AddReward(moneyReward);
+        }
         lastTotalMoney += moneyDifference;
+
         // - Holding the Pedals
         if (GameManager.Instance.GasBtnPressed)
         {
@@ -380,7 +518,9 @@ public class HillClimberAgent : Agent
             { "totalAcceleratorReward", totalAcceleratorReward },
             { "totalDistanceToGround", totalDistanceToGround },
             { "totalIdleReward", idleReward },
-            { "totalSpeedDisagreePunishment", tooFastPunishment },
+            { "idealSpeedReward", idealSpeedReward },
+            { "tooSlowPunishment", tooSlowPunishment },
+            { "tooFastPunishment", tooFastPunishment },
         };
 
         // - No Fuel

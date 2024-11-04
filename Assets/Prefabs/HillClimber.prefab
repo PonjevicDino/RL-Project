@@ -1176,6 +1176,26 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  agentRewards:
+    rewardLevelProgress: 1
+    rewardLevelProgressForwardThreshold: 1
+    rewardLevelProgressForwardMultiplier: 10
+    rewardLevelProgressBackwardThreshold: 5
+    rewardLevelProgressBackwardValue: 0.005
+    rewardGroundDistance: 1
+    rewardGroundDistanceThreshold: 2
+    rewardGroundDistanceMultiplier: 0.2
+    rewardFuel: 1
+    rewardFuelCenter: 0.5
+    rewardFuelMultiplier: 0.001
+    rewardIdealSpeed: 1
+    rewardIdealSpeedValue: 0.001
+    rewardMinSpeed: 1
+    rewardSlowSpeedValue: 0.001
+    rewardMaxSpeed: 7
+    rewardFastSpeedValue: 0.05
+    rewardMoney: 1
+    rewardMoneyMultiplier: 0.01
   categoryName: Car
   printRewardInfo: 1
   terrainRaycastsInViewport: 11
