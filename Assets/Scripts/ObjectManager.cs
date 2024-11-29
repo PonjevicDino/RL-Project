@@ -15,7 +15,7 @@ public class ObjectManager : MonoBehaviour {
                 {
                     return objectPrefabs[i];
                 }
-                GameObject newObject = Instantiate(objectPrefabs[i]);
+                GameObject newObject = Instantiate(objectPrefabs[i], this.transform.parent);
                 newObject.SetActive(isActive);
                 pooledObjs.Add(newObject);
                 newObject.name = type;

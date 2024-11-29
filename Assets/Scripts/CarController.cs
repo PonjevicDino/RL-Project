@@ -17,13 +17,18 @@ public class CarController : MonoBehaviour {
 
     private JointMotor2D motor;
 
+    private GameManager gameManager;
+
     private void Start()
     {
+        gameManager = this.transform.parent.Find("GameManager").GetComponent<GameManager>();
+
         motor = new JointMotor2D();
         motor.maxMotorTorque = 10000;
         motor.motorSpeed = 0;  // Initial speed is set to zero
         frontTire.motor = motor;
         backTire.motor = motor;
+        StartPos = new Vector3(3.0f, StartPos.y, StartPos.z);
     }
 
     private void FixedUpdate()
@@ -31,7 +36,7 @@ public class CarController : MonoBehaviour {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, StartPos.x, transform.position.x), transform.position.y);
 
         // Stop car speed on game over
-        if (GameManager.Instance.isDie && moveStop)
+        if (gameManager.isDie && moveStop)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
@@ -40,11 +45,11 @@ public class CarController : MonoBehaviour {
         fuel -= fuelConsumption * Mathf.Abs(movement) * Time.fixedDeltaTime + 0.00025f;
 
         // Adjust movement based on button presses
-        if (GameManager.Instance.BrakeBtnPressed)
+        if (gameManager.BrakeBtnPressed)
         {
             movement = Mathf.Clamp(movement - 0.05f, -1f, 0f);
         }
-        else if (GameManager.Instance.GasBtnPressed)
+        else if (gameManager.GasBtnPressed)
         {
             movement = Mathf.Clamp(movement + 0.05f, 0f, 1f);
         }
@@ -70,6 +75,6 @@ public class CarController : MonoBehaviour {
             backTire.motor = motor;
         }
 
-        GameManager.Instance.FuelConsume();  // Update fuel usage
+        gameManager.FuelConsume();  // Update fuel usage
     }
 }

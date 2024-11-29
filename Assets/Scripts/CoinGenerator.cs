@@ -14,7 +14,7 @@ public class CoinGenerator : MonoBehaviour
 
     public void SpawnCoins(Vector3 spawnPosition)
     {
-        GameManager gameManager = Object.FindAnyObjectByType<GameManager>();
+        GameManager gameManager = this.transform.parent.parent.parent.Find("GameManager").GetComponent<GameManager>();
         levelProgress = gameManager.levelProgress / 2000.0f;
 
         // Define the coin values

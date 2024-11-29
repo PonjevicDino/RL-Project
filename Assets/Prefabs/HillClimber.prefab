@@ -1153,7 +1153,7 @@ Transform:
   m_GameObject: {fileID: 5499236696101136771}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.805, y: -0.8397422, z: -1}
+  m_LocalPosition: {x: -0.805, y: -0.7397422, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   agentRewards:
-    rewardLevelProgress: 1
+    rewardLevelProgress: 0
     rewardLevelProgressForwardThreshold: 1
     rewardLevelProgressForwardMultiplier: 10
     rewardLevelProgressBackwardThreshold: 5
@@ -1218,14 +1218,14 @@ MonoBehaviour:
     rewardGroundDistance: 1
     rewardGroundDistanceThreshold: 0.25
     rewardGroundDistanceMultiplier: 0.5
-    rewardFuel: 1
+    rewardFuel: 0
     rewardFuelThreshold: 0.2
     rewardFuelMultiplier: 5
     rewardIdealSpeed: 0
     rewardIdealSpeedValue: 0.001
-    rewardMinSpeed: 1
+    rewardMinSpeed: 0
     rewardSlowSpeedValue: 0.001
-    rewardMaxSpeed: 7
+    rewardMaxSpeed: 8
     rewardFastSpeedValue: 0.05
     rewardMoney: 0
     rewardMoneyMultiplier: 0.01
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 4
+  DecisionPeriod: 8
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
 --- !u!1 &7429565143703748535
@@ -1303,7 +1303,7 @@ Transform:
   m_GameObject: {fileID: 7429565143703748535}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.815, y: -0.8397422, z: -1}
+  m_LocalPosition: {x: 0.815, y: -0.7397422, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

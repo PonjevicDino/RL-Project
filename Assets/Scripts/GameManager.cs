@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : Singleton<GameManager> {
+public class GameManager : MonoBehaviour {
 
     [SerializeField]
     private Image fuelGauge, captureImg;
@@ -109,14 +109,14 @@ public class GameManager : Singleton<GameManager> {
             mapName = "Cave";
 
         Debug.Log(mapName);
-        // TODO: Enable for procedural generation
         Vector3 chunkStart = chunkSpawner.InitializeChunkSpawning(objectManager.GetOrGenerateObject(mapName, false));
 
         //선택한 차량 불러오기/오브젝트 생성
         if(vehicleIndex.Equals(0)) vehicleName = "HillClimber";
         else if(vehicleIndex.Equals(1)) vehicleName = "Motorcycle";
         CarController vehicle = objectManager.GetOrGenerateObject(vehicleName).GetComponent<CarController>();
-        vehicle.gameObject.transform.SetPositionAndRotation(chunkStart, Quaternion.identity);
+        vehicle.gameObject.transform.SetLocalPositionAndRotation(chunkStart, Quaternion.identity);
+        vehicle.transform.parent = this.transform.parent;
         carController = vehicle;
 
         //카메라 조정

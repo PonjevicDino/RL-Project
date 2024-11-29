@@ -2,8 +2,8 @@ behaviors:
   HillClimber:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 2560
-      buffer_size: 102400
+      batch_size: 1280
+      buffer_size: 51200
       learning_rate: 5.0e-5
       beta: 1.0e-2
       epsilon: 0.9
@@ -16,7 +16,7 @@ behaviors:
       normalize: true
       hidden_units: 128
       num_layers: 4
-      use_recurrent: true
+      use_recurrent: false
       sequence_length: 32
       memory_size: 2048
     reward_signals:
@@ -26,7 +26,7 @@ behaviors:
       curiosity:
         strength: 0.02
         gamma: 0.95
-    max_steps: 100000000
+    max_steps: 10000000
     time_horizon: 128
     summary_freq: 1000
     threaded: true

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PickableColliderRemover : MonoBehaviour
 {
+    private Vector3 startPos;
+
+    void Start()
+    {
+        startPos = transform.localPosition;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (transform.gameObject.activeSelf)
@@ -32,9 +39,9 @@ public class PickableColliderRemover : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.position.y < -50.0f)
+        if (transform.localPosition.y < -50.0f)
         {
-            transform.SetPositionAndRotation(transform.position + Vector3.up * 100.0f, Quaternion.identity);
+            transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.identity);
         }
     }
 }

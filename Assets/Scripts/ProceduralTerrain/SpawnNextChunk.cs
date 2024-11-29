@@ -11,7 +11,7 @@ public class SpawnNextChunk : MonoBehaviour
         //If the next chunk wasn´t spawned yet, sapwn it using the ChunkSpawner
         if (!isNextChunkSpawned && !other.gameObject.name.Contains("Coin") && !other.gameObject.name.Contains("FuelTank"))
         {
-            Object.FindAnyObjectByType<ChunkSpawner>().SpawnNewChunkBasedOnFourier();
+            this.transform.parent.parent.GetComponent<ChunkSpawner>().SpawnNewChunkBasedOnFourier();
             isNextChunkSpawned = true;
         }
     }

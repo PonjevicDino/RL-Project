@@ -109,9 +109,14 @@ public class HillClimberAgent : Agent
     private Vector3 mapEndPosition;
 
     private bool alreadyFuelStatePunished = false;
+    private int totalFuelPunishment = 0;
+
+    private GameManager gameManager;
 
     void Start()
     {
+        gameManager = this.transform.parent.parent.Find("GameManager").GetComponent<GameManager>();
+
         GenerateModelInfo();             
         
         agentGasText = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "AgentGas").ToList()[0].GetComponent<Text>();
@@ -159,15 +164,24 @@ public class HillClimberAgent : Agent
                           "Reward | Money : " + agentRewards.rewardMoney + "\n" +
                           "Reward | Money | Multiplier : " + agentRewards.rewardMoneyMultiplier + "\n\n\n";
 
-        File.AppendAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Ml-Agents_Model_Info.txt", fsString);
+        try
+        {
+            File.AppendAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Ml-Agents_Model_Info.txt", fsString);
+
+        }
+        catch { }
     }
 
     public override void OnEpisodeBegin(bool reloadScene = false)
     {
-        GameManager.Instance.isControlledByAI = true;
+        if (!gameManager)
+        {
+            gameManager = this.transform.parent.parent.Find("GameManager").GetComponent<GameManager>();
+        }
+        gameManager.isControlledByAI = true;
         if (reloadScene)
         {
-            Vector3 carStartPosition = Resources.FindObjectsOfTypeAll<GameObject>().Where(obj => obj.name == "Terrain").ToList()[0].GetComponent<ChunkSpawner>().ReloadAllChunks();
+            Vector3 carStartPosition = this.transform.parent.parent.Find("Terrain").GetComponent<ChunkSpawner>().ReloadAllChunks();
             transform.parent.SetPositionAndRotation(carStartPosition, Quaternion.identity);
             transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.parent.gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
@@ -181,8 +195,8 @@ public class HillClimberAgent : Agent
             transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
             transform.parent.Find("driver-head").gameObject.GetComponent<Rigidbody2D>().Sleep();
-            GameManager.Instance.isDie = false;
-            GameManager.Instance.FuelCharge();
+            gameManager.isDie = false;
+            gameManager.FuelCharge();
             transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit = false;
             //SceneManager.LoadScene("ProceduralTest", LoadSceneMode.Single);
         }
@@ -192,7 +206,7 @@ public class HillClimberAgent : Agent
         lastSectionTime = DateTime.Now;
 
         totalLevelProgressReward = 0.0f;
-        totalFuelStateReward = 0.0f;
+        totalFuelPunishment = 0;
         totalMoneyReward = 0.0f;
         totalAcceleratorReward = 0.0f;
         totalDistanceToGround = 0.0f;
@@ -202,8 +216,8 @@ public class HillClimberAgent : Agent
         tooFastPunishment = 0;
         tooSlowPunishment = 0;
 
-        GameManager.Instance.totalFuelTanksCollected = 0;
-        GameManager.Instance.totalCoinsCollected = 0;
+        gameManager.totalFuelTanksCollected = 0;
+        gameManager.totalCoinsCollected = 0;
         totalAcceleratorHeldSteps = 0;
 
         //Prefill the Velocity-Histroy
@@ -213,8 +227,8 @@ public class HillClimberAgent : Agent
             velocityHistory.Add(Vector3.zero);
         }
 
-        mapName = GameManager.Instance.mapName;
-        vehicleName = GameManager.Instance.vehicleName;
+        mapName = gameManager.mapName;
+        vehicleName = gameManager.vehicleName;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -230,9 +244,9 @@ public class HillClimberAgent : Agent
         Rigidbody2D carRidgidBody = carTransform.gameObject.GetComponent<Rigidbody2D>();
 
         // Viewport values for later usage
-        float cameraLeftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero).x;
-        float cameraRightEdge = Camera.main.ViewportToWorldPoint(Vector3.right).x;
-        float cameraTopEdge = Camera.main.ViewportToWorldPoint(Vector3.up).y;
+        float cameraLeftEdge = -2.8824883f + transform.position.x;
+        float cameraRightEdge = cameraLeftEdge + 17.783374f;
+        float cameraTopEdge = 6.0f + this.transform.parent.parent.position.y;
 
         // Fuel state
         float currentFuel = carTransform.gameObject.GetComponent<CarController>().Fuel;
@@ -285,7 +299,7 @@ public class HillClimberAgent : Agent
         Vector3 trajectoryHitNormal = Vector3.zero;
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
+            if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null && hit.distance <= 10.0f)
             {
                 Debug.DrawRay(carTransform.position, carTrajectory * hit.distance, Color.green);
                 //Debug.Log("Trajectory | Hit distance: " + hit.distance.ToString("00.000"));
@@ -330,7 +344,7 @@ public class HillClimberAgent : Agent
         List<float> terrainHeights = new List<float>();
         for (int raycast = 0; raycast < terrainRaycastsInViewport; raycast++)
         {
-            Vector3 raycastSource = new Vector3(cameraLeftEdge + terrainRaycastDistance * raycast, cameraTopEdge + 50.0f, 0.0f);
+            Vector3 raycastSource = new Vector3(cameraLeftEdge + terrainRaycastDistance * raycast, cameraTopEdge + 15.0f, 0.0f);
             hits = Physics2D.RaycastAll(raycastSource, Vector3.down);
             hitTerrain = false;
             foreach (RaycastHit2D hit in hits)
@@ -360,21 +374,21 @@ public class HillClimberAgent : Agent
         
         foreach (RaycastHit2D hit in distanceToGroundHitsBT)
         {
-            if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
+            if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null && hit.distance <= 10.0f)
             {
                 Debug.DrawRay(carTransform.position, -carTransform.up * hit.distance, Color.white);
-                backTireHitDistance = hit.distance;
+                backTireHitDistance = hit.distance - 0.1f;
                 break;
             }
         }
-        if (backTireHitDistance == -1.0f)
+        if (backTireHitDistance != -1.0f)
         {
             foreach (RaycastHit2D hit in distanceToGroundHitsFT)
             {
-                if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null)
+                if (hit.collider.gameObject.transform.GetComponent<SpriteShapeRenderer>() != null && hit.distance <= 10.0f)
                 {
                     Debug.DrawRay(carTransform.position, -carTransform.up * hit.distance, Color.white);
-                    distanceToGround = (hit.distance + backTireHitDistance) / 2;
+                    distanceToGround = (hit.distance - 0.1f + backTireHitDistance) / 2;
                     totalDistanceToGround += distanceToGround;
                     break;
                 }
@@ -386,7 +400,6 @@ public class HillClimberAgent : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         float levelProgressReward = 0.00f;
-        float fuelStateReward = 0.00f;
         float moneyReward = 0.00f;
         float acceleratorReward = 0.00f;
 
@@ -394,20 +407,20 @@ public class HillClimberAgent : Agent
         // Agent inputs
         if (agentGasText != null && agentBrakeText != null)
         {
-            agentGasText.enabled = GameManager.Instance.GasBtnPressed = actions.DiscreteActions[0] > 0.0f ? true : false;
-            agentBrakeText.enabled = GameManager.Instance.BrakeBtnPressed = actions.DiscreteActions[1] > 0.0f ? true : false;
+            agentGasText.enabled = gameManager.GasBtnPressed = actions.DiscreteActions[0] > 0.0f ? true : false;
+            agentBrakeText.enabled = gameManager.BrakeBtnPressed = actions.DiscreteActions[1] > 0.0f ? true : false;
         }
 
         // Rewards
         // - Level Progress
         if (agentRewards.rewardLevelProgress)
         {
-            if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
+            if (gameManager.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
             {
-                levelProgressReward = (GameManager.Instance.levelProgress - lastLevelProgress) + (GameManager.Instance.levelProgress / GameManager.Instance.mapEndPoint.x) * agentRewards.rewardLevelProgressForwardMultiplier; /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
+                levelProgressReward = (gameManager.levelProgress - lastLevelProgress) + (gameManager.levelProgress / gameManager.mapEndPoint.x) * agentRewards.rewardLevelProgressForwardMultiplier; /*+ Mathf.Max(0, 5.0f - (float)(lastSectionTime - DateTime.Now).TotalSeconds)*/;
                 //lastSectionTime = DateTime.Now;
             }
-            else if (GameManager.Instance.levelProgress - lastLevelProgress < -agentRewards.rewardLevelProgressBackwardThreshold)
+            else if (gameManager.levelProgress - lastLevelProgress < -agentRewards.rewardLevelProgressBackwardThreshold)
             {
                 levelProgressReward = -agentRewards.rewardLevelProgressBackwardValue; // Punishment for going backwards
             }
@@ -430,7 +443,8 @@ public class HillClimberAgent : Agent
 
             idealSpeedReward++;
         }
-        else if (transform.parent.GetComponent<Rigidbody2D>().velocityX < agentRewards.rewardMinSpeed)
+        else if (transform.parent.GetComponent<Rigidbody2D>().velocityX >= 0.0f &&
+                 transform.parent.GetComponent<Rigidbody2D>().velocityX < agentRewards.rewardMinSpeed)
         {
             if (agentRewards.rewardIdealSpeed)
             {
@@ -470,15 +484,15 @@ public class HillClimberAgent : Agent
         */
 
         // - Distance to Ground
-        if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold &&
+        if (gameManager.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold &&
             agentRewards.rewardGroundDistance)
         {
             AddReward((agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier);
-            lastLevelProgress = GameManager.Instance.levelProgress;
+            lastLevelProgress = gameManager.levelProgress;
         }
-        else if (GameManager.Instance.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
+        else if (gameManager.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
         {
-            lastLevelProgress = GameManager.Instance.levelProgress; // Must be updated even if no reward is given
+            lastLevelProgress = gameManager.levelProgress; // Must be updated even if no reward is given
         }
         // - Fuel State
         // -- Fuel > 75% = Reward
@@ -487,16 +501,17 @@ public class HillClimberAgent : Agent
         {
             alreadyFuelStatePunished = true;
             AddReward(-agentRewards.rewardFuelMultiplier);
+            totalFuelPunishment++;
         }
-        if (agentRewards.rewardFuel && GameManager.Instance.hasCollectedFuel)
+        if (agentRewards.rewardFuel && gameManager.hasCollectedFuel)
         {
-            GameManager.Instance.hasCollectedFuel = false;
+            gameManager.hasCollectedFuel = false;
             alreadyFuelStatePunished = false;
             AddReward(agentRewards.rewardFuelMultiplier * 2.0f);
         }
         
         // - Collected coin
-        int moneyDifference = lastTotalMoney < GameManager.Instance.totalMoney ? GameManager.Instance.totalMoney - lastTotalMoney : 0;
+        int moneyDifference = lastTotalMoney < gameManager.totalMoney ? gameManager.totalMoney - lastTotalMoney : 0;
         moneyReward = moneyDifference * agentRewards.rewardMoneyMultiplier;
         if (agentRewards.rewardMoney)
         {
@@ -505,7 +520,7 @@ public class HillClimberAgent : Agent
         lastTotalMoney += moneyDifference;
 
         // - Holding the Pedals
-        if (GameManager.Instance.GasBtnPressed)
+        if (gameManager.GasBtnPressed)
         {
             totalAcceleratorHeldSteps++;
             acceleratorHeldSteps++;
@@ -524,20 +539,20 @@ public class HillClimberAgent : Agent
             }
             acceleratorHeldSteps = 0;
         }
-        brakeHeldSteps = GameManager.Instance.BrakeBtnPressed ? brakeHeldSteps += 1 : 0;
+        brakeHeldSteps = gameManager.BrakeBtnPressed ? brakeHeldSteps += 1 : 0;
         if (brakeHeldStepsText != null)
         {
-            brakeHeldStepsText.enabled = GameManager.Instance.BrakeBtnPressed ? true : false;
+            brakeHeldStepsText.enabled = gameManager.BrakeBtnPressed ? true : false;
         }
 
         // End Episode conditions
         Dictionary<string, float> stats = new Dictionary<string, float>
         {
-            { "totalLevelProgress",  GameManager.Instance.levelProgress },
+            { "totalLevelProgress",  gameManager.levelProgress },
             { "totalLevelProgressReward", totalLevelProgressReward },
-            { "totalFuelTanksCollected",  GameManager.Instance.totalFuelTanksCollected },
-            { "totalFuelStateReward", totalFuelStateReward },
-            { "totalCollectedCoins", GameManager.Instance.totalCoinsCollected },
+            { "totalFuelTanksCollected",  gameManager.totalFuelTanksCollected },
+            { "totalFuelPunishment", totalFuelPunishment },
+            { "totalCollectedCoins", gameManager.totalCoinsCollected },
             { "totalMoneyReward", totalMoneyReward },
             { "totalAcceleratorHeld", totalAcceleratorHeldSteps },
             { "totalAcceleratorReward", totalAcceleratorReward },
@@ -561,13 +576,13 @@ public class HillClimberAgent : Agent
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car out of Map
-        else if (transform.parent.position.y <= -100.0f)
+        else if (transform.parent.localPosition.y <= -50.0f)
         {
             stats.Add("deathCause", 3.0f);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car reached Goal
-        else if (transform.parent.position.x >= GameManager.Instance.mapEndPoint.x - 1.0f)
+        else if (transform.parent.position.x >= gameManager.mapEndPoint.x - 1.0f)
         {
             AddReward(1000.0f);
             stats.Add("deathCause", 0.0f);
@@ -577,13 +592,13 @@ public class HillClimberAgent : Agent
         // Print Debug Info
         if (printRewardInfo && rewardInfoText != null)
         {
-            PrintRewardInfo(levelProgressReward, fuelStateReward, moneyReward, acceleratorReward);
+            PrintRewardInfo(levelProgressReward, 0, moneyReward, acceleratorReward);
         }
     }
 
     #region --> Total Rewards for Debug
     private float totalLevelProgressReward = 0.0f;
-    private float totalFuelStateReward = 0.0f;
+    private int totalFuelStateReward = 0;
     private float totalMoneyReward = 0.0f;
     private float totalAcceleratorReward = 0.0f;
     #endregion
@@ -601,7 +616,6 @@ public class HillClimberAgent : Agent
         brakeHeldStepsText.text = brakeHeldSteps + "x";
 
         totalLevelProgressReward += levelProgressReward;
-        totalFuelStateReward += fuelStateReward;
         totalMoneyReward += moneyReward;
         totalAcceleratorReward += acceleratorReward;
         //Debug.Log("Rewards: LVL - " + totalLevelProgressReward + " | Fuel - " + totalFuelStateReward +

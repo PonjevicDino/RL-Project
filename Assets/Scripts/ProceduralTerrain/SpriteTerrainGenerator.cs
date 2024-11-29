@@ -31,15 +31,23 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
     public Vector3 endPoint;
     private SpriteShapeController shape;
+    private float envOffsetY;
 
-    private void Start()
+    void Start()
     {
         Physics.gravity = gravity;
         //Random.InitState(0);
     }
 
+    private void UpdateEnvOffset()
+    {
+        envOffsetY = transform.parent.position.y;
+    }
+
     public void SpawnChunkBasedOnFourier(Vector3[] points, int chunkNumber, Vector3 previousEndPoint)
     {
+        UpdateEnvOffset();
+
         //Rename the gameObject for better debugging
         this.gameObject.name = "Chunk " + (chunkNumber + 1);
         shape = transform.GetComponent<SpriteShapeController>();
@@ -49,8 +57,8 @@ public class SpriteTerrainGenerator : MonoBehaviour
         endPoint = points[offset + numOfPoints];
 
         //Pull the two points underneath the ground further down so the ground covers the whole lower screen
-        shape.spline.SetPosition(0, shape.spline.GetPosition(0) + Vector3.down * 100.0f);
-        shape.spline.SetPosition(3, shape.spline.GetPosition(3) + Vector3.down * 100.0f);
+        shape.spline.SetPosition(0, shape.spline.GetPosition(0) + Vector3.down * 50.0f);
+        shape.spline.SetPosition(3, shape.spline.GetPosition(3) + Vector3.down * 50.0f);
 
         //Set the start of the ground to the endpoint.y of the previous chunk to keep the correct height
         shape.spline.SetPosition(1, new Vector3(shape.spline.GetPosition(1).x, previousEndPoint.y));
@@ -97,6 +105,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
     {
         for (int splinePoint = 1; splinePoint < shape.spline.GetPointCount()-2; splinePoint++)
         {
+
             int spawnSplineOffset = splinePoint;
             if (splinePoint % distanceBetweenCoins == 0)
             {
@@ -119,7 +128,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
         int spawnSplinePoint = splinePoint + Random.Range(-1, 1);
         Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint, spawnSplinePoint) + Vector3.up * 5.0f;
         Vector3 spawnPosition = GetMeanBetweenSplinePoints(splinePoint, spawnSplinePoint);
-        GameObject coinPrefabInstance = Instantiate(coinPrefab, new Vector3(spawnPosition.x, heightOffset.y) 
+        GameObject coinPrefabInstance = Instantiate(coinPrefab, new Vector3(spawnPosition.x, heightOffset.y + envOffsetY) 
             + Vector3.right * spawnOffset, Quaternion.identity, transform);
         coinPrefabInstance.GetComponent<CoinGenerator>().SpawnCoins(spawnPosition);
         return spawnSplinePoint;
@@ -129,7 +138,7 @@ public class SpriteTerrainGenerator : MonoBehaviour
     {
         Vector3 fuelTankSpawnPoint = shape.spline.GetPosition(splinePoint);
         Vector3 heightOffset = GetHighestPointBetweenSplinePoints(splinePoint - 1, splinePoint + 1) + Vector3.up * 5.0f;
-        Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y) 
+        Instantiate(fuelTankPrefab, new Vector3(fuelTankSpawnPoint.x, heightOffset.y + envOffsetY) 
             + Vector3.right * spawnOffset, Quaternion.identity, transform);
     }
 
@@ -137,8 +146,8 @@ public class SpriteTerrainGenerator : MonoBehaviour
     {
         float spawnDifference = (shape.spline.GetPosition(numOfPoints + 1).x - shape.spline.GetPosition(1).x) * (1.0f/3.0f);
 
-        transform.Find("DeleteCollider").transform.SetPositionAndRotation(new Vector3(endPoint.x + spawnDifference, endPoint.y, 0.0f), Quaternion.identity);
-        transform.Find("SpawnCollider").transform.SetPositionAndRotation(new Vector3(endPoint.x - spawnDifference, endPoint.y, 0.0f), Quaternion.identity);
+        transform.Find("DeleteCollider").transform.SetPositionAndRotation(new Vector3(endPoint.x + spawnDifference, endPoint.y + envOffsetY, 0.0f), Quaternion.identity);
+        transform.Find("SpawnCollider").transform.SetPositionAndRotation(new Vector3(endPoint.x - spawnDifference, endPoint.y + envOffsetY, 0.0f), Quaternion.identity);
     }
 
     public Vector3 GetMeanBetweenSplinePoints(int pointIndex1, int pointIndex2)
