@@ -10,7 +10,7 @@ public class ChunkSpawner : MonoBehaviour
 {
     [SerializeField] private Vector3 spawnPosition = new Vector3(-9.0f, 0.0f, 0.0f);
     private Vector3 spawnPositionWithTerrainOffset;
-    [SerializeField] private float fourierThreshold = 0.5f;
+    [SerializeField] public float fourierThreshold = 0.5f;
     [SerializeField] private bool debug = false;
     [SerializeField] private bool fixedTerrain = false;
 

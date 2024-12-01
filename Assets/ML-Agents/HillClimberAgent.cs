@@ -112,10 +112,12 @@ public class HillClimberAgent : Agent
     private int totalFuelPunishment = 0;
 
     private GameManager gameManager;
+    private CurriculumUpdater curriculumUpdater;
 
     void Start()
     {
         gameManager = this.transform.parent.parent.Find("GameManager").GetComponent<GameManager>();
+        curriculumUpdater = this.transform.parent.parent.Find("Terrain").GetComponent<CurriculumUpdater>();
 
         GenerateModelInfo();             
         
@@ -548,7 +550,8 @@ public class HillClimberAgent : Agent
         // End Episode conditions
         Dictionary<string, float> stats = new Dictionary<string, float>
         {
-            { "totalLevelProgress",  gameManager.levelProgress },
+            { "totalLevelProgress",  gameManager.levelProgress + curriculumUpdater.progressOffset },
+            { "totalLevelProgressOffset", curriculumUpdater.progressOffset },
             { "totalLevelProgressReward", totalLevelProgressReward },
             { "totalFuelTanksCollected",  gameManager.totalFuelTanksCollected },
             { "totalFuelPunishment", totalFuelPunishment },
@@ -567,30 +570,41 @@ public class HillClimberAgent : Agent
         if (transform.parent.gameObject.GetComponent<CarController>().Fuel <= 0.0f)
         {
             stats.Add("deathCause", 1.0f);
+            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car on Roof
         else if (transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit)
         {
             stats.Add("deathCause", 2.0f);
+            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car out of Map
         else if (transform.parent.localPosition.y <= -50.0f)
         {
             stats.Add("deathCause", 3.0f);
+            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
         // - Car reached Goal
         else if (transform.parent.position.x >= gameManager.mapEndPoint.x - 1.0f)
         {
-            AddReward(1000.0f);
+            AddReward(100.0f);
             stats.Add("deathCause", 0.0f);
+            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
+            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
+        }
+
+        else if (transform.parent.position.x >= 150.0f)
+        {
+            stats.Add("deathCause", 0.0f);
+            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
 
         // Print Debug Info
-        if (printRewardInfo && rewardInfoText != null)
+        if (rewardInfoText != null)
         {
             PrintRewardInfo(levelProgressReward, 0, moneyReward, acceleratorReward);
         }
@@ -605,7 +619,10 @@ public class HillClimberAgent : Agent
 
     private void PrintRewardInfo(float levelProgressReward, float fuelStateReward, float moneyReward, float acceleratorReward)
     {
-        rewardInfoText.SetActive(true);
+        if (printRewardInfo)
+        {
+            rewardInfoText.SetActive(true);
+        }
        
         levelProgressRewardText.text = "LVL-Prog: " + levelProgressReward.ToString("00.000");
         fuelStateRewardText.text = "Fuel: " + fuelStateReward.ToString(".00000");

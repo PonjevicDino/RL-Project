@@ -1230,7 +1230,7 @@ MonoBehaviour:
     rewardMoney: 0
     rewardMoneyMultiplier: 0.01
   categoryName: Car
-  printRewardInfo: 1
+  printRewardInfo: 0
   terrainRaycastsInViewport: 11
 --- !u!114 &6877186084156993669
 MonoBehaviour:
