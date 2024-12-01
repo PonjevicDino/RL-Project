@@ -596,13 +596,6 @@ public class HillClimberAgent : Agent
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
         }
 
-        else if (transform.parent.position.x >= 150.0f)
-        {
-            stats.Add("deathCause", 0.0f);
-            curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
-            EndEpisode(stats, mapName, vehicleName, reloadScene: true);
-        }
-
         // Print Debug Info
         if (rewardInfoText != null)
         {
