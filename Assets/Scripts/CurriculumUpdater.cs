@@ -24,7 +24,7 @@ public class CurriculumUpdater : MonoBehaviour
     void OnValidate()
     {
         mapStartPos = Mathf.Max(mapStartPos, GetComponent<ChunkSpawner>().fourierThreshold); 
-        increaseThrProgress = (int)Mathf.Min(increaseThrProgress, (1.0f - mapEndPos) * 20000);
+        increaseThrProgress = (int)Mathf.Min(increaseThrProgress, (1.0f - mapEndPos) * 19689);
         totalMapSteps = (int)((mapEndPos - mapStartPos) / increaseFactor);
     }
 
@@ -58,6 +58,6 @@ public class CurriculumUpdater : MonoBehaviour
         float newMapStart = GetComponent<ChunkSpawner>().fourierThreshold + increaseFactor;
         newMapStart = Mathf.Clamp(newMapStart, mapStartPos, mapEndPos);
         GetComponent<ChunkSpawner>().fourierThreshold = newMapStart;
-        progressOffset = 20000 * (newMapStart - mapStartPos);
+        progressOffset = 19689 * (newMapStart - mapStartPos);
     }
 }

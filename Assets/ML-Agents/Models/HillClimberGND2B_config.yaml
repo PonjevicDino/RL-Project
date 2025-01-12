@@ -1,0 +1,55 @@
+behaviors:
+  HillClimber:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 512                # Larger batch for stability in action-limited environments
+      buffer_size: 4096              # Medium buffer size to ensure sufficient data per update
+      learning_rate: 1.0e-4          # Moderate learning rate to ensure stable learning
+      beta: 0.04                     # Entropy for initial exploration, decay to exploit over time
+      epsilon: 0.2                   # Start epsilon high to explore early
+      epsilon_schedule: linear       # Linear decay for steady exploration reduction
+      lambd: 0.95                    # Standard GAE parameter
+      num_epoch: 3                   # Fewer epochs to avoid overfitting with limited actions
+      learning_rate_schedule: linear
+      beta_schedule: linear          # Gradual decay to reduce exploration over time
+    network_settings:
+      normalize: true
+      hidden_units: 64               # Lightweight network due to simpler actions
+      num_layers: 2                  # Fewer layers, enough to model hill terrain
+      use_recurrent: false           # No need for memory given simpler, reactive controls
+      sequence_length: 16            # Shorter sequences since memory isn t crucial
+    reward_signals:
+      extrinsic:
+        gamma: 0.99                  # High gamma for valuing long-term rewards over the hill terrain
+        strength: 1.0
+    max_steps: 2500000000            # Shorten for faster runs; adjust for tuning
+    time_horizon: 8192               # Shorter time horizon to get quick feedback
+    summary_freq: 100000             # Adjusted for sufficient logging without excessive overhead
+    threaded: true
+  Motorcycle:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 512                # Larger batch for stability in action-limited environments
+      buffer_size: 4096              # Medium buffer size to ensure sufficient data per update
+      learning_rate: 1.0e-4          # Moderate learning rate to ensure stable learning
+      beta: 0.04                     # Entropy for initial exploration, decay to exploit over time
+      epsilon: 0.2                   # Start epsilon high to explore early
+      epsilon_schedule: linear       # Linear decay for steady exploration reduction
+      lambd: 0.95                    # Standard GAE parameter
+      num_epoch: 3                   # Fewer epochs to avoid overfitting with limited actions
+      learning_rate_schedule: linear
+      beta_schedule: linear          # Gradual decay to reduce exploration over time
+    network_settings:
+      normalize: true
+      hidden_units: 64               # Lightweight network due to simpler actions
+      num_layers: 2                  # Fewer layers, enough to model hill terrain
+      use_recurrent: false           # No need for memory given simpler, reactive controls
+      sequence_length: 16            # Shorter sequences since memory isn t crucial
+    reward_signals:
+      extrinsic:
+        gamma: 0.99                  # High gamma for valuing long-term rewards over the hill terrain
+        strength: 1.0
+    max_steps: 2500000000            # Shorten for faster runs; adjust for tuning
+    time_horizon: 8192               # Shorter time horizon to get quick feedback
+    summary_freq: 100000             # Adjusted for sufficient logging without excessive overhead
+    threaded: true

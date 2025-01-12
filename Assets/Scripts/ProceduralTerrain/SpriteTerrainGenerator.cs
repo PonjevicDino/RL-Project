@@ -25,17 +25,20 @@ public class SpriteTerrainGenerator : MonoBehaviour
     [SerializeField] private int distanceBetweenFuelTanks = 7;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameObject fuelTankPrefab;
-    [SerializeField] private PhysicsMaterial2D material;
+    [SerializeField] public PhysicsMaterial2D material;
     [SerializeField] private Vector3 gravity = new Vector3(0.0f, -9.81f);
     [SerializeField] public FourierTransformation fourierTransformation;
+    [SerializeField] private int pointsBetween = 1;
 
     public Vector3 endPoint;
     private SpriteShapeController shape;
     private float envOffsetY;
 
+
+
     void Start()
     {
-        Physics.gravity = gravity;
+        Physics2D.gravity = gravity;
         //Random.InitState(0);
     }
 
@@ -70,48 +73,77 @@ public class SpriteTerrainGenerator : MonoBehaviour
 
         for (int i = 0; i < numOfPoints; i++)
         {
-            //Afterwards insert the point into the spline
-            if (i != 0)
+            for (int j = 0; j < pointsBetween; j++)
             {
-                shape.spline.InsertPointAt(i + 1, new Vector3(points[offset + i].x - points[offset].x, points[offset + i].y));
+                float tempPoint = 1.0f / pointsBetween * j;
+                float xPosFromOffset = points[offset + i].x - points[offset].x;
+                float tempXPos = points[offset + i + 1].x - points[offset + i].x;
+
+                float yPosFromOffset = points[offset + i].y;
+                float tempYPos = (points[offset + i + 1].y - points[offset + i].y) * tempPoint;
+
+                if (i + j != 0)
+                {
+                    shape.spline.InsertPointAt(i * pointsBetween + j + 1, new Vector3(xPosFromOffset + tempXPos * (1.0f + tempPoint) - tempXPos, yPosFromOffset + tempYPos));
+                }
             }
         }
 
         float tangentOffset = offset * (fourierTransformation.spacingIncreaseFactor/5.0f);
         shape.spline.SetTangentMode(1, ShapeTangentMode.Broken);
-        shape.spline.SetRightTangent(1, new Vector3(5.0f + tangentOffset, 0, 0));
+        shape.spline.SetRightTangent(1, new Vector3((5.0f + tangentOffset) / pointsBetween, 0, 0));
 
-        //The condition must be <(numOfPoints-1) otherwise the right side won´t be flatten!
-        for (int i = 2; i < numOfPoints + 1; i++)
+        for (int i = 2; i <= numOfPoints * pointsBetween; i++)
         {
-            shape.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
-            shape.spline.SetLeftTangent(i, new Vector3(-5.0f - tangentOffset, 0, 0));
-            shape.spline.SetRightTangent(i, new Vector3(5.0f + tangentOffset, 0, 0));
+            float leftTangentY = 0.0f;
+            float rightTangentY = 0.0f;
+
+            if (pointsBetween != 1)
+            {
+                float lastPointDiff = offset + i + 1 < points.Length ? points[offset + i].y - points[offset + i - 1].y : 0.0f;
+                float nextPointDiff = offset + i + 1 < points.Length ? points[offset + i].y - points[offset + i + 1].y : 0.0f;
+
+                lastPointDiff = shape.spline.GetPosition(i - 1).y - shape.spline.GetPosition(i).y;
+                nextPointDiff = shape.spline.GetPosition(i + 1).y - shape.spline.GetPosition(i).y;
+
+                // .. / 4.0f for smoothing
+                leftTangentY = lastPointDiff >= 0.0f ? Random.Range(0.0f, lastPointDiff / 2.0f) : Random.Range(lastPointDiff / 2.0f, 0.0f);
+                rightTangentY = nextPointDiff >= 0.0f ? Random.Range(0.0f, nextPointDiff / 2.0f) : Random.Range(nextPointDiff / 2.0f, 0.0f);
+            }
+
+            shape.spline.SetTangentMode(i, ShapeTangentMode.Broken);
+            shape.spline.SetLeftTangent(i, new Vector3((-5.0f - tangentOffset) / pointsBetween, leftTangentY / pointsBetween, 0));
+            shape.spline.SetRightTangent(i, new Vector3((5.0f + tangentOffset) / pointsBetween, rightTangentY / pointsBetween, 0));
         }
 
-        shape.spline.SetTangentMode(numOfPoints + 1, ShapeTangentMode.Broken);
-        shape.spline.SetLeftTangent(numOfPoints + 1, new Vector3(-5.0f - tangentOffset, 0, 0));
+        shape.spline.SetTangentMode(numOfPoints * pointsBetween + 1, ShapeTangentMode.Broken);
+        shape.spline.SetLeftTangent(numOfPoints * pointsBetween + 1, new Vector3((-5.0f - tangentOffset) / pointsBetween, 0, 0));
+
+        if (pointsBetween != 1)
+        {
+            shape.spline.SetPosition(0, shape.spline.GetPosition(0) + Vector3.right);
+            shape.spline.SetPosition(1, shape.spline.GetPosition(1) + Vector3.right);
+        }
 
         float spawnOffset = previousEndPoint.x;
 
-        PlacePickables(spawnOffset);
+        PlacePickables(spawnOffset, pointsBetween);
         PlaceCollider();
 
         EdgeCollider2D collider = transform.gameObject.AddComponent<EdgeCollider2D>();
         collider.sharedMaterial = material;
         shape.BakeMesh();
     }
-    private void PlacePickables(float spawnOffset)
+    private void PlacePickables(float spawnOffset, int pointsBetween)
     {
         for (int splinePoint = 1; splinePoint < shape.spline.GetPointCount()-2; splinePoint++)
         {
-
             int spawnSplineOffset = splinePoint;
-            if (splinePoint % distanceBetweenCoins == 0)
+            if (splinePoint % (distanceBetweenCoins * pointsBetween) == 0)
             {
                 spawnSplineOffset = PlaceCoins(spawnOffset, splinePoint);
             }
-            if (splinePoint % distanceBetweenFuelTanks == 0)
+            if (splinePoint % (distanceBetweenFuelTanks * pointsBetween) == 0)
             {
                 if (spawnSplineOffset == 0)
                 {

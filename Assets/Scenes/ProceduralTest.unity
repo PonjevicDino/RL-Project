@@ -257,6 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2082703175}
   - component: {fileID: 2082703174}
+  - component: {fileID: 2082703176}
   m_Layer: 0
   m_Name: EnvLoader
   m_TagString: Untagged
@@ -278,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   envPrefab: {fileID: 1079736066021471170, guid: 207c6aef7095c5a48a6e92398b5f022d,
     type: 3}
-  envCount: 14
+  envCount: 1
 --- !u!4 &2082703175
 Transform:
   m_ObjectHideFlags: 0
@@ -294,6 +295,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082703176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082703173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9452d17f9b0f3d47a85cac8adc18505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedVehicle: 1
+  selectedMap: 1
+  useInference: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

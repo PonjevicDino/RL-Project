@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4487222631327317641}
   - component: {fileID: 4487222631327317642}
   - component: {fileID: 4487222631327317643}
-  - component: {fileID: 7307278401078213326}
+  - component: {fileID: 699760110912042893}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Platform
@@ -177,8 +177,8 @@ SpriteShapeRenderer:
   m_Sprites:
   - {fileID: 21300000, guid: 662f1f9bcef471d4889e7b1a6f04de77, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0, y: 0.08000004, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0800002, z: 0}
+    m_Center: {x: 0.50000006, y: 0.08000004, z: 0}
+    m_Extent: {x: 0.50000006, y: 1.0800002, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &4487222631327317643
 MonoBehaviour:
@@ -195,21 +195,21 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: -1, y: -1, z: 0}
+    - position: {x: 0, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-    - position: {x: -1, y: 1, z: 0}
+    - position: {x: 0, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
@@ -217,7 +217,7 @@ MonoBehaviour:
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
       mode: 0
       height: 1
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 3c97c09fd99a74641b0f8e7bf0266445, type: 2}
   m_FillPixelPerUnit: 100
@@ -254,7 +254,7 @@ MonoBehaviour:
   - {x: 1, y: -1}
   - {x: -1, y: -1}
   m_ShadowSegment: []
---- !u!114 &7307278401078213326
+--- !u!114 &699760110912042893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,21 +266,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04966e94db968a8469c52c869be30892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfPoints: 10
+  numOfPoints: 25
+  distanceBetweenCoins: 4
+  distanceBetweenFuelTanks: 7
   coinPrefab: {fileID: 7897156915498184797, guid: 937c7ff61e3f40a4a831f4a4faf74bad,
     type: 3}
   fuelTankPrefab: {fileID: 840678049715806552, guid: 4d5ef3535a7b60d4cad89880af19b151,
     type: 3}
   material: {fileID: 6200000, guid: abd7462fb12960b409398a3dac010f03, type: 2}
-  gravity: {x: 0, y: -0.81, z: 0}
+  gravity: {x: 0, y: -3.24, z: 0}
   fourierTransformation:
     initialFrequency: 1
-    initialAmplitude: 1.5
+    initialAmplitude: 0
     amplitudeIncrease: 0.01
-    pointCount: 1000
-    initialPointSpacing: 10
-    spacingIncreaseFactor: 0
-    randomnessFactor: 2
+    maxAmplitudePercentage: 1.2
+    pointCount: 2000
+    initialPointSpacing: 5
+    spacingIncreaseFactor: 0.005
+    randomnessFactor: 0
+  pointsBetween: 1
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &7085776994185623917
 GameObject:

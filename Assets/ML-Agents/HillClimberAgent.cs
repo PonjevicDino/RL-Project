@@ -31,6 +31,8 @@ public class HillClimberAgent : Agent
         public bool rewardGroundDistance;
         public float rewardGroundDistanceThreshold;
         public float rewardGroundDistanceMultiplier;
+        public bool rewardGroundDistanceReverse;
+        public bool rewardGroundNoPunishment;
 
         public bool rewardFuel;
         public float rewardFuelThreshold; 
@@ -489,7 +491,28 @@ public class HillClimberAgent : Agent
         if (gameManager.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold &&
             agentRewards.rewardGroundDistance)
         {
-            AddReward((agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier);
+            if (!agentRewards.rewardGroundDistanceReverse)
+            {
+                if (agentRewards.rewardGroundNoPunishment)
+                {
+                    AddReward(Mathf.Max(0.0f, (agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier));
+                }
+                else
+                {
+                    AddReward((agentRewards.rewardGroundDistanceThreshold - distanceToGround) * agentRewards.rewardGroundDistanceMultiplier);
+                }
+            }
+            else
+            {
+                if (agentRewards.rewardGroundNoPunishment)
+                {
+                    AddReward(Mathf.Max(0.0f, (distanceToGround - agentRewards.rewardGroundDistanceThreshold) * agentRewards.rewardGroundDistanceMultiplier));
+                }
+                else
+                {
+                    AddReward((distanceToGround - agentRewards.rewardGroundDistanceThreshold) * agentRewards.rewardGroundDistanceMultiplier);
+                }
+            }
             lastLevelProgress = gameManager.levelProgress;
         }
         else if (gameManager.levelProgress - lastLevelProgress >= agentRewards.rewardLevelProgressForwardThreshold)
@@ -571,7 +594,9 @@ public class HillClimberAgent : Agent
         {
             stats.Add("deathCause", 1.0f);
             curriculumUpdater.UpdateOnEpisodeEnd((int)gameManager.levelProgress);
+            
             EndEpisode(stats, mapName, vehicleName, reloadScene: true);
+            //gameManager.FuelCharge();
         }
         // - Car on Roof
         else if (transform.parent.GetChild(0).GetChild(0).gameObject.GetComponent<HeadScript>().headHit)

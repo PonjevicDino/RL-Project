@@ -149,7 +149,7 @@ MonoBehaviour:
   m_UpdateCollider: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
-  m_UTess2D: 1
+  m_UTess2D: 0
   m_UpdateShadow: 0
   m_ShadowDetail: 16
   m_ShadowOffset: 0.5
@@ -193,6 +193,7 @@ MonoBehaviour:
     initialPointSpacing: 5
     spacingIncreaseFactor: 0.005
     randomnessFactor: 0
+  pointsBetween: 1
   endPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &4074610699751182046
 GameObject:

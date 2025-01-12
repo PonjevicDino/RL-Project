@@ -76,5 +76,6 @@ public class CarController : MonoBehaviour {
         }
 
         gameManager.FuelConsume();  // Update fuel usage
+        //gameManager.FuelCharge();
     }
 }
